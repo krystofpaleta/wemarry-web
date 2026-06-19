@@ -1,44 +1,20 @@
 ---
 import SectionIntro from "./SectionIntro.astro";
+import { getFeatured, getPopular } from "../../lib/blog";
 
-type Post = {
-  title: string;
-  excerpt: string;
-  category: string;
-  readTime: string;
-  href: string;
-  palette: string;
-};
+// 3 reálné články z blogu: featured + první 2 nejčtenější.
+const featured = await getFeatured();
+const popular = await getPopular();
+const entries = [featured, ...popular].filter(Boolean).slice(0, 3);
 
-const posts: Post[] = [
-  {
-    title: "Jak sestavit rozpočet na svatbu a nezbláznit se",
-    excerpt:
-      "Praktický průvodce, který vám pomůže rozvrhnout peníze na jednotlivé položky a nezapomenout na drobné detaily.",
-    category: "Rozpočet",
-    readTime: "7 min čtení",
-    href: "/blog/jak-sestavit-rozpocet",
-    palette: "from-[#edd4cb] via-[#d4b6a8] to-[#a78b7d]",
-  },
-  {
-    title: "10 otázek, které musíte položit fotografovi před svatbou",
-    excerpt:
-      "Vybrat fotografa není sprint ani maraton. Je to vztah. Zjistěte, na co se zeptat, než podepíšete smlouvu.",
-    category: "Dodavatelé",
-    readTime: "5 min čtení",
-    href: "/blog/otazky-fotografovi",
-    palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]",
-  },
-  {
-    title: "Zasedací pořádek krok za krokem (a jak se vyhnout drama)",
-    excerpt:
-      "Kdo nesmí sedět vedle koho, a proč je někdy lepší mít stůl u baru. Průvodce rozesazením hostů bez stresu.",
-    category: "Den svatby",
-    readTime: "6 min čtení",
-    href: "/blog/zasedaci-poradek",
-    palette: "from-[#f5d9d2] via-[#e8a89a] to-[#b66b5c]",
-  },
-];
+const posts = entries.map((e) => ({
+  title: e!.data.title,
+  excerpt: e!.data.excerpt,
+  category: e!.data.category,
+  readTime: `${e!.data.readMinutes} min čtení`,
+  href: `/blog/${e!.slug}`,
+  palette: e!.data.palette,
+}));
 ---
 
 <section class="bg-white py-20 md:py-28 lg:py-32">

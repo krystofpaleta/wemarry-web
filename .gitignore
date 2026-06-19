@@ -26,3 +26,7 @@ pnpm-debug.log*
 # editor
 .vscode/
 .idea/
+
+# odsunuté fiktivní články (sandbox nedovolil smazat)
+src/content/_blog_fiktivni_*
+scripts/_gen-blog.mjs.bak
