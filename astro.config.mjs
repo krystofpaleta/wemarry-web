@@ -19,11 +19,8 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: false }),
     react(),
-    sitemap({
-      i18n: {
-        defaultLocale: "cs",
-        locales: { cs: "cs-CZ", en: "en-US" },
-      },
-    }),
+    // hreflang alternativy řešíme přímo v <head> (BaseLayout). Sitemap i18n
+    // option je v kombinaci s prefixDefaultLocale:false bugnutá (reduce of undefined).
+    sitemap(),
   ],
 });
