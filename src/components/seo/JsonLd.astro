@@ -1,0 +1,20 @@
+---
+/**
+ * Vloží structured data (JSON-LD) do stránky. Pole objektů → jeden <script>.
+ * Pomáhá SEO i AIO/GEO (AI/LLM vyhledávače čtou strukturovaná data).
+ */
+interface Props {
+  schema: Record<string, unknown> | Record<string, unknown>[];
+}
+const { schema } = Astro.props;
+const payload = Array.isArray(schema) ? schema : [schema];
+---
+{
+  payload.map((item) => (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(item)}
+    />
+  ))
+}

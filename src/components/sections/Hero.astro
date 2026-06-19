@@ -1,0 +1,31 @@
+---
+import { SITE } from "../../config/site";
+---
+
+<section class="relative isolate overflow-hidden">
+  <!-- Background — dočasný warm gradient, nahradit fotkou páru -->
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#c9a796] via-[#a78b7d] to-[#6b5b52]"></div>
+  <!-- Overlay pro čitelnost textu -->
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
+
+  <div class="container-site flex min-h-[640px] flex-col justify-center pb-20 pt-40 md:min-h-[720px] md:pb-32 md:pt-48 lg:min-h-[820px]">
+    <div class="max-w-2xl">
+      <p class="mb-5 text-tiny uppercase tracking-cta text-white/90">Svatební plánovač</p>
+      <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+        Výjimečné chvíle si zaslouží výjimečnou péči.
+        <span class="not-italic"> A proto je tu WeMarry!</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-body text-white/90 md:mt-8">
+        Online svatební plánovač, který vám ušetří čas, nervy i peníze.
+        Checklist, kalkulačka nákladů, online pozvánky, zasedací pořádek
+        i sdílená galerie — vše na jednom místě.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-4 md:mt-10">
+        <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        <a href="/jak-to-funguje" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">
+          Jak to funguje ↓
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

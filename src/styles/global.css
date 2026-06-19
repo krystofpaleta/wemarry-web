@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base reset & smoothing */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink-body font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-ink;
+  }
+
+  /* Remove default selection highlight to warm theme */
+  ::selection {
+    background-color: #edd4cb;
+    color: #000;
+  }
+}
+
+/* Reusable primitives */
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-content px-5 md:px-10;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-pill bg-primary text-white font-sans font-medium uppercase tracking-cta text-micro px-8 py-4 transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-pill border border-white/80 text-white font-sans font-medium uppercase tracking-cta text-micro px-6 py-3 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-pill border border-ink/15 text-ink font-sans font-medium uppercase tracking-cta text-micro px-6 py-3 transition-colors hover:bg-ink/5;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-pill bg-cream border border-beige-light px-3 py-1.5 text-tiny font-sans text-ink-muted;
+  }
+}

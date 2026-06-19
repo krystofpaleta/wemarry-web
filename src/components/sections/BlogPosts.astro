@@ -1,0 +1,82 @@
+---
+import SectionIntro from "./SectionIntro.astro";
+
+type Post = {
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  href: string;
+  palette: string;
+};
+
+const posts: Post[] = [
+  {
+    title: "Jak sestavit rozpočet na svatbu a nezbláznit se",
+    excerpt:
+      "Praktický průvodce, který vám pomůže rozvrhnout peníze na jednotlivé položky a nezapomenout na drobné detaily.",
+    category: "Rozpočet",
+    readTime: "7 min čtení",
+    href: "/blog/jak-sestavit-rozpocet",
+    palette: "from-[#edd4cb] via-[#d4b6a8] to-[#a78b7d]",
+  },
+  {
+    title: "10 otázek, které musíte položit fotografovi před svatbou",
+    excerpt:
+      "Vybrat fotografa není sprint ani maraton. Je to vztah. Zjistěte, na co se zeptat, než podepíšete smlouvu.",
+    category: "Dodavatelé",
+    readTime: "5 min čtení",
+    href: "/blog/otazky-fotografovi",
+    palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]",
+  },
+  {
+    title: "Zasedací pořádek krok za krokem (a jak se vyhnout drama)",
+    excerpt:
+      "Kdo nesmí sedět vedle koho, a proč je někdy lepší mít stůl u baru. Průvodce rozesazením hostů bez stresu.",
+    category: "Den svatby",
+    readTime: "6 min čtení",
+    href: "/blog/zasedaci-poradek",
+    palette: "from-[#f5d9d2] via-[#e8a89a] to-[#b66b5c]",
+  },
+];
+---
+
+<section class="bg-white py-20 md:py-28 lg:py-32">
+  <div class="container-site">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <SectionIntro
+        eyebrow="Blog"
+        title="Inspirace a tipy z našeho blogu"
+        subtitle="Praktické rady, příběhy z reálných svateb a rozhovory s předními českými dodavateli — vše na jednom místě."
+        align="left"
+      />
+      <a href="/blog" class="hidden text-micro uppercase tracking-cta text-primary hover:text-primary-hover md:inline-flex">
+        Všechny články →
+      </a>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+      {
+        posts.map((post) => (
+          <a href={post.href} class="group flex flex-col gap-5 outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
+            <div class:list={["aspect-[4/3] w-full overflow-hidden rounded-card bg-gradient-to-br shadow-card transition-shadow group-hover:shadow-prominent", post.palette]}>
+              <div class="flex size-full items-end p-6">
+                <span class="rounded-pill bg-white/90 px-3 py-1 text-tiny uppercase tracking-cta text-ink">{post.category}</span>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              <p class="text-tiny uppercase tracking-cta text-ink-soft">{post.readTime}</p>
+              <h3 class="font-serif text-h3 text-ink transition-colors group-hover:text-primary">{post.title}</h3>
+              <p class="text-body text-ink-muted">{post.excerpt}</p>
+              <span class="mt-2 text-micro uppercase tracking-cta text-primary">Číst článek →</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex justify-center md:hidden">
+      <a href="/blog" class="btn-outline">Všechny články</a>
+    </div>
+  </div>
+</section>

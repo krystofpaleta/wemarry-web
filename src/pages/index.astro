@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import FeatureCards from "../components/sections/FeatureCards.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
+import PricingCompare from "../components/sections/PricingCompare.astro";
+import ScrollFeatures from "../components/sections/ScrollFeatures.tsx";
+import PhotoBreak from "../components/sections/PhotoBreak.astro";
+import TemplatesGallery from "../components/sections/TemplatesGallery.tsx";
+import Pricing from "../components/sections/Pricing.astro";
+import TrustLogos from "../components/sections/TrustLogos.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import BlogPosts from "../components/sections/BlogPosts.astro";
+import { SITE } from "../config/site";
+
+const title = "WeMarry — Vše pro vaši svatbu na jednom místě";
+const description =
+  "Svatební checklist, kalkulačka nákladů, online pozvánky, zasedací pořádek i sdílená galerie. WeMarry vám pomůže naplánovat svatbu hladce a bez stresu.";
+
+// Product structured data (AIO/GEO + rich results).
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "WeMarry",
+  applicationCategory: "LifestyleApplication",
+  operatingSystem: "Web",
+  description,
+  url: SITE.url,
+  offers: {
+    "@type": "Offer",
+    price: "1490",
+    priceCurrency: "CZK",
+    description: "Jednorázová platba při zveřejnění svatebního webu.",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "248",
+  },
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={productSchema}>
+  <main class="relative min-h-screen bg-white">
+    <Hero />
+    <FeatureCards />
+    <Testimonials />
+    <PricingCompare />
+    <ScrollFeatures client:visible />
+    <PhotoBreak />
+    <TemplatesGallery client:visible />
+    <Pricing />
+    <TrustLogos />
+    <HandsCTA />
+    <BlogPosts />
+  </main>
+</BaseLayout>

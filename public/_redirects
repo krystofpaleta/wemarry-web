@@ -1,0 +1,6 @@
+# Cloudflare Pages redirecty.
+# Staré marketingové cesty teď vedou rovnou do aplikace (jiná doména).
+# Pokud se změní app URL, uprav i src/config/site.ts.
+/vyzkouset    https://wemarry.app/auth/signup   302
+/prihlaseni   https://wemarry.app/auth/login    302
+/registrace   https://wemarry.app/auth/signup   302

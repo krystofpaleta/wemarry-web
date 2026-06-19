@@ -1,0 +1,208 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HandsCTA from "../../components/sections/HandsCTA.astro";
+import { templates } from "../../data/templates";
+import { SITE, absoluteUrl } from "../../config/site";
+
+export function getStaticPaths() {
+  return templates.map((t) => ({ params: { slug: t.slug }, props: { template: t } }));
+}
+
+const { template } = Astro.props;
+
+const title = `Šablona ${template.name} — WeMarry`;
+const description = template.description;
+
+const similar = templates.filter((t) => t.slug !== template.slug).slice(0, 3);
+
+const features = [
+  { title: "Hlavní strana", description: "Úvodní sekce s fotkou, jmény a datem svatby." },
+  { title: "RSVP formulář", description: "Hosté potvrdí účast, dietní požadavky i dopravu jedním kliknutím." },
+  { title: "Program dne", description: "Timeline od obřadu po poslední tanec — vždy po ruce." },
+  { title: "Fotogalerie", description: "Po svatbě se zde objeví fotky od hostů i profesionálů." },
+  { title: "Vícejazyčné verze", description: "Automatické přepínání mezi češtinou, angličtinou a dalšími." },
+  { title: "Vlastní doména", description: "Adresa ve stylu novakovi.cz namísto dlouhého odkazu." },
+];
+
+const toneLabel =
+  template.previewTone === "light"
+    ? "Světlá a hravá"
+    : template.previewTone === "romance"
+      ? "Romantická"
+      : "Tlumená a elegantní";
+const idealFor =
+  template.previewTone === "light"
+    ? "Zahradní a letní svatby"
+    : template.previewTone === "romance"
+      ? "Vinařství a zámecké svatby"
+      : "Městské a večerní svatby";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "WeMarry", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Šablony", item: absoluteUrl("/sablony") },
+    { "@type": "ListItem", position: 3, name: template.name, item: absoluteUrl(`/sablony/${template.slug}`) },
+  ],
+};
+
+const dateMain = template.date.split("•")[0]?.trim() ?? template.date;
+---
+
+<BaseLayout title={title} description={description} jsonld={breadcrumbSchema}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class:list={["absolute inset-0 -z-10 bg-gradient-to-br", template.palette]}></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/60"></div>
+
+      <div class="container-site flex min-h-[560px] flex-col justify-end pb-14 pt-40 md:min-h-[680px] md:pb-20 md:pt-48">
+        <nav aria-label="Drobečková navigace" class="mb-10 flex items-center gap-2 text-tiny uppercase tracking-cta text-white/70">
+          <a href="/" class="hover:text-white">WeMarry</a>
+          <span>/</span>
+          <a href="/sablony" class="hover:text-white">Šablony</a>
+          <span>/</span>
+          <span class="text-white">{template.name}</span>
+        </nav>
+
+        <div class="flex flex-col gap-6 md:max-w-3xl">
+          <span class="inline-flex w-fit rounded-pill bg-white/15 px-3 py-1 text-tiny uppercase tracking-cta text-white backdrop-blur-sm">
+            Styl: {template.style}
+          </span>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">{template.name}</h1>
+          <p class="max-w-xl text-body text-white/85">{template.subtitle}</p>
+          <div class="mt-2 flex flex-wrap items-center gap-4">
+            <a href={SITE.app.signup} class="btn-primary">Použít tuto šablonu</a>
+            <a href="#nahled" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">Ukázat náhled ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preview + popis -->
+    <section id="nahled" class="relative isolate overflow-hidden bg-warm-gray py-20 md:py-28 lg:py-32">
+      <div class="container-site">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-[1fr,minmax(0,0.9fr)] lg:items-center lg:gap-16">
+          <!-- Preview mockup -->
+          <div class="order-2 lg:order-1">
+            <div class:list={["relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-card bg-gradient-to-br p-8 shadow-prominent md:p-12", template.palette]}>
+              <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/45"></div>
+              <div class="relative z-10 aspect-[9/19] w-[min(260px,100%)] overflow-hidden rounded-[32px] border-[6px] border-ink/80 bg-white shadow-prominent">
+                <div class:list={["h-1/2 bg-gradient-to-br relative", template.palette]}>
+                  <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/55"></div>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
+                    <p class="text-[10px] uppercase tracking-cta text-white/80">Svatba</p>
+                    <p class="mt-2 font-serif text-white text-lg italic">{template.coupleName}</p>
+                    <p class="mt-1 text-[9px] uppercase tracking-cta text-white/70">{dateMain}</p>
+                  </div>
+                </div>
+                <div class="flex h-1/2 flex-col gap-2 bg-white p-4">
+                  <p class="text-[10px] uppercase tracking-cta text-primary">Program</p>
+                  <p class="font-serif text-xs italic text-ink">{template.tagline}</p>
+                  <div class="mt-2 flex flex-col gap-1.5">
+                    <div class="h-1.5 w-3/4 rounded-full bg-beige-light"></div>
+                    <div class="h-1.5 w-full rounded-full bg-beige-light"></div>
+                    <div class="h-1.5 w-5/6 rounded-full bg-beige-light"></div>
+                    <div class="h-1.5 w-2/3 rounded-full bg-beige-light"></div>
+                  </div>
+                  <div class="mt-auto flex w-full justify-center">
+                    <span class="rounded-pill bg-primary px-3 py-1 text-[9px] uppercase tracking-cta text-white">Potvrdit účast</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy -->
+          <div class="order-1 lg:order-2">
+            <p class="text-tiny uppercase tracking-cta text-primary">O šabloně</p>
+            <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">
+              {template.name} <span class="italic text-ink-muted">— {template.style.toLowerCase()}</span>
+            </h2>
+            <p class="mt-5 text-body text-ink-muted">{template.description}</p>
+
+            <dl class="mt-8 grid grid-cols-1 gap-4 border-t border-beige-border pt-6 sm:grid-cols-2">
+              <div>
+                <dt class="text-tiny uppercase tracking-cta text-ink-soft">Paleta</dt>
+                <dd class="mt-2 flex items-center gap-2">
+                  <span aria-hidden="true" class:list={["inline-block h-5 w-10 rounded-full bg-gradient-to-r", template.palette]}></span>
+                  <span class="text-small text-ink">{toneLabel}</span>
+                </dd>
+              </div>
+              <div>
+                <dt class="text-tiny uppercase tracking-cta text-ink-soft">Ideální pro</dt>
+                <dd class="mt-2 text-small text-ink">{idealFor}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Co šablona umí</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Všechno, co pro svatební web potřebujete</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Každá šablona je plně vybavená. Vy jen doplníte obsah a fotky — o zbytek se postará WeMarry.
+          </p>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {
+            features.map((f) => (
+              <article class="rounded-card bg-cream p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{f.title}</h3>
+                <p class="mt-3 text-body text-ink-muted">{f.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Podobné šablony -->
+    <section class="relative isolate overflow-hidden bg-cream py-20 md:py-28">
+      <div class="container-site">
+        <div class="mb-10 flex items-end justify-between md:mb-14">
+          <div>
+            <p class="text-tiny uppercase tracking-cta text-primary">Další šablony</p>
+            <h2 class="mt-3 font-serif text-hero-sm text-ink md:text-hero">Podobné designy</h2>
+          </div>
+          <a href="/sablony" class="hidden text-micro uppercase tracking-cta text-primary hover:text-primary-hover md:inline-flex">Všechny šablony →</a>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+          {
+            similar.map((t) => (
+              <a href={`/sablony/${t.slug}`} class="group relative flex aspect-[4/5] flex-col overflow-hidden rounded-card shadow-card transition-all hover:shadow-prominent">
+                <div aria-hidden="true" class:list={["absolute inset-0 bg-gradient-to-br", t.palette]}></div>
+                <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/35 to-black/75"></div>
+                <div class="relative z-10 flex items-start justify-between p-5 md:p-6">
+                  <span class="rounded-pill bg-white/15 px-3 py-1 text-tiny uppercase tracking-cta text-white backdrop-blur-sm">{t.style}</span>
+                </div>
+                <div class="relative z-10 mt-auto p-5 md:p-6">
+                  <h3 class="font-serif text-h2 italic text-white md:text-hero-sm">{t.name}</h3>
+                  <p class="mt-2 text-small text-white/80">{t.subtitle}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+
+        <div class="mt-10 text-center md:hidden">
+          <a href="/sablony" class="text-micro uppercase tracking-cta text-primary">Všechny šablony →</a>
+        </div>
+      </div>
+    </section>
+
+    <HandsCTA />
+  </main>
+</BaseLayout>

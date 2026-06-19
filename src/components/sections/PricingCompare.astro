@@ -1,0 +1,79 @@
+---
+import PricingCell from "./PricingCell.astro";
+
+type Cmp = {
+  feature: string;
+  wemarry: string | boolean;
+  traditional: string | boolean;
+  others: string | boolean;
+};
+
+const comparison: Cmp[] = [
+  { feature: "Svatební web s RSVP", wemarry: true, traditional: false, others: "částečně" },
+  { feature: "Checklist úkolů", wemarry: true, traditional: "papír", others: true },
+  { feature: "Kalkulačka nákladů", wemarry: true, traditional: "excel", others: "někdy" },
+  { feature: "Zasedací pořádek (drag & drop)", wemarry: true, traditional: false, others: "někdy" },
+  { feature: "Sdílená fotogalerie + QR", wemarry: true, traditional: false, others: false },
+  { feature: "Doporučení dodavatelů", wemarry: true, traditional: "osobní", others: false },
+  { feature: "Vlastní doména", wemarry: true, traditional: false, others: "příplatek" },
+  { feature: "Vícejazyčná verze", wemarry: true, traditional: false, others: "příplatek" },
+  { feature: "Export do tabulek", wemarry: true, traditional: false, others: "někdy" },
+  { feature: "Cena", wemarry: "1 490 Kč jednorázově", traditional: "10 000+ Kč", others: "199–499 Kč / měsíc" },
+];
+
+interface Props {
+  background?: "warm-gray" | "white";
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+const {
+  background = "warm-gray",
+  eyebrow = "Podrobné srovnání",
+  title = "Co získáte s WeMarry vs. jinde",
+  subtitle = "Tady je přehled funkcí, které jsou u nás standardně v ceně — a jak je řeší tradiční plánování nebo jiné online nástroje.",
+} = Astro.props;
+
+const bgClass = background === "white" ? "bg-white" : "bg-warm-gray";
+---
+
+<section class:list={["relative isolate overflow-hidden py-20 md:py-28 lg:py-32", bgClass]}>
+  <div class="container-site">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-tiny uppercase tracking-cta text-primary">{eyebrow}</p>
+      <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">{title}</h2>
+      {subtitle && <p class="mt-4 text-body text-ink-muted">{subtitle}</p>}
+    </div>
+
+    <div class="mx-auto mt-14 max-w-4xl overflow-hidden rounded-card bg-white shadow-card">
+      <div class="grid grid-cols-[2fr,1fr,1fr,1fr] border-b border-beige-border text-small">
+        <div class="px-5 py-5 text-tiny uppercase tracking-cta text-ink-soft md:px-6">Funkce</div>
+        <div class="px-3 py-5 text-center text-tiny uppercase tracking-cta text-primary md:px-4">WeMarry</div>
+        <div class="px-3 py-5 text-center text-tiny uppercase tracking-cta text-ink-soft md:px-4">Tradičně</div>
+        <div class="px-3 py-5 text-center text-tiny uppercase tracking-cta text-ink-soft md:px-4">Jiné online</div>
+      </div>
+
+      {
+        comparison.map((row, i) => (
+          <div
+            class:list={[
+              "grid grid-cols-[2fr,1fr,1fr,1fr] items-center text-small",
+              i % 2 === 0 ? "bg-white" : "bg-cream",
+              i === comparison.length - 1 ? "font-medium" : "",
+            ]}
+          >
+            <div class="px-5 py-4 text-ink md:px-6">{row.feature}</div>
+            <div class="px-3 py-4 text-center md:px-4"><PricingCell value={row.wemarry} emphasis="primary" /></div>
+            <div class="px-3 py-4 text-center md:px-4"><PricingCell value={row.traditional} /></div>
+            <div class="px-3 py-4 text-center md:px-4"><PricingCell value={row.others} /></div>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mx-auto mt-8 max-w-2xl text-center text-small text-ink-soft">
+      Ceny „Jiných online" jsou orientační průměry — konkrétní nástroje se liší.
+      WeMarry je jednorázová platba bez měsíčního závazku.
+    </p>
+  </div>
+</section>

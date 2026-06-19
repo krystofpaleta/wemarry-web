@@ -1,0 +1,303 @@
+---
+import { SITE } from "../../config/site";
+import {
+  useTranslations,
+  enabledLocales,
+  localeNames,
+  defaultLocale,
+  type Locale,
+} from "../../i18n/ui";
+
+interface Props {
+  /** Hlavička startuje transparentní přes tmavý hero (default). */
+  transparent?: boolean;
+}
+const { transparent = true } = Astro.props;
+
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
+const t = useTranslations(locale);
+
+const navLinks = [
+  { href: "/jak-to-funguje", label: t("nav.howItWorks") },
+  { href: "/sablony", label: t("nav.templates") },
+  { href: "/cenik", label: t("nav.pricing") },
+  { href: "/faq", label: t("nav.faq") },
+  { href: "/blog", label: t("nav.blog") },
+  { href: "/kontakt", label: t("nav.contact") },
+];
+
+// Když stránka nemá tmavý hero, startujeme rovnou v solid variantě.
+const startSolid = !transparent;
+---
+
+<header
+  id="site-header"
+  data-start-solid={startSolid ? "true" : "false"}
+  class:list={[
+    "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+    startSolid ? "bg-white/95 shadow-card backdrop-blur-md" : "bg-transparent",
+  ]}
+>
+  <div
+    data-header-bar
+    class:list={[
+      "mx-auto flex max-w-container items-center justify-between px-5 transition-all md:px-10",
+      startSolid ? "py-3 md:py-4" : "py-5 md:py-6 lg:py-8",
+    ]}
+  >
+    <!-- Logo -->
+    <a
+      href="/"
+      data-logo
+      class:list={[
+        "font-logo text-h2 font-medium tracking-tight transition-colors",
+        startSolid ? "text-ink" : "text-white",
+      ]}
+    >
+      WeMarry
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-10 lg:flex">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            data-nav-link
+            class:list={[
+              "text-micro transition-colors",
+              startSolid
+                ? "text-ink-muted hover:text-ink"
+                : "text-white/90 hover:text-white",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Desktop right controls -->
+    <div class="hidden items-center gap-6 lg:flex">
+      <!-- Language switcher -->
+      <div class="relative">
+        <button
+          type="button"
+          data-lang-toggle
+          aria-haspopup="true"
+          aria-expanded="false"
+          class:list={[
+            "inline-flex items-center gap-1.5 text-micro transition-colors",
+            startSolid ? "text-ink-muted hover:text-ink" : "text-white/90 hover:text-white",
+          ]}
+        >
+          {localeNames[locale]}
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div
+          data-lang-menu
+          hidden
+          class="absolute right-0 top-full mt-2 min-w-[140px] rounded-input border border-beige-border bg-white py-2 shadow-prominent"
+        >
+          {
+            enabledLocales.map((loc) => (
+              <a
+                href={loc === defaultLocale ? "/" : `/${loc}/`}
+                class:list={[
+                  "block px-4 py-2 text-small hover:bg-cream",
+                  loc === locale ? "text-primary" : "text-ink-muted",
+                ]}
+              >
+                {localeNames[loc]}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <a
+        href={SITE.app.login}
+        data-nav-link
+        class:list={[
+          "text-micro transition-colors",
+          startSolid ? "text-ink-muted hover:text-ink" : "text-white/90 hover:text-white",
+        ]}
+      >
+        {t("cta.login")}
+      </a>
+
+      <a
+        href={SITE.app.signup}
+        data-cta
+        class:list={[startSolid ? "btn-primary px-5 py-2.5" : "btn-ghost"]}
+      >
+        {t("cta.tryFree")}
+      </a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+      type="button"
+      data-menu-toggle
+      aria-label="Otevřít menu"
+      aria-expanded="false"
+      class:list={[
+        "flex items-center gap-2 transition-colors lg:hidden",
+        startSolid ? "text-ink" : "text-white",
+      ]}
+    >
+      <span class="text-micro uppercase tracking-cta">{t("menu.label")}</span>
+      <span class="relative block h-5 w-6">
+        <span data-bar="1" class:list={["absolute left-0 top-0 block h-[2px] w-full transition-all", startSolid ? "bg-ink" : "bg-white"]}></span>
+        <span data-bar="2" class:list={["absolute left-0 top-2 block h-[2px] w-full transition-all", startSolid ? "bg-ink" : "bg-white"]}></span>
+        <span data-bar="3" class:list={["absolute left-0 top-4 block h-[2px] w-full transition-all", startSolid ? "bg-ink" : "bg-white"]}></span>
+      </span>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div
+    data-mobile-drawer
+    hidden
+    class="absolute inset-x-0 top-full bg-white text-ink shadow-prominent lg:hidden"
+  >
+    <nav class="flex flex-col gap-2 px-5 py-6">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            data-drawer-link
+            class="rounded-input px-3 py-3 text-body text-ink hover:bg-cream"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <div class="mt-2 flex flex-col gap-3 border-t border-beige-border pt-4">
+        <a href={SITE.app.login} class="rounded-input px-3 py-3 text-body text-ink hover:bg-cream">
+          {t("cta.login")}
+        </a>
+        <a href={SITE.app.signup} class="btn-primary w-full text-center">
+          {t("cta.tryFree")}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Sticky header — transparentní přes hero, po scrollu (>24px) přepne do bílé varianty.
+  // Mobilní drawer + jazykový přepínač. Bez Reactu — čistý DOM, nulová hydratace.
+  const header = document.getElementById("site-header");
+  if (header) {
+    const startSolid = header.dataset.startSolid === "true";
+    const bar = header.querySelector("[data-header-bar]");
+    const logo = header.querySelector("[data-logo]");
+    const navLinks = header.querySelectorAll("[data-nav-link]");
+    const cta = header.querySelector("[data-cta]");
+    const menuBtn = header.querySelector("[data-menu-toggle]");
+    const drawer = header.querySelector("[data-mobile-drawer]");
+    const drawerLinks = header.querySelectorAll("[data-drawer-link]");
+    const bars = header.querySelectorAll("[data-bar]");
+    const langToggle = header.querySelector("[data-lang-toggle]");
+    const langMenu = header.querySelector("[data-lang-menu]");
+
+    let mobileOpen = false;
+
+    const applySolid = (solid: boolean) => {
+      // header bg
+      header.classList.toggle("bg-white/95", solid);
+      header.classList.toggle("shadow-card", solid);
+      header.classList.toggle("backdrop-blur-md", solid);
+      header.classList.toggle("bg-transparent", !solid);
+      // bar padding
+      if (bar) {
+        bar.classList.toggle("py-3", solid);
+        bar.classList.toggle("md:py-4", solid);
+        bar.classList.toggle("py-5", !solid);
+        bar.classList.toggle("md:py-6", !solid);
+        bar.classList.toggle("lg:py-8", !solid);
+      }
+      // logo
+      if (logo) {
+        logo.classList.toggle("text-ink", solid);
+        logo.classList.toggle("text-white", !solid);
+      }
+      // nav links + login + lang toggle
+      navLinks.forEach((el) => {
+        el.classList.toggle("text-ink-muted", solid);
+        el.classList.toggle("hover:text-ink", solid);
+        el.classList.toggle("text-white/90", !solid);
+        el.classList.toggle("hover:text-white", !solid);
+      });
+      if (langToggle) {
+        langToggle.classList.toggle("text-ink-muted", solid);
+        langToggle.classList.toggle("hover:text-ink", solid);
+        langToggle.classList.toggle("text-white/90", !solid);
+        langToggle.classList.toggle("hover:text-white", !solid);
+      }
+      // CTA ghost <-> primary
+      if (cta) {
+        cta.classList.toggle("btn-primary", solid);
+        cta.classList.toggle("px-5", solid);
+        cta.classList.toggle("py-2.5", solid);
+        cta.classList.toggle("btn-ghost", !solid);
+      }
+      // mobile button color
+      if (menuBtn) {
+        menuBtn.classList.toggle("text-ink", solid);
+        menuBtn.classList.toggle("text-white", !solid);
+      }
+      bars.forEach((b) => {
+        b.classList.toggle("bg-ink", solid);
+        b.classList.toggle("bg-white", !solid);
+      });
+    };
+
+    const onScroll = () => {
+      // mobilní menu otevřené => vždy solid (drawer má bílé pozadí)
+      const solid = startSolid || window.scrollY > 24 || mobileOpen;
+      applySolid(solid);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Mobile drawer toggle
+    menuBtn?.addEventListener("click", () => {
+      mobileOpen = !mobileOpen;
+      if (drawer) (drawer as HTMLElement).hidden = !mobileOpen;
+      menuBtn.setAttribute("aria-expanded", String(mobileOpen));
+      // hamburger -> X
+      bars.forEach((b, i) => {
+        if (i === 0) b.classList.toggle("translate-y-2", mobileOpen), b.classList.toggle("rotate-45", mobileOpen);
+        if (i === 1) b.classList.toggle("opacity-0", mobileOpen);
+        if (i === 2) b.classList.toggle("-translate-y-2", mobileOpen), b.classList.toggle("-rotate-45", mobileOpen);
+      });
+      onScroll();
+    });
+    drawerLinks.forEach((l) =>
+      l.addEventListener("click", () => {
+        mobileOpen = false;
+        if (drawer) (drawer as HTMLElement).hidden = true;
+        onScroll();
+      }),
+    );
+
+    // Language dropdown
+    langToggle?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!langMenu) return;
+      const open = (langMenu as HTMLElement).hidden;
+      (langMenu as HTMLElement).hidden = !open;
+      langToggle.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", () => {
+      if (langMenu && !(langMenu as HTMLElement).hidden) {
+        (langMenu as HTMLElement).hidden = true;
+        langToggle?.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+</script>

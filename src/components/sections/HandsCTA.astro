@@ -1,0 +1,31 @@
+---
+import { SITE } from "../../config/site";
+---
+
+<section class="relative isolate overflow-hidden">
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#d9b8a4] via-[#b38b75] to-[#6b4a3d]"></div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/20 via-black/30 to-black/55"></div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.15)_0%,_transparent_60%)]"></div>
+
+  <div class="container-site flex min-h-[520px] flex-col items-center justify-center py-24 text-center md:min-h-[620px] md:py-32">
+    <p class="text-tiny uppercase tracking-cta text-white/85">Začněte plánovat</p>
+    <h2 class="mt-5 max-w-3xl font-serif text-hero-sm text-white md:text-hero lg:text-hero-xl">
+      Spojte své ruce <em class="font-serif italic">s WeMarry</em>
+    </h2>
+    <p class="mt-6 max-w-xl text-body text-white/85">
+      Začněte plánovat svatbu snů ještě dnes. Registrace zdarma, žádná kreditka,
+      bez závazků — vše najednou na jednom místě.
+    </p>
+
+    <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
+      <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+      <a href="/jak-to-funguje" class="text-micro uppercase tracking-cta text-white hover:text-white/80">
+        Jak to funguje →
+      </a>
+    </div>
+
+    <p class="mt-8 text-tiny uppercase tracking-cta text-white/70">
+      Bez kreditky · Zdarma na 14 dní · Pro celou rodinu
+    </p>
+  </div>
+</section>

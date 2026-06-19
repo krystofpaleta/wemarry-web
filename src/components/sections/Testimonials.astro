@@ -1,0 +1,86 @@
+---
+import SectionIntro from "./SectionIntro.astro";
+
+type Story = {
+  quote: string;
+  coupleName: string;
+  weddingDate: string;
+  location: string;
+  palette: string;
+  highlight?: boolean;
+};
+
+const stories: Story[] = [
+  {
+    quote:
+      "Bez WeMarry bych se zbláznila. Checklist mě provedl každým krokem a rozpočet nám zachránil asi tak pětkrát, když jsme chtěli utrácet hlouposti.",
+    coupleName: "Tereza & Martin",
+    weddingDate: "Červen 2025",
+    location: "Zámek Liblice",
+    palette: "from-[#edd4cb] via-[#d4b6a8] to-[#a78b7d]",
+  },
+  {
+    quote:
+      "RSVP formulář nám ušetřil stovky telefonátů. Babička sice ještě chvíli volala, ale to je asi dáno spíš tou babičkou než aplikací 😊",
+    coupleName: "Klára & Honza",
+    weddingDate: "Září 2024",
+    location: "Stodola Suška",
+    palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]",
+    highlight: true,
+  },
+  {
+    quote:
+      "Zasedací pořádek jsem přerovnávala asi 30×, a drag and drop mě pokaždé zachránil. Na papíře bych to dávno vzdala.",
+    coupleName: "Nikola & Filip",
+    weddingDate: "Květen 2025",
+    location: "Vinařství Sonberk",
+    palette: "from-[#f5d9d2] via-[#e8a89a] to-[#b66b5c]",
+  },
+];
+---
+
+<section class="bg-cream py-20 md:py-28 lg:py-32">
+  <div class="container-site">
+    <SectionIntro
+      eyebrow="Příběhy"
+      title="Příběhy našich svatebčanů"
+      subtitle="Přes 3 000 českých párů si s WeMarry naplánovalo svatbu svých snů. Tady jsou tři z nich."
+    />
+
+    <div class="mt-14 grid grid-cols-1 gap-6 lg:mt-20 lg:grid-cols-3 lg:gap-8">
+      {
+        stories.map((story) => (
+          <article
+            class:list={[
+              "flex flex-col overflow-hidden rounded-card border shadow-card transition-shadow hover:shadow-prominent",
+              story.highlight
+                ? "border-primary/20 bg-white lg:-translate-y-4"
+                : "border-beige-border bg-white",
+            ]}
+          >
+            <div class:list={["aspect-[4/3] w-full bg-gradient-to-br relative", story.palette]} aria-hidden="true">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+
+            <div class="flex flex-1 flex-col gap-5 p-8 md:p-10">
+              <svg viewBox="0 0 32 24" class="size-7 text-primary/70" fill="currentColor" aria-hidden="true">
+                <path d="M0 24V12C0 5.4 4.8 0 12 0v4c-4 .8-6.4 3.6-6.4 8H12v12H0zm20 0V12c0-6.6 4.8-12 12-12v4c-4 .8-6.4 3.6-6.4 8H32v12H20z"></path>
+              </svg>
+              <blockquote class="font-serif text-h4 italic leading-snug text-ink">
+                „{story.quote}"
+              </blockquote>
+
+              <div class="mt-auto flex items-center justify-between pt-4">
+                <div>
+                  <p class="font-serif text-body text-ink">{story.coupleName}</p>
+                  <p class="text-small text-ink-soft">{story.location}</p>
+                </div>
+                <p class="text-tiny uppercase tracking-cta text-primary">{story.weddingDate}</p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

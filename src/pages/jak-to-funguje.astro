@@ -1,0 +1,130 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE } from "../config/site";
+
+const title = "Jak to funguje — WeMarry";
+const description =
+  "Od registrace po den svatby: podívejte se, jak WeMarry krok za krokem provede celým plánováním.";
+
+const steps = [
+  { n: "01", eyebrow: "Registrace", title: "Zaregistrujte se za pár vteřin", description: "Zadáte jméno, e-mail a datum svatby. Hotovo — už žádné papírové deníky ani 15 různých aplikací.", bullets: ["Stačí e-mail, žádná kreditka", "Přístup z mobilu i počítače", "První svatební checklist je připravený hned"] },
+  { n: "02", eyebrow: "Svatební web", title: "Vytvořte svůj svatební web", description: "Vyberte si z ověřených šablon, přidejte foto, adresu a klíčové informace. Všechno na vlastní doméně.", bullets: ["6 designových šablon na výběr", "Vícejazyčná verze pro zahraniční hosty", "Vlastní doména ve stylu novakovi.cz"] },
+  { n: "03", eyebrow: "Pozvánky & RSVP", title: "Rozešlete pozvánky a sesbírejte odpovědi", description: "Místo neustálých telefonátů tetičkám pošlete krásnou digitální pozvánku s RSVP formulářem.", bullets: ["Hromadné pozvánky e-mailem i odkazem", "Automatický sběr odpovědí včetně alergií", "Export do tabulek pro catering a sedák"] },
+  { n: "04", eyebrow: "Plánování", title: "Mějte náklady a úkoly pod kontrolou", description: "Checklist od zkušené koordinátorky, kalkulačka nákladů do poslední koruny a katalog ověřených dodavatelů.", bullets: ["Přednastavený checklist s termíny", "Kalkulačka: rozpočet vs. reálné výdaje", "Doporučení fotografů, floristů, cateringu"] },
+  { n: "05", eyebrow: "Zasedací pořádek", title: "Rozsaďte hosty za pár minut", description: "Drag & drop nástroj s napojením na RSVP. Všechny tvary stolů, export a tisk.", bullets: ["Napojení na seznam hostů z RSVP", "Kulaté, obdélníkové i královské tabule", "Tisk a PDF export pro catering"] },
+  { n: "06", eyebrow: "Den svatby", title: "Sdílejte fotky v reálném čase", description: "V den D se váš web promění v živou galerii. Hosté nahrávají fotky přes QR kód, vy je máte všechny na jednom místě.", bullets: ["QR kód pro rychlé nahrávání z mobilu", "Profesionální fotky od fotografa doplníte později", "Dostupné kdykoliv a kdekoliv"] },
+];
+
+const faq = [
+  { q: "Je registrace opravdu zdarma?", a: "Ano. WeMarry vyzkoušíte zdarma. Platíte až ve chvíli, kdy se rozhodnete svatební web zveřejnit hostům — jednorázově 1 490 Kč." },
+  { q: "Jak dlouho trvá, než vytvořím svatební web?", a: "Prvních pět minut stačí na základ. Většina párů má hotovo za jeden večer. Kdykoliv se vracíte a upravujete obsah podle potřeby." },
+  { q: "Funguje to i pro zahraniční hosty?", a: "Ano, svatební web umí více jazyků najednou — hosté si sami přepnou mezi češtinou, angličtinou nebo další jazykovou verzí." },
+  { q: "Co když si nevím rady?", a: "Napište nám. Podpora odpovídá v řádu hodin a pomůže jak s technickou stránkou, tak s tipy na plánování." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={faqSchema}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#c9a796] via-[#a78b7d] to-[#6b5b52]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/35 via-black/25 to-black/55"></div>
+
+      <div class="container-site flex min-h-[520px] flex-col justify-center pb-16 pt-40 md:min-h-[620px] md:pb-24 md:pt-48">
+        <div class="max-w-2xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Jak to funguje</p>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+            Od prvního kliknutí po poslední fotku.
+            <span class="not-italic"> Provedeme vás celou cestou.</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-body text-white/85">
+            Šest kroků, které promění chaos ve svatbu, na jakou jste čekali.
+            Bez excelů, bez telefonátů tetičkám a bez stresu.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4 md:mt-10">
+            <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+            <a href="#kroky" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">
+              Podívat se na kroky ↓
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kroky -->
+    <section id="kroky" class="relative isolate overflow-hidden bg-cream py-20 md:py-28 lg:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Šest kroků</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Jak WeMarry funguje v praxi</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Každý krok je navržený tak, aby vám ušetřil čas a pár jasně navigoval k dalšímu kroku.
+          </p>
+        </div>
+
+        <ol class="mx-auto mt-16 flex max-w-4xl flex-col gap-12 md:mt-20 md:gap-16">
+          {
+            steps.map((step) => (
+              <li class="grid grid-cols-1 gap-6 md:grid-cols-[auto,1fr] md:gap-10">
+                <div class="flex md:block">
+                  <span class="font-serif text-hero italic text-primary md:text-hero-xl">{step.n}</span>
+                </div>
+                <div class="flex flex-col gap-4">
+                  <p class="text-tiny uppercase tracking-cta text-primary">{step.eyebrow}</p>
+                  <h3 class="font-serif text-h2 text-ink md:text-hero-sm">{step.title}</h3>
+                  <p class="text-body text-ink-muted">{step.description}</p>
+                  <ul class="mt-2 flex flex-col gap-2.5">
+                    {step.bullets.map((b) => (
+                      <li class="flex items-start gap-3">
+                        <span aria-hidden="true" class="mt-2 size-1.5 shrink-0 rounded-full bg-primary"></span>
+                        <span class="text-body text-ink-body">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- FAQ strip -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Časté otázky</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Co se vás ptají jiné páry</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+          {
+            faq.map((f) => (
+              <article class="rounded-card bg-white p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{f.q}</h3>
+                <p class="mt-3 text-body text-ink-muted">{f.a}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="/faq" class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">Celé FAQ →</a>
+        </div>
+      </div>
+    </section>
+
+    <HandsCTA />
+  </main>
+</BaseLayout>

@@ -1,0 +1,226 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getRelated, formatViews } from "../../lib/blog";
+import { SITE, absoluteUrl } from "../../config/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+
+const related = await getRelated(post.slug, 3);
+const tags = ["Novinky", "Rady a tipy", "Svatby 2026", "Svatební proslov"];
+
+const title = `${d.title} — WeMarry Blog`;
+const description = d.excerpt || d.title;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: d.title,
+  description,
+  datePublished: d.isoDate.toISOString(),
+  articleSection: d.category,
+  inLanguage: "cs-CZ",
+  author: { "@type": "Organization", name: SITE.name, url: SITE.url },
+  publisher: {
+    "@type": "Organization",
+    name: SITE.name,
+    logo: { "@type": "ImageObject", url: absoluteUrl("/logo.png") },
+  },
+  mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+};
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "WeMarry", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Blog", item: absoluteUrl("/blog") },
+    { "@type": "ListItem", position: 3, name: d.title, item: absoluteUrl(`/blog/${post.slug}`) },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} ogType="article" jsonld={[articleSchema, breadcrumbSchema]}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class:list={["absolute inset-0 -z-10 bg-gradient-to-br", d.palette]}></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/35 via-black/30 to-black/65"></div>
+
+      <div class="container-site flex min-h-[520px] flex-col justify-end pb-14 pt-40 md:min-h-[620px] md:pb-20 md:pt-48">
+        <nav aria-label="Drobečková navigace" class="mb-8 flex items-center gap-2 text-tiny uppercase tracking-cta text-white/70">
+          <a href="/" class="hover:text-white">WeMarry</a>
+          <span>/</span>
+          <a href="/blog" class="hover:text-white">Blog</a>
+          <span>/</span>
+          <span class="text-white">{d.category}</span>
+        </nav>
+
+        <div class="flex max-w-3xl flex-col gap-6">
+          <span class="inline-flex w-fit rounded-pill bg-white/15 px-3 py-1.5 text-tiny uppercase tracking-cta text-white backdrop-blur-sm">{d.category}</span>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">{d.title}</h1>
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-small text-white/85">
+            <span>{d.date}</span>
+            <span class="hidden size-1 rounded-full bg-white/40 md:inline-block"></span>
+            <span>{d.readMinutes} min čtení</span>
+            <span class="hidden size-1 rounded-full bg-white/40 md:inline-block"></span>
+            <span class="inline-flex items-center gap-1.5">
+              <svg viewBox="0 0 20 20" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.667 10S4.667 4.167 10 4.167 18.333 10 18.333 10 15.333 15.833 10 15.833 1.667 10 1.667 10z"></path><circle cx="10" cy="10" r="2.5"></circle></svg>
+              {formatViews(d.views)}×
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Body -->
+    <article class="relative isolate overflow-hidden py-16 md:py-24 lg:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-3xl">
+          <!-- Lead / perex -->
+          {d.excerpt && <p class="font-serif text-h3 italic text-ink md:text-h2">{d.excerpt}</p>}
+
+          <!-- Úvodní ilustrační foto (placeholder z palety) -->
+          <figure class="mt-12">
+            <div aria-hidden="true" class:list={["relative aspect-[16/10] overflow-hidden rounded-card bg-gradient-to-br shadow-card", d.palette]}>
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/25"></div>
+            </div>
+            <figcaption class="mt-3 text-center text-tiny uppercase tracking-cta text-ink-soft">Foto · ilustrační</figcaption>
+          </figure>
+
+          <!-- Tělo článku z markdownu -->
+          <div class="article-body mt-12">
+            <Content />
+          </div>
+
+          <!-- Tags -->
+          <div class="mt-16 border-t border-beige-border pt-10">
+            <p class="text-tiny uppercase tracking-cta text-ink-soft">Štítky článku</p>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {
+                tags.map((t) => (
+                  <li>
+                    <a href={`/blog?stitek=${encodeURIComponent(t)}`} class="inline-flex rounded-pill border border-beige-border bg-cream px-4 py-2 text-micro uppercase tracking-cta text-ink-muted transition-colors hover:border-primary/50 hover:bg-white hover:text-primary">{t}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Share + back -->
+          <div class="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-beige-border pt-6 text-small text-ink-muted">
+            <a href="/blog" class="inline-flex items-center gap-1.5 text-micro uppercase tracking-cta text-primary hover:text-primary-hover">← Zpět na blog</a>
+            <span class="inline-flex items-center gap-3 text-tiny uppercase tracking-cta text-ink-soft">
+              Sdílet:
+              <span class="inline-flex items-center gap-2">
+                <a href="#" aria-label="Sdílet na Facebook" class="flex size-8 items-center justify-center rounded-full border border-beige-border bg-white text-tiny font-medium text-ink-muted transition-colors hover:border-primary hover:text-primary">F</a>
+                <a href="#" aria-label="Sdílet na Twitter" class="flex size-8 items-center justify-center rounded-full border border-beige-border bg-white text-tiny font-medium text-ink-muted transition-colors hover:border-primary hover:text-primary">X</a>
+                <a href="#" aria-label="Sdílet na Pinterest" class="flex size-8 items-center justify-center rounded-full border border-beige-border bg-white text-tiny font-medium text-ink-muted transition-colors hover:border-primary hover:text-primary">P</a>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Related -->
+    <section class="relative isolate overflow-hidden bg-cream py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Pokračujte ve čtení</p>
+          <h2 class="mt-3 font-serif text-hero-sm text-ink md:text-hero">Další články, které by se vám mohly líbit</h2>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+          {
+            related.map((p) => (
+              <article class="group flex flex-col">
+                <a href={`/blog/${p.slug}`} class="relative aspect-[4/3] overflow-hidden rounded-card shadow-card transition-all group-hover:shadow-prominent">
+                  <div aria-hidden="true" class:list={["absolute inset-0 bg-gradient-to-br", p.data.palette]}></div>
+                  <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/45"></div>
+                  <div class="relative p-5 md:p-6">
+                    <span class="rounded-pill bg-white/15 px-3 py-1 text-tiny uppercase tracking-cta text-white backdrop-blur-sm">{p.data.category}</span>
+                  </div>
+                </a>
+                <div class="mt-5 flex flex-1 flex-col">
+                  <p class="text-tiny uppercase tracking-cta text-ink-soft">{p.data.date}</p>
+                  <h3 class="mt-3 font-serif text-h3 text-ink">
+                    <a href={`/blog/${p.slug}`} class="transition-colors hover:text-primary">{p.data.title}</a>
+                  </h3>
+                  {p.data.excerpt && <p class="mt-3 line-clamp-2 text-body text-ink-muted">{p.data.excerpt}</p>}
+                  <div class="mt-4 flex items-center justify-between border-t border-beige-border pt-4">
+                    <span class="inline-flex items-center gap-1.5 text-tiny text-ink-soft">
+                      <svg viewBox="0 0 20 20" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.667 10S4.667 4.167 10 4.167 18.333 10 18.333 10 15.333 15.833 10 15.833 1.667 10 1.667 10z"></path><circle cx="10" cy="10" r="2.5"></circle></svg>
+                      {formatViews(p.data.views)}×
+                    </span>
+                    <a href={`/blog/${p.slug}`} class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">Celý článek →</a>
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="/blog" class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">Všechny články →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="relative isolate overflow-hidden bg-warm-peach/40 py-20 md:py-28">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-warm-peach/50 via-cream to-warm-peach/30"></div>
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Newsletter</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Praktické rady jednou za čas do mailu</h2>
+          <p class="mt-4 text-body text-ink-muted">Žádný spam, jen vybrané tipy pro plánování svatby. Odhlásit se můžete kdykoliv jedním kliknutím.</p>
+
+          <form class="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row" action="/newsletter" method="post">
+            <label class="sr-only" for="newsletter-email-article">Váš e-mail</label>
+            <input id="newsletter-email-article" type="email" name="email" required placeholder="Zadejte váš e-mail" class="flex-1 rounded-pill border border-beige-border bg-white px-5 py-4 text-body text-ink placeholder:text-ink-light focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30" />
+            <button type="submit" class="btn-primary">Odebírat</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  /* Prose styl těla článku — přibližuje editorial layout z prototypu. */
+  .article-body { color: #454545; }
+  .article-body > * + * { margin-top: 1.5rem; }
+  .article-body p { font-size: 1rem; line-height: 1.7; }
+  .article-body h2 {
+    font-family: Lora, Georgia, serif; color: #000;
+    font-size: 1.75rem; line-height: 1.2; margin-top: 3.5rem;
+  }
+  @media (min-width: 768px) { .article-body h2 { font-size: 2rem; } }
+  .article-body a { color: #0c948c; text-decoration: underline; }
+  .article-body a:hover { color: #0a7f78; }
+  .article-body strong { color: #000; }
+  .article-body ul { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .article-body ul li {
+    position: relative; padding-left: 2rem; font-size: 1rem; line-height: 1.7;
+  }
+  .article-body ul li::before {
+    content: ""; position: absolute; left: 0; top: 0.45rem;
+    width: 1.1rem; height: 1.1rem; border-radius: 9999px;
+    border: 2px solid rgba(12, 148, 140, 0.7);
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%230c948c' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 7.5L6 10.5L11 4'/%3E%3C/svg%3E") center / 0.7rem no-repeat;
+  }
+  .article-body blockquote {
+    margin: 3.5rem 0; border-radius: 24px; background: #fffdfc;
+    padding: 2rem; box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.1);
+    font-family: Lora, Georgia, serif; font-style: italic; color: #000;
+    font-size: 1.5rem; line-height: 1.3;
+  }
+  @media (min-width: 768px) { .article-body blockquote { padding: 3rem; font-size: 1.75rem; } }
+</style>

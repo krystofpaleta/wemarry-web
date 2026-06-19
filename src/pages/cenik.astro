@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Pricing from "../components/sections/Pricing.astro";
+import PricingCompare from "../components/sections/PricingCompare.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE } from "../config/site";
+
+const title = "Ceník — WeMarry";
+const description =
+  "Jedna jednorázová platba 1 490 Kč. Žádné měsíční poplatky, žádné překvapení. 30denní garance vrácení peněz.";
+
+const faq = [
+  { q: "Platí se jednorázově nebo měsíčně?", a: "Jednorázově. Zaplatíte 1 490 Kč a WeMarry používáte tak dlouho, jak potřebujete — od zásnub až po roky po svatbě, kdy se stále vracíte do galerie." },
+  { q: "Co znamená 30denní garance vrácení peněz?", a: "Pokud si WeMarry koupíte a do 30 dní zjistíte, že vám nesedí, vrátíme vám peníze bez otázek. Napište nám e-mail a peníze jsou zpět do pár dní." },
+  { q: "Potřebuji kreditku pro vyzkoušení?", a: "Ne. Registrace a plánování je zdarma. Platíte až ve chvíli, kdy chcete svatební web zveřejnit hostům." },
+  { q: "Můžu WeMarry používat jako plánovač svateb klientům?", a: "Ano. Pro svatební koordinátory a plánovače připravujeme partnerský program — ozvěte se nám na info@wemarry.cz." },
+  { q: "Jak je to s fakturou a DPH?", a: "Standardní faktura vám přijde automaticky na e-mail. Pokud potřebujete IČO a DIČ, doplníte je při platbě." },
+  { q: "Co když se svatba nekoná?", a: "Stává se. Napište nám do 30 dnů od platby a peníze vrátíme. I po 30 dnech se snažíme vyjít vstříc — řešíme individuálně." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={faqSchema}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#6b5b52] via-[#8a7a6e] to-[#c9a796]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
+
+      <div class="container-site flex min-h-[480px] flex-col items-center justify-center pb-16 pt-40 text-center md:min-h-[560px] md:pb-20 md:pt-48">
+        <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Ceník</p>
+        <h1 class="max-w-3xl font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+          Jedna férová cena.
+          <span class="not-italic"> Žádná překvapení.</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-body text-white/85">
+          Zaplatíte jednou, používáte kdykoliv. Žádné měsíční poplatky, žádné
+          skryté příplatky za hosty nebo doménu.
+        </p>
+      </div>
+    </section>
+
+    <PricingCompare background="warm-gray" />
+    <Pricing />
+
+    <!-- FAQ -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Platba a faktura</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Časté otázky k ceně</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+          {
+            faq.map((f) => (
+              <article class="rounded-card bg-white p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{f.q}</h3>
+                <p class="mt-3 text-body text-ink-muted">{f.a}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <HandsCTA />
+  </main>
+</BaseLayout>

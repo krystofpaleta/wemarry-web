@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wemarry.cz/sitemap-index.xml

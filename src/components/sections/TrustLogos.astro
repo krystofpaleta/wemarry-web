@@ -1,0 +1,32 @@
+---
+const mediaLogos = ["Svatby.cz", "Hypotheek", "Esence", "Elle", "Vogue", "Vlasta"];
+---
+
+<section class="bg-white py-14 md:py-20">
+  <div class="container-site">
+    <p class="text-center text-tiny uppercase tracking-cta text-ink-soft">Psali o nás</p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14">
+      {
+        mediaLogos.map((logo) => (
+          <span class="font-serif text-h4 text-ink-soft/70 transition-colors hover:text-ink-muted">{logo}</span>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex flex-col items-center gap-2">
+      <div class="flex items-center gap-1">
+        {
+          [1, 2, 3, 4, 5].map(() => (
+            <svg viewBox="0 0 20 20" class="size-5 text-primary" fill="currentColor" aria-hidden="true">
+              <path d="M10 1.5l2.472 5.01 5.528.804-4 3.9.944 5.506L10 14.127 5.056 16.72l.944-5.506-4-3.9 5.528-.804L10 1.5z"></path>
+            </svg>
+          ))
+        }
+      </div>
+      <p class="text-small text-ink-muted">
+        <span class="font-semibold text-ink">4.9 / 5</span> na základě 248 recenzí spokojených párů
+      </p>
+    </div>
+  </div>
+</section>
