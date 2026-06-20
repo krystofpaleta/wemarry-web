@@ -7,6 +7,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}"],
+  // ScrollFeatures animace aplikované přes inline style (dynamický stagger delay)
+  // se v contentu neobjeví jako animate-* třídy — safelist donutí Tailwind
+  // vygenerovat jejich @keyframes do CSS, jinak by tiše nejely.
+  safelist: [
+    "animate-sf-pop",
+    "animate-sf-slide-up",
+    "animate-sf-seat-fill",
+    "animate-sf-star-fill",
+  ],
   theme: {
     extend: {
       colors: {
@@ -98,6 +107,47 @@ export default {
       backgroundImage: {
         "hero-overlay":
           "linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.35))",
+      },
+      keyframes: {
+        "sf-pop": {
+          "0%": { transform: "scale(0.6)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "sf-slide-up": {
+          "0%": { transform: "translateY(10px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "sf-pulse-soft": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+        "sf-guest-to-seat": {
+          "0%": { transform: "translate(0, 0) scale(1)", opacity: "1" },
+          "40%": { transform: "translate(-28px, -18px) scale(1.08)", opacity: "1" },
+          "70%": { transform: "translate(-52px, -42px) scale(0.95)", opacity: "1" },
+          "100%": { transform: "translate(-52px, -42px) scale(1)", opacity: "0" },
+        },
+        "sf-seat-fill": {
+          "0%": { transform: "scale(0)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "sf-lang-blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.35" },
+        },
+        "sf-star-fill": {
+          "0%": { transform: "scaleX(0)" },
+          "100%": { transform: "scaleX(1)" },
+        },
+      },
+      animation: {
+        "sf-pop": "sf-pop 0.4s ease forwards",
+        "sf-slide-up": "sf-slide-up 0.45s ease forwards",
+        "sf-pulse-soft": "sf-pulse-soft 2.4s ease-in-out infinite",
+        "sf-guest-to-seat": "sf-guest-to-seat 1.8s ease-in-out forwards",
+        "sf-seat-fill": "sf-seat-fill 0.35s ease forwards",
+        "sf-lang-blink": "sf-lang-blink 0.6s ease 2.2s 2",
+        "sf-star-fill": "sf-star-fill 0.7s ease forwards",
       },
     },
   },

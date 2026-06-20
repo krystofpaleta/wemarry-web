@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { SITE } from "../../config/site";
+import {
+  useActiveAnimKey,
+  useCountUp,
+  usePrefersReducedMotion,
+  type VisualProps,
+} from "./scroll-features/hooks";
 
 /**
  * "Apple-style" sticky scroll sekce (React island).
@@ -241,7 +247,7 @@ export default function ScrollFeatures() {
                     : "pointer-events-none translate-y-6 opacity-0 scale-95"
                 }`}
               >
-                <FeatureVisual step={step} />
+                <FeatureVisual step={step} isActive={i === activeStep} />
               </div>
             ))}
           </div>
@@ -261,76 +267,142 @@ export default function ScrollFeatures() {
   );
 }
 
-function FeatureVisual({ step }: { step: Step }) {
+function FeatureVisual({ step, isActive }: { step: Step; isActive: boolean }) {
   return (
     <div
       className={`relative size-full max-w-md rounded-card bg-gradient-to-br ${step.palette} p-8 shadow-prominent`}
     >
-      {step.visual === "checklist" && <ChecklistVisual />}
-      {step.visual === "budget" && <BudgetVisual />}
-      {step.visual === "website" && <WebsiteVisual />}
-      {step.visual === "seating" && <SeatingVisual />}
-      {step.visual === "photos" && <PhotosVisual />}
-      {step.visual === "vendors" && <VendorsVisual />}
+      {step.visual === "checklist" && <ChecklistVisual isActive={isActive} />}
+      {step.visual === "budget" && <BudgetVisual isActive={isActive} />}
+      {step.visual === "website" && <WebsiteVisual isActive={isActive} />}
+      {step.visual === "seating" && <SeatingVisual isActive={isActive} />}
+      {step.visual === "photos" && <PhotosVisual isActive={isActive} />}
+      {step.visual === "vendors" && <VendorsVisual isActive={isActive} />}
     </div>
   );
 }
 
-function ChecklistVisual() {
+function ChecklistVisual({ isActive }: VisualProps) {
+  const reduced = usePrefersReducedMotion();
+  const animKey = useActiveAnimKey(isActive);
   const items = [
-    { text: "Zamluvit místo obřadu", done: true },
-    { text: "Objednat fotografa", done: true },
-    { text: "Vybrat svatební šaty", done: true },
+    { text: "Stanovit datum svatby", done: true },
+    { text: "Určit rozpočet", done: true },
+    { text: "Rezervovat místo konání", done: false },
+    { text: "Zarezervovat fotografa", done: false },
     { text: "Rozeslat pozvánky", done: false },
-    { text: "Finalizovat menu", done: false },
   ];
+  const idleDone = 2;
+  const finalDone = 5;
+  const [doneCount, setDoneCount] = useState(idleDone);
+
+  useEffect(() => {
+    if (!isActive) {
+      setDoneCount(idleDone);
+      return;
+    }
+    if (reduced) {
+      setDoneCount(finalDone);
+      return;
+    }
+    setDoneCount(idleDone);
+    const steps = [800, 1500, 2200];
+    const timers = steps.map((ms, i) =>
+      setTimeout(() => setDoneCount(idleDone + i + 1), ms),
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [isActive, reduced, animKey]);
+
+  const displayDone = isActive ? doneCount : idleDone;
+  const progressPct = (displayDone / items.length) * 100;
+
   return (
     <div className="flex size-full flex-col rounded-card-sm bg-white p-6 shadow-card">
       <div className="flex items-center justify-between">
         <p className="font-serif text-h4 text-ink">Checklist</p>
-        <span className="rounded-pill bg-sage/20 px-3 py-1 text-tiny uppercase tracking-cta text-ink-body">
-          3 / 5
+        <span className="rounded-pill bg-sage/20 px-3 py-1 text-tiny uppercase tracking-cta text-ink-body transition-all duration-300">
+          {displayDone} / {items.length}
         </span>
       </div>
-      <ul className="mt-5 flex flex-col gap-3">
-        {items.map((it) => (
-          <li key={it.text} className="flex items-center gap-3">
-            <span
-              className={`flex size-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                it.done ? "border-sage bg-sage" : "border-ink/20 bg-white"
-              }`}
+      <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-ink/5">
+        <div
+          className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
+          style={{ width: `${progressPct}%`, transformOrigin: "left" }}
+        />
+      </div>
+      <p className="mt-3 text-tiny uppercase tracking-cta text-ink-soft">
+        12+ měsíců před svatbou
+      </p>
+      <ul className="mt-3 flex flex-col gap-2.5">
+        {items.map((it, i) => {
+          const done = i < displayDone;
+          return (
+            <li
+              key={it.text}
+              className="flex items-center gap-3"
+              style={
+                isActive && !reduced && done && i >= idleDone
+                  ? { animation: "sf-slide-up 0.35s ease forwards" }
+                  : undefined
+              }
             >
-              {it.done && (
-                <svg viewBox="0 0 12 12" className="size-3 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2.5 6.5L5 9L10 3.5" />
-                </svg>
-              )}
-            </span>
-            <span
-              className={`text-small ${
-                it.done ? "text-ink-soft line-through" : "text-ink-body"
-              }`}
-            >
-              {it.text}
-            </span>
-          </li>
-        ))}
+              <span
+                className={`flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+                  done ? "scale-100 border-primary bg-primary" : "scale-100 border-ink/20 bg-white"
+                }`}
+                style={
+                  isActive && !reduced && done && i >= idleDone
+                    ? { animation: "sf-pop 0.35s ease forwards" }
+                    : undefined
+                }
+              >
+                {done && (
+                  <svg
+                    viewBox="0 0 12 12"
+                    className="size-3 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M2.5 6.5L5 9L10 3.5" />
+                  </svg>
+                )}
+              </span>
+              <span
+                className={`text-small transition-all duration-300 ${
+                  done ? "text-ink-soft line-through" : "text-ink-body"
+                }`}
+              >
+                {it.text}
+              </span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
 }
 
-function BudgetVisual() {
+function BudgetVisual({ isActive }: VisualProps) {
+  const reduced = usePrefersReducedMotion();
+  const animKey = useActiveAnimKey(isActive);
+
   const totalBudget = 450000;
-  const spent = 312000;
-  const remaining = totalBudget - spent;
-  const spentPct = Math.round((spent / totalBudget) * 100);
+  const spentTarget = 312000;
+  const remainingTarget = totalBudget - spentTarget;
+  const spentPctTarget = Math.round((spentTarget / totalBudget) * 100);
+
+  const spent = useCountUp(spentTarget, isActive, reduced, animKey, 1600);
+  const remaining = useCountUp(remainingTarget, isActive, reduced, animKey, 1600);
+  const spentPct = useCountUp(spentPctTarget, isActive, reduced, animKey, 1600);
 
   const categories = [
-    { label: "Místo konání", budget: 160000, spent: 160000, color: "bg-primary" },
-    { label: "Catering", budget: 115000, spent: 90000, color: "bg-sage" },
-    { label: "Fotograf", budget: 65000, spent: 45000, color: "bg-[#d4a78a]" },
-    { label: "Dekorace", budget: 55000, spent: 17000, color: "bg-warm-peach" },
+    { label: "Místo konání", budget: 160000, spent: 160000, color: "bg-primary", delay: 400 },
+    { label: "Catering", budget: 115000, spent: 90000, color: "bg-sage", delay: 650 },
+    { label: "Fotograf", budget: 65000, spent: 45000, color: "bg-[#d4a78a]", delay: 900 },
+    { label: "Dekorace", budget: 55000, spent: 17000, color: "bg-warm-peach", delay: 1150 },
   ];
 
   const size = 112;
@@ -364,8 +436,27 @@ function BudgetVisual() {
             className="-rotate-90"
             aria-hidden="true"
           >
-            <circle cx={size / 2} cy={size / 2} r={radius} stroke="currentColor" className="text-ink/5" strokeWidth={stroke} fill="none" />
-            <circle cx={size / 2} cy={size / 2} r={radius} stroke="currentColor" className="text-primary" strokeWidth={stroke} strokeDasharray={circumference} strokeDashoffset={dashOffset} strokeLinecap="round" fill="none" />
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              stroke="currentColor"
+              className="text-ink/5"
+              strokeWidth={stroke}
+              fill="none"
+            />
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              stroke="currentColor"
+              className="text-primary transition-[stroke-dashoffset] duration-300 ease-out"
+              strokeWidth={stroke}
+              strokeDasharray={circumference}
+              strokeDashoffset={dashOffset}
+              strokeLinecap="round"
+              fill="none"
+            />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="font-serif text-h3 text-ink leading-none">{spentPct}%</span>
@@ -407,7 +498,18 @@ function BudgetVisual() {
                 </span>
               </div>
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink/5">
-                <span className={`block h-full rounded-full ${c.color}`} style={{ width: `${pct}%` }} />
+                <span
+                  className={`block h-full origin-left rounded-full ${c.color}`}
+                  style={{
+                    width: `${pct}%`,
+                    transform:
+                      isActive && !reduced ? "scaleX(0)" : "scaleX(1)",
+                    animation:
+                      isActive && !reduced
+                        ? `sf-star-fill 0.9s ease ${c.delay}ms forwards`
+                        : undefined,
+                  }}
+                />
               </div>
             </li>
           );
@@ -417,68 +519,272 @@ function BudgetVisual() {
   );
 }
 
-function WebsiteVisual() {
+function WebsiteVisual({ isActive }: VisualProps) {
+  const reduced = usePrefersReducedMotion();
+  const animKey = useActiveAnimKey(isActive);
+  const [visibleRows, setVisibleRows] = useState(0);
+  const [langEn, setLangEn] = useState(false);
+
+  const rsvpRows = [
+    { name: "Marie Nováková", status: "Přijde · vegetarián" },
+    { name: "Petr Svoboda", status: "Přijde · bez lepku" },
+    { name: "Jana Horáková", status: "Přijde · ubytování" },
+  ];
+  const finalRows = reduced ? rsvpRows.length : visibleRows;
+
+  useEffect(() => {
+    if (!isActive) {
+      setVisibleRows(0);
+      setLangEn(false);
+      return;
+    }
+    if (reduced) {
+      setVisibleRows(rsvpRows.length);
+      setLangEn(true);
+      return;
+    }
+    setVisibleRows(0);
+    setLangEn(false);
+    const timers = [
+      setTimeout(() => setLangEn(true), 2200),
+      setTimeout(() => setLangEn(false), 2800),
+      ...rsvpRows.map((_, i) => setTimeout(() => setVisibleRows(i + 1), 900 + i * 550)),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, [isActive, reduced, animKey]);
+
   return (
-    <div className="flex size-full flex-col rounded-card-sm bg-white p-0 shadow-card overflow-hidden">
+    <div className="flex size-full flex-col overflow-hidden rounded-card-sm bg-white p-0 shadow-card">
       <div className="flex items-center gap-1.5 border-b border-ink/5 bg-warm-gray/50 px-3 py-2">
         <span className="size-2 rounded-full bg-ink/15" />
         <span className="size-2 rounded-full bg-ink/15" />
         <span className="size-2 rounded-full bg-ink/15" />
-        <span className="ml-2 text-micro text-ink-soft">tereza-a-martin.wemarry.cz</span>
+        <span className="ml-2 flex-1 truncate text-micro text-ink-soft">
+          tereza-a-martin.wemarry.cz
+        </span>
+        <span className="flex gap-1 text-micro">
+          <span
+            className={`rounded px-1.5 py-0.5 transition-colors ${
+              !langEn ? "bg-primary/10 font-medium text-primary" : "text-ink-soft"
+            } ${isActive && !reduced && langEn ? "animate-sf-lang-blink" : ""}`}
+          >
+            CS
+          </span>
+          <span
+            className={`rounded px-1.5 py-0.5 transition-colors ${
+              langEn ? "bg-primary/10 font-medium text-primary" : "text-ink-soft"
+            }`}
+          >
+            EN
+          </span>
+        </span>
       </div>
-      <div className="flex-1 p-5">
+      <div className="flex flex-1 flex-col overflow-hidden p-4">
         <div className="flex flex-col items-center text-center">
           <p className="text-tiny uppercase tracking-cta text-primary">Tereza & Martin</p>
-          <p className="mt-2 font-serif text-h4 italic text-ink">12. června 2025</p>
+          <p className="mt-1 font-serif text-h4 italic text-ink">12. června 2025</p>
           <p className="text-small text-ink-soft">Zámek Liblice</p>
         </div>
-        <div className="mt-5 aspect-[4/3] rounded-card-sm bg-gradient-to-br from-warm-peach to-beige-light" />
-        <div className="mt-5">
-          <p className="text-tiny uppercase tracking-cta text-ink-soft">Potvrďte účast</p>
-          <div className="mt-2 flex h-9 items-center justify-center rounded-pill bg-primary">
-            <span className="text-tiny uppercase tracking-cta text-white">Odpovědět na RSVP</span>
-          </div>
+        <div
+          className="mt-3 aspect-[5/2] rounded-card-sm bg-gradient-to-br from-warm-peach to-beige-light"
+          style={
+            isActive && !reduced
+              ? { animation: "sf-pop 0.6s ease forwards" }
+              : undefined
+          }
+        />
+        <div className="mt-3 flex-1 overflow-hidden">
+          <p className="text-tiny uppercase tracking-cta text-ink-soft">RSVP odpovědi</p>
+          <ul className="mt-2 flex flex-col gap-1.5">
+            {rsvpRows.map((row, i) => {
+              const show = i < finalRows;
+              return (
+                <li
+                  key={row.name}
+                  className={`flex items-center justify-between rounded-input border border-beige-border px-2.5 py-1.5 transition-all duration-300 ${
+                    show ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                  }`}
+                  style={
+                    show && isActive && !reduced
+                      ? { animation: `sf-slide-up 0.4s ease ${i * 0.05}s forwards` }
+                      : undefined
+                  }
+                >
+                  <div>
+                    <p className="text-micro font-medium text-ink">{row.name}</p>
+                    <p className="text-tiny text-ink-soft">{row.status}</p>
+                  </div>
+                  <span className="flex items-center gap-1 text-tiny font-medium text-primary">
+                    <svg
+                      viewBox="0 0 12 12"
+                      className="size-3"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M2.5 6.5L5 9L10 3.5" />
+                    </svg>
+                    Potvrzeno
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </div>
   );
 }
 
-function SeatingVisual() {
+function SeatingVisual({ isActive }: VisualProps) {
+  const reduced = usePrefersReducedMotion();
+  const animKey = useActiveAnimKey(isActive);
+  const [guestSeated, setGuestSeated] = useState(false);
+  const [tablesVisible, setTablesVisible] = useState(reduced);
+
+  useEffect(() => {
+    if (!isActive) {
+      setGuestSeated(false);
+      setTablesVisible(false);
+      return;
+    }
+    if (reduced) {
+      setGuestSeated(true);
+      setTablesVisible(true);
+      return;
+    }
+    setGuestSeated(false);
+    setTablesVisible(false);
+    const t1 = setTimeout(() => setTablesVisible(true), 300);
+    const t2 = setTimeout(() => setGuestSeated(true), 1400);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [isActive, reduced, animKey]);
+
+  const tablePositions = [
+    { top: "38%", left: "16%" },
+    { top: "38%", left: "58%" },
+    { top: "72%", left: "38%" },
+  ];
+  const showTables = !isActive || tablesVisible;
+
   return (
-    <div className="relative flex size-full flex-col rounded-card-sm bg-white p-6 shadow-card">
+    <div className="relative flex size-full flex-col rounded-card-sm bg-white p-5 shadow-card">
       <div className="flex items-center justify-between">
         <p className="font-serif text-h4 text-ink">Zasedací pořádek</p>
         <span className="rounded-pill bg-primary/10 px-3 py-1 text-tiny uppercase tracking-cta text-primary">
           68 hostů
         </span>
       </div>
-      <div className="relative mt-6 flex flex-1 items-center justify-center">
-        <div className="absolute left-1/2 top-6 flex -translate-x-1/2 flex-col items-center">
-          <div className="h-6 w-32 rounded-card-sm bg-primary/80" />
-          <span className="mt-1 text-micro text-ink-soft">Hlavní stůl</span>
-        </div>
-        {[
-          { top: "35%", left: "18%" },
-          { top: "35%", left: "62%" },
-          { top: "70%", left: "10%" },
-          { top: "75%", left: "45%" },
-          { top: "70%", left: "75%" },
-        ].map((pos, i) => (
-          <div
-            key={i}
-            className="absolute flex size-16 items-center justify-center rounded-full bg-sage/30 ring-2 ring-sage/60"
-            style={{ top: pos.top, left: pos.left }}
-          >
-            <span className="text-micro text-ink-body">{i + 1}</span>
+
+      <div className="mt-3 flex flex-1 gap-3 overflow-hidden">
+        {/* Guest sidebar */}
+        <div className="flex w-[72px] shrink-0 flex-col gap-2 border-r border-beige-border pr-2">
+          <p className="text-tiny uppercase tracking-cta text-ink-soft">Hosté</p>
+          <div className="relative">
+            {!guestSeated && (
+              <span
+                key={isActive ? animKey : "idle"}
+                className={`block rounded-pill bg-primary/10 px-2 py-1 text-tiny font-medium text-primary ${
+                  isActive && !reduced && !guestSeated ? "animate-sf-guest-to-seat" : ""
+                }`}
+              >
+                Marie N.
+              </span>
+            )}
+            {guestSeated && isActive && (
+              <span className="block rounded-pill border border-dashed border-ink/15 px-2 py-1 text-tiny text-ink-soft">
+                + host
+              </span>
+            )}
           </div>
-        ))}
+        </div>
+
+        {/* Floor plan */}
+        <div className="relative flex-1">
+          <div className="absolute left-1/2 top-2 flex -translate-x-1/2 flex-col items-center">
+            <HeartIcon />
+            <span className="mt-0.5 text-micro text-ink-soft">Obřad</span>
+          </div>
+
+          {tablePositions.map((pos, i) => (
+            <div
+              key={i}
+              className={`absolute flex size-[4.5rem] items-center justify-center transition-all duration-500 ${
+                showTables ? "scale-100 opacity-100" : "scale-75 opacity-0"
+              }`}
+              style={{
+                top: pos.top,
+                left: pos.left,
+                transitionDelay: reduced ? "0ms" : `${i * 120}ms`,
+              }}
+            >
+              <div className="relative size-full">
+                {[0, 1, 2, 3, 4, 5].map((s) => {
+                  const angle = (s / 6) * 2 * Math.PI - Math.PI / 2;
+                  const r = 34;
+                  const x = 36 + r * Math.cos(angle);
+                  const y = 36 + r * Math.sin(angle);
+                  const isTarget = i === 1 && s === 2;
+                  const filled = isTarget && guestSeated && isActive;
+                  return (
+                    <span
+                      key={s}
+                      className={`absolute flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 text-[7px] font-medium transition-all duration-300 ${
+                        filled
+                          ? "border-primary bg-primary text-white"
+                          : "border-beige-border bg-white text-ink-soft"
+                      }`}
+                      style={{
+                        left: x,
+                        top: y,
+                        animation:
+                          filled && !reduced
+                            ? "sf-seat-fill 0.35s ease forwards"
+                            : undefined,
+                      }}
+                    >
+                      {filled ? "MN" : ""}
+                    </span>
+                  );
+                })}
+                <div className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-warm-gray ring-1 ring-beige-border">
+                  <span className="text-micro font-medium text-ink-body">{i + 1}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-function PhotosVisual() {
+function HeartIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="size-6 text-primary"
+      fill="currentColor"
+      fillOpacity={0.15}
+      stroke="currentColor"
+      strokeWidth={1.5}
+      aria-hidden="true"
+    >
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+    </svg>
+  );
+}
+
+function PhotosVisual({ isActive }: VisualProps) {
+  const reduced = usePrefersReducedMotion();
+  const animKey = useActiveAnimKey(isActive);
+  const [visibleCount, setVisibleCount] = useState(reduced ? 6 : 0);
+
   const tiles = [
     { palette: "from-[#f5d9d2] to-[#e8a89a]" },
     { palette: "from-[#d4e3d0] to-[#a6c1a7]" },
@@ -487,23 +793,59 @@ function PhotosVisual() {
     { palette: "from-[#f9f0eb] to-[#e8d6c8]" },
     { palette: "from-[#d4b8a4] to-[#8a6a54]" },
   ];
+
+  useEffect(() => {
+    if (!isActive) {
+      setVisibleCount(0);
+      return;
+    }
+    if (reduced) {
+      setVisibleCount(tiles.length);
+      return;
+    }
+    setVisibleCount(0);
+    const timers = tiles.map((_, i) =>
+      setTimeout(() => setVisibleCount(i + 1), 400 + i * 180),
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [isActive, reduced, animKey]);
+
+  const shown = isActive ? visibleCount : tiles.length;
+
   return (
     <div className="flex size-full flex-col rounded-card-sm bg-white p-6 shadow-card">
       <div className="flex items-center justify-between">
         <p className="font-serif text-h4 text-ink">Galerie</p>
         <span className="rounded-pill bg-primary/10 px-3 py-1 text-tiny uppercase tracking-cta text-primary">
-          128 fotek
+          {isActive && visibleCount > 0 ? visibleCount : 128} fotek
         </span>
       </div>
 
       <div className="relative mt-5 flex-1">
         <div className="grid h-full grid-cols-3 gap-2">
-          {tiles.map((t, i) => (
-            <div key={i} className={`rounded-card-sm bg-gradient-to-br ${t.palette}`} />
-          ))}
+          {tiles.map((t, i) => {
+            const visible = i < shown;
+            return (
+              <div
+                key={i}
+                className={`rounded-card-sm bg-gradient-to-br ${t.palette} transition-all duration-300 ${
+                  visible ? "scale-100 opacity-100" : "scale-90 opacity-0"
+                }`}
+                style={
+                  visible && isActive && !reduced && i < shown
+                    ? { animation: `sf-pop 0.4s ease ${i * 0.08}s forwards` }
+                    : undefined
+                }
+              />
+            );
+          })}
         </div>
 
-        <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 rounded-card-sm bg-white p-3 shadow-prominent">
+        <div
+          className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 rounded-card-sm bg-white p-3 shadow-prominent ${
+            isActive && !reduced ? "animate-sf-pulse-soft" : ""
+          }`}
+        >
           <QrIcon />
           <div className="flex flex-col">
             <p className="text-tiny uppercase tracking-cta text-ink-soft">Naskenujte</p>
@@ -525,12 +867,44 @@ function QrIcon() {
   );
 }
 
-function VendorsVisual() {
+function VendorsVisual({ isActive }: VisualProps) {
+  const reduced = usePrefersReducedMotion();
+  const animKey = useActiveAnimKey(isActive);
+  const [visibleCards, setVisibleCards] = useState(0);
+  const [starsFilled, setStarsFilled] = useState(false);
+
   const vendors = [
     { name: "Marie Nováková", role: "Fotografka", rating: "5.0", initials: "MN", color: "bg-warm-peach" },
     { name: "Atelier Květ", role: "Floristika", rating: "4.9", initials: "AK", color: "bg-sage/40" },
     { name: "Jakub Dvořák", role: "DJ & hudba", rating: "4.8", initials: "JD", color: "bg-beige-light" },
   ];
+
+  useEffect(() => {
+    if (!isActive) {
+      setVisibleCards(0);
+      setStarsFilled(false);
+      return;
+    }
+    if (reduced) {
+      setVisibleCards(vendors.length);
+      setStarsFilled(true);
+      return;
+    }
+    setVisibleCards(0);
+    setStarsFilled(false);
+    const cardTimers = vendors.map((_, i) =>
+      setTimeout(() => setVisibleCards(i + 1), 350 + i * 280),
+    );
+    const starTimer = setTimeout(() => setStarsFilled(true), 1200);
+    return () => {
+      cardTimers.forEach(clearTimeout);
+      clearTimeout(starTimer);
+    };
+  }, [isActive, reduced, animKey]);
+
+  const shown = isActive ? visibleCards : vendors.length;
+  const fillStars = !isActive || reduced || starsFilled;
+
   return (
     <div className="flex size-full flex-col rounded-card-sm bg-white p-6 shadow-card">
       <div className="flex items-center justify-between">
@@ -541,23 +915,56 @@ function VendorsVisual() {
       </div>
 
       <ul className="mt-5 flex flex-col gap-3">
-        {vendors.map((v) => (
-          <li key={v.name} className="flex items-center gap-4 rounded-card-sm border border-beige-border bg-cream/50 p-3">
-            <span className={`flex size-11 shrink-0 items-center justify-center rounded-full ${v.color} font-serif text-h4 text-ink`}>
-              {v.initials}
-            </span>
-            <div className="flex-1">
-              <p className="text-small font-medium text-ink">{v.name}</p>
-              <p className="text-tiny text-ink-soft">{v.role}</p>
-            </div>
-            <div className="flex items-center gap-1">
-              <svg viewBox="0 0 20 20" className="size-3.5 text-primary" fill="currentColor" aria-hidden="true">
-                <path d="M10 1.5l2.472 5.01 5.528.804-4 3.9.944 5.506L10 14.127 5.056 16.72l.944-5.506-4-3.9 5.528-.804L10 1.5z" />
-              </svg>
-              <span className="text-tiny font-medium text-ink">{v.rating}</span>
-            </div>
-          </li>
-        ))}
+        {vendors.map((v, i) => {
+          const show = i < shown;
+          return (
+            <li
+              key={v.name}
+              className={`flex items-center gap-4 rounded-card-sm border border-beige-border bg-cream/50 p-3 transition-all duration-400 ${
+                show ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+              }`}
+              style={
+                show && isActive && !reduced
+                  ? { animation: `sf-slide-up 0.45s ease ${i * 0.1}s forwards` }
+                  : undefined
+              }
+            >
+              <span
+                className={`flex size-11 shrink-0 items-center justify-center rounded-full ${v.color} font-serif text-h4 text-ink`}
+              >
+                {v.initials}
+              </span>
+              <div className="flex-1">
+                <p className="text-small font-medium text-ink">{v.name}</p>
+                <p className="text-tiny text-ink-soft">{v.role}</p>
+              </div>
+              <div className="relative flex items-center gap-1">
+                <svg
+                  viewBox="0 0 20 20"
+                  className="size-3.5 text-ink/15"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M10 1.5l2.472 5.01 5.528.804-4 3.9.944 5.506L10 14.127 5.056 16.72l.944-5.506-4-3.9 5.528-.804L10 1.5z" />
+                </svg>
+                <svg
+                  viewBox="0 0 20 20"
+                  className="absolute left-0 size-3.5 origin-left text-primary"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  style={{
+                    clipPath: fillStars ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+                    transition: reduced ? "none" : "clip-path 0.6s ease",
+                    transitionDelay: reduced ? "0ms" : `${800 + i * 150}ms`,
+                  }}
+                >
+                  <path d="M10 1.5l2.472 5.01 5.528.804-4 3.9.944 5.506L10 14.127 5.056 16.72l.944-5.506-4-3.9 5.528-.804L10 1.5z" />
+                </svg>
+                <span className="text-tiny font-medium text-ink">{v.rating}</span>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
