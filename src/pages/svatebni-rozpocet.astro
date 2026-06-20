@@ -1,0 +1,133 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/sections/Faq.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE, absoluteUrl } from "../config/site";
+
+const title = "Svatební rozpočet a kalkulačka nákladů zdarma | WeMarry";
+const description =
+  "Mějte svatební rozpočet pod kontrolou. Kalkulačka nákladů pohlídá výdaje do poslední koruny — kategorie, zálohy, doplatky i přehled utraceno vs. zbývá na jednom místě.";
+
+const benefits = [
+  { title: "Rozdělení do kategorií", text: "Místo, catering, fotograf, šaty, dekorace… Každou položku máte přehledně zvlášť a vidíte, kam peníze tečou." },
+  { title: "Sledování záloh a doplatků", text: "Evidujte zaplacené zálohy, zbývající doplatky i termíny plateb. Žádná platba vás nepřekvapí." },
+  { title: "Utraceno vs. zbývá", text: "Okamžitý přehled, kolik už jste utratili a kolik vám v rozpočtu ještě zbývá." },
+  { title: "Vše u svatebního webu", text: "Rozpočet máte na jednom místě s checklistem, svatebním webem i zasedacím pořádkem." },
+];
+
+const steps = [
+  { n: "01", title: "Stanovte si rozpočet", text: "Nastavte si celkovou částku, na kterou chcete svatbu vejít." },
+  { n: "02", title: "Rozdělte výdaje do kategorií", text: "Přidejte položky jako místo, catering nebo fotograf a přiřaďte k nim plánované částky." },
+  { n: "03", title: "Sledujte zálohy a zůstatek", text: "Zapisujte zaplacené zálohy a kalkulačka průběžně počítá, kolik jste utratili a kolik zbývá." },
+];
+
+const faq = [
+  { q: "Kolik stojí svatba?", a: "V Česku se rozpočet menší svatby pohybuje řádově v desítkách tisíc korun, větší veselka pro 100+ hostů snadno přesáhne 300 000 Kč. Nejvíc obvykle spolkne místo konání, catering a fotograf. Konkrétní odhad si snadno sestavíte v kalkulačce." },
+  { q: "Jak sestavit svatební rozpočet?", a: "Stanovte si celkovou částku, rozdělte ji do kategorií (místo, catering, fotograf, šaty, dekorace…) a u každé sledujte plánovanou cenu, zálohy a doplatky. Kalkulačka WeMarry to počítá za vás." },
+  { q: "Co všechno započítat do svatebního rozpočtu?", a: "Místo obřadu i hostiny, catering a dort, fotografa a kameramana, šaty a oblek, snubní prsteny, květiny a dekorace, hudbu, oznámení, dopravu a ubytování i drobné rezervy na nečekané výdaje." },
+  { q: "Je svatební kalkulačka zdarma?", a: "Ano. Kalkulačka rozpočtu i plánování jsou zdarma. Platíte až při zveřejnění svatebního webu — jednorázově 1 490 Kč." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "WeMarry", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Svatební rozpočet", item: absoluteUrl("/svatebni-rozpocet") },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={[faqSchema, breadcrumb]}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#3a4a40] via-[#7a8a6e] to-[#c8d4b8]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/55"></div>
+
+      <div class="container-site flex min-h-[520px] flex-col justify-center pb-16 pt-40 md:min-h-[620px] md:pb-24 md:pt-48">
+        <div class="max-w-2xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Svatební rozpočet</p>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+            Svatební rozpočet
+            <span class="not-italic"> pod kontrolou do poslední koruny.</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-body text-white/90">
+            Kalkulačka nákladů vám ohlídá svatební rozpočet. Mějte přehled o všech výdajích,
+            zaplacených zálohách i zbývajících doplatcích — všechno na jednom místě.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+            <a href="/svatebni-checklist" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">Svatební checklist →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefity -->
+    <section class="bg-white py-20 md:py-28 lg:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Co kalkulačka umí</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Náklady, které vás nepřekvapí</h2>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+          {
+            benefits.map((b) => (
+              <article class="rounded-card border border-beige-border bg-cream p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{b.title}</h3>
+                <p class="mt-3 text-body text-ink-muted">{b.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Jak na to -->
+    <section class="bg-cream py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Jak na to</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Svatební rozpočet ve třech krocích</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
+          {
+            steps.map((s) => (
+              <div class="flex flex-col gap-3">
+                <span class="font-serif text-hero italic text-primary">{s.n}</span>
+                <h3 class="font-serif text-h3 text-ink">{s.title}</h3>
+                <p class="text-body text-ink-muted">{s.text}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Související -->
+    <section class="bg-white py-16 md:py-20">
+      <div class="container-site">
+        <p class="text-center text-body text-ink-muted">
+          Rozpočet máte u <a href="/svatebni-checklist" class="text-primary underline hover:text-primary-hover">svatebního checklistu</a>,
+          <a href="/svatebni-web" class="text-primary underline hover:text-primary-hover"> svatebního webu s RSVP</a> i
+          <a href="/zasedaci-poradek" class="text-primary underline hover:text-primary-hover"> zasedacího pořádku</a> — vše za jednu cenu.
+        </p>
+      </div>
+    </section>
+
+    <Faq title="Časté otázky o svatebním rozpočtu" items={faq} />
+    <HandsCTA />
+  </main>
+</BaseLayout>

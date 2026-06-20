@@ -1,0 +1,133 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/sections/Faq.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE, absoluteUrl } from "../config/site";
+
+const title = "Svatební checklist od koordinátorky zdarma | WeMarry";
+const description =
+  "Svatební checklist sestavený zkušenou koordinátorkou vás provede přípravami od zásnub po den D. Přednastavené úkoly s termíny, vlastní položky a sdílení s partnerem.";
+
+const benefits = [
+  { title: "Úkoly podle fáze plánování", text: "Přednastavený checklist rozdělený podle toho, jak se blíží velký den. Žádný úkol vám neunikne." },
+  { title: "Vlastní úkoly a termíny", text: "Přidávejte vlastní položky, deadliny a poznámky. Odškrtávejte si je postupně, jak je plníte." },
+  { title: "Sdílení s partnerem i koordinátorkou", text: "Pracujte na seznamu společně v reálném čase. Každý vidí, co je hotové a co zbývá." },
+  { title: "Vše u svatebního webu", text: "Checklist máte na jednom místě se svatebním webem, rozpočtem i zasedacím pořádkem." },
+];
+
+const steps = [
+  { n: "01", title: "Začněte s hotovým seznamem", text: "Po registraci máte připravený checklist od zkušené koordinátorky — stačí se do něj pustit." },
+  { n: "02", title: "Přizpůsobte si ho", text: "Doplňte vlastní úkoly, nastavte termíny a rozdělte si je s partnerem." },
+  { n: "03", title: "Odškrtávejte a sledujte postup", text: "Jak se blíží svatba, odškrtáváte hotové úkoly a máte přehled, co ještě zbývá." },
+];
+
+const faq = [
+  { q: "Co má obsahovat svatební checklist?", a: "Rezervaci místa obřadu i hostiny, svatební web, oznámení, fotografa, šaty a oblek, dort, kapelu nebo DJ, snubní prsteny, dekorace, program a dopravu. Ve WeMarry máte tyhle úkoly přednastavené podle fáze plánování." },
+  { q: "Kdy začít plánovat svatbu?", a: "Ideálně hned po zásnubách. Místo a fotografa je dobré rezervovat klidně rok dopředu, šaty zhruba půl roku. Checklist vás termíny provede, abyste nic neuspěchali ani nezmeškali." },
+  { q: "Je svatební checklist zdarma?", a: "Ano, checklist i plánování jsou zdarma. Platíte až při zveřejnění svatebního webu — jednorázově 1 490 Kč." },
+  { q: "Můžu checklist sdílet s koordinátorkou?", a: "Ano. Seznam můžete sdílet s partnerem i svatební koordinátorkou a pracovat na něm společně v reálném čase." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "WeMarry", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Svatební checklist", item: absoluteUrl("/svatebni-checklist") },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={[faqSchema, breadcrumb]}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#5a4a42] via-[#8a7a6e] to-[#e8c9b8]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/55"></div>
+
+      <div class="container-site flex min-h-[520px] flex-col justify-center pb-16 pt-40 md:min-h-[620px] md:pb-24 md:pt-48">
+        <div class="max-w-2xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Svatební checklist</p>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+            Svatební checklist,
+            <span class="not-italic"> který nic nezapomene.</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-body text-white/90">
+            Checklist sestavený zkušenou svatební koordinátorkou vás provede přípravami
+            od zásnub až po den D. Žádný úkol už nebudete nosit v hlavě.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+            <a href="/jak-to-funguje" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">Jak to funguje →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefity -->
+    <section class="bg-white py-20 md:py-28 lg:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Co checklist umí</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Klid v hlavě po celé přípravy</h2>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+          {
+            benefits.map((b) => (
+              <article class="rounded-card border border-beige-border bg-cream p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{b.title}</h3>
+                <p class="mt-3 text-body text-ink-muted">{b.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Jak na to -->
+    <section class="bg-cream py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Jak na to</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Svatební checklist ve třech krocích</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
+          {
+            steps.map((s) => (
+              <div class="flex flex-col gap-3">
+                <span class="font-serif text-hero italic text-primary">{s.n}</span>
+                <h3 class="font-serif text-h3 text-ink">{s.title}</h3>
+                <p class="text-body text-ink-muted">{s.text}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Související -->
+    <section class="bg-white py-16 md:py-20">
+      <div class="container-site">
+        <p class="text-center text-body text-ink-muted">
+          Spolu s checklistem získáte i <a href="/svatebni-rozpocet" class="text-primary underline hover:text-primary-hover">svatební rozpočet</a>,
+          <a href="/svatebni-web" class="text-primary underline hover:text-primary-hover"> svatební web s RSVP</a> a
+          <a href="/zasedaci-poradek" class="text-primary underline hover:text-primary-hover"> zasedací pořádek</a>.
+        </p>
+      </div>
+    </section>
+
+    <Faq title="Časté otázky o svatebním checklistu" items={faq} />
+    <HandsCTA />
+  </main>
+</BaseLayout>
