@@ -16,6 +16,8 @@ type Step = {
   bullets: string[];
   palette: string;
   visual: "checklist" | "budget" | "website" | "seating" | "photos" | "vendors";
+  /** Odkaz na detailní feature stránku (Zjistit víc). */
+  href?: string;
 };
 
 const steps: Step[] = [
@@ -31,6 +33,7 @@ const steps: Step[] = [
     ],
     palette: "from-[#f5e8e0] via-[#e8c9b8] to-[#d4a894]",
     visual: "checklist",
+    href: "/svatebni-checklist",
   },
   {
     eyebrow: "02 — Rozpočet",
@@ -44,6 +47,7 @@ const steps: Step[] = [
     ],
     palette: "from-[#e8ebe0] via-[#c8d4b8] to-[#9bb59a]",
     visual: "budget",
+    href: "/svatebni-rozpocet",
   },
   {
     eyebrow: "03 — Svatební web & RSVP",
@@ -57,6 +61,7 @@ const steps: Step[] = [
     ],
     palette: "from-[#f0e4db] via-[#d8b8a4] to-[#b08a75]",
     visual: "website",
+    href: "/svatebni-web",
   },
   {
     eyebrow: "04 — Zasedací pořádek",
@@ -70,6 +75,7 @@ const steps: Step[] = [
     ],
     palette: "from-[#f5d9d2] via-[#e8a89a] to-[#c37768]",
     visual: "seating",
+    href: "/zasedaci-poradek",
   },
   {
     eyebrow: "05 — Sdílená fotogalerie",
@@ -205,10 +211,18 @@ export default function ScrollFeatures() {
                     ))}
                   </ul>
 
-                  <div className="mt-4">
+                  <div className="mt-4 flex flex-wrap items-center gap-5">
                     <a href={SITE.app.signup} className="btn-primary">
                       Vyzkoušet zdarma
                     </a>
+                    {step.href && (
+                      <a
+                        href={step.href}
+                        className="text-micro uppercase tracking-cta text-primary transition-colors hover:text-primary-hover"
+                      >
+                        Zjistit víc →
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
