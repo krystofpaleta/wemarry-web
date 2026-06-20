@@ -47,4 +47,89 @@
   .chip {
     @apply inline-flex items-center gap-2 rounded-pill bg-cream border border-beige-light px-3 py-1.5 text-tiny font-sans text-ink-muted;
   }
+
+  /* ScrollFeatures — keyframes (referenced via inline animation: or .sf-anim-*).
+     Defined here so Tailwind purge never strips them from production CSS. */
+  .sf-anim-pop {
+    animation: sf-pop 0.4s ease forwards;
+  }
+
+  .sf-anim-slide-up {
+    animation: sf-slide-up 0.45s ease forwards;
+  }
+
+  .sf-anim-pulse-soft {
+    animation: sf-pulse-soft 2.4s ease-in-out infinite;
+  }
+
+  .sf-anim-seat-fill {
+    animation: sf-seat-fill 0.35s ease forwards;
+  }
+
+  .sf-anim-star-fill {
+    animation: sf-star-fill 0.7s ease forwards;
+  }
+}
+
+/* ScrollFeatures @keyframes — outside @layer so they are always emitted */
+@keyframes sf-pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes sf-slide-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sf-pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes sf-seat-fill {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes sf-star-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes sf-lang-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
 }

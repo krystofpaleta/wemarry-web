@@ -7,15 +7,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}"],
-  // ScrollFeatures animace aplikované přes inline style (dynamický stagger delay)
-  // se v contentu neobjeví jako animate-* třídy — safelist donutí Tailwind
-  // vygenerovat jejich @keyframes do CSS, jinak by tiše nejely.
-  safelist: [
-    "animate-sf-pop",
-    "animate-sf-slide-up",
-    "animate-sf-seat-fill",
-    "animate-sf-star-fill",
-  ],
   theme: {
     extend: {
       colors: {
@@ -121,16 +112,6 @@ export default {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.05)" },
         },
-        "sf-guest-to-seat": {
-          "0%": { transform: "translate(0, 0) scale(1)", opacity: "1" },
-          "35%": { transform: "translate(40px, 6px) scale(1.06)", opacity: "1" },
-          "75%": { transform: "translate(78px, 16px) scale(0.85)", opacity: "0.85" },
-          "100%": { transform: "translate(104px, 24px) scale(0.6)", opacity: "0" },
-        },
-        "sf-seat-fill": {
-          "0%": { transform: "scale(0)", opacity: "0" },
-          "100%": { transform: "scale(1)", opacity: "1" },
-        },
         "sf-lang-blink": {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.35" },
@@ -144,8 +125,6 @@ export default {
         "sf-pop": "sf-pop 0.4s ease forwards",
         "sf-slide-up": "sf-slide-up 0.45s ease forwards",
         "sf-pulse-soft": "sf-pulse-soft 2.4s ease-in-out infinite",
-        "sf-guest-to-seat": "sf-guest-to-seat 1.2s ease-in forwards",
-        "sf-seat-fill": "sf-seat-fill 0.35s ease forwards",
         "sf-lang-blink": "sf-lang-blink 0.6s ease 2.2s 2",
         "sf-star-fill": "sf-star-fill 0.7s ease forwards",
       },

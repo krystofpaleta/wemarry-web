@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type RefObject,
+} from "react";
 import { SITE } from "../../config/site";
 import {
   useActiveAnimKey,
@@ -288,8 +295,8 @@ function ChecklistVisual({ isActive }: VisualProps) {
   const items = [
     { text: "Stanovit datum svatby", done: true },
     { text: "Určit rozpočet", done: true },
+    { text: "Registrace na WeMarry", done: false },
     { text: "Vytvořit svatební web", done: false },
-    { text: "Rezervovat místo konání", done: false },
     { text: "Rozeslat pozvánky", done: false },
   ];
   const idleDone = 2;
@@ -326,8 +333,8 @@ function ChecklistVisual({ isActive }: VisualProps) {
       </div>
       <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-ink/5">
         <div
-          className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
-          style={{ width: `${progressPct}%`, transformOrigin: "left" }}
+          className="h-full w-full origin-left rounded-full bg-primary transition-transform duration-500 ease-out"
+          style={{ transform: `scaleX(${progressPct / 100})` }}
         />
       </div>
       <p className="mt-3 text-tiny uppercase tracking-cta text-ink-soft">
@@ -339,20 +346,24 @@ function ChecklistVisual({ isActive }: VisualProps) {
           return (
             <li
               key={it.text}
-              className="flex items-center gap-3"
+              className={`flex items-center gap-3 ${
+                isActive && !reduced && done && i >= idleDone ? "sf-anim-slide-up" : ""
+              }`}
               style={
                 isActive && !reduced && done && i >= idleDone
-                  ? { animation: "sf-slide-up 0.35s ease forwards" }
+                  ? { animationDuration: "0.35s" }
                   : undefined
               }
             >
               <span
-                className={`flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300 ${
-                  done ? "scale-100 border-primary bg-primary" : "scale-100 border-ink/20 bg-white"
+                className={`flex size-5 shrink-0 items-center justify-center rounded-full border-2 ${
+                  done ? "border-primary bg-primary" : "border-ink/20 bg-white"
+                } ${
+                  isActive && !reduced && done && i >= idleDone ? "sf-anim-pop" : ""
                 }`}
                 style={
                   isActive && !reduced && done && i >= idleDone
-                    ? { animation: "sf-pop 0.35s ease forwards" }
+                    ? { animationDuration: "0.35s" }
                     : undefined
                 }
               >
@@ -638,39 +649,226 @@ function WebsiteVisual({ isActive }: VisualProps) {
   );
 }
 
+const SEATING_TABLES = [
+  { id: 0, top: "32%", left: "4%" },
+  { id: 1, top: "32%", left: "38%" },
+  { id: 2, top: "62%", left: "20%" },
+] as const;
+const SEATING_TARGET_TABLE = 1;
+const SEATING_TARGET_SEAT = 2;
+const SEAT_COUNT = 6;
+
+type SeatingPhase = "idle" | "base-tables" | "table-slide" | "guest-fly" | "done";
+
+type FlyStyle = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  transform: string;
+  transition: string;
+  opacity: number;
+};
+
+function SeatingRoundTable({
+  label,
+  targetSeatRef,
+  seatFilled,
+  isTargetTable,
+}: {
+  label: number;
+  targetSeatRef?: RefObject<HTMLSpanElement>;
+  seatFilled: boolean;
+  isTargetTable: boolean;
+}) {
+  const r = 34;
+  const cx = 36;
+  const cy = 36;
+
+  return (
+    <div className="relative size-[4.5rem]">
+      {Array.from({ length: SEAT_COUNT }, (_, s) => {
+        const angle = (s / SEAT_COUNT) * 2 * Math.PI - Math.PI / 2;
+        const x = cx + r * Math.cos(angle);
+        const y = cy + r * Math.sin(angle);
+        const isTarget = isTargetTable && s === SEATING_TARGET_SEAT;
+        const filled = isTarget && seatFilled;
+        return (
+          <span
+            key={s}
+            ref={isTarget ? targetSeatRef : undefined}
+            className={`absolute flex size-5 items-center justify-center rounded-full border-2 text-[7px] font-medium ${
+              filled
+                ? "border-primary bg-primary text-white sf-anim-seat-fill"
+                : "border-beige-border bg-white text-ink-soft"
+            }`}
+            style={{
+              left: x,
+              top: y,
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            {filled ? "MN" : ""}
+          </span>
+        );
+      })}
+      <div className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-warm-gray ring-1 ring-beige-border">
+        <span className="text-micro font-medium text-ink-body">{label}</span>
+      </div>
+    </div>
+  );
+}
+
 function SeatingVisual({ isActive }: VisualProps) {
   const reduced = usePrefersReducedMotion();
   const animKey = useActiveAnimKey(isActive);
-  const [guestSeated, setGuestSeated] = useState(false);
-  const [tablesVisible, setTablesVisible] = useState(reduced);
+
+  const stageRef = useRef<HTMLDivElement>(null);
+  const guestRef = useRef<HTMLSpanElement>(null);
+  const targetSeatRef = useRef<HTMLSpanElement>(null);
+  const flyingRef = useRef<HTMLDivElement>(null);
+  const tableSlideRef = useRef<HTMLDivElement>(null);
+  const phaseRef = useRef<SeatingPhase>("idle");
+
+  const [phase, setPhase] = useState<SeatingPhase>("idle");
+  const [seatFilled, setSeatFilled] = useState(false);
+  const [guestGhost, setGuestGhost] = useState(false);
+  const [fly, setFly] = useState<FlyStyle | null>(null);
+  const [sideReveal, setSideReveal] = useState(true);
+  const [tableDocked, setTableDocked] = useState(true);
+
+  phaseRef.current = phase;
+
+  const setPhaseSafe = useCallback((next: SeatingPhase) => {
+    phaseRef.current = next;
+    setPhase(next);
+  }, []);
+
+  const flyStartedRef = useRef(false);
+
+  const startGuestFly = useCallback(() => {
+    if (flyStartedRef.current) return;
+    const stage = stageRef.current;
+    const guest = guestRef.current;
+    const seat = targetSeatRef.current;
+    if (!stage || !guest || !seat) return;
+
+    flyStartedRef.current = true;
+
+    const stageRect = stage.getBoundingClientRect();
+    const from = guest.getBoundingClientRect();
+    const to = seat.getBoundingClientRect();
+
+    const startX = from.left - stageRect.left;
+    const startY = from.top - stageRect.top;
+    const dx = to.left - stageRect.left + (to.width - from.width) / 2 - startX;
+    const dy = to.top - stageRect.top + (to.height - from.height) / 2 - startY;
+
+    setGuestGhost(true);
+    setFly({
+      left: startX,
+      top: startY,
+      width: from.width,
+      height: from.height,
+      transform: "translate(0, 0)",
+      transition: "none",
+      opacity: 1,
+    });
+    setPhaseSafe("guest-fly");
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setFly((prev) =>
+          prev
+            ? {
+                ...prev,
+                transform: `translate(${dx}px, ${dy}px)`,
+                transition: "transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.85s ease",
+              }
+            : null,
+        );
+      });
+    });
+  }, [setPhaseSafe]);
+
+  const handleTableSlideEnd = useCallback(
+    (e: React.TransitionEvent<HTMLDivElement>) => {
+      if (e.propertyName !== "transform") return;
+      if (phaseRef.current !== "table-slide") return;
+      if (e.target !== tableSlideRef.current) return;
+      startGuestFly();
+    },
+    [startGuestFly],
+  );
+
+  const handleGuestFlyEnd = useCallback(
+    (e: React.TransitionEvent<HTMLDivElement>) => {
+      if (e.propertyName !== "transform") return;
+      if (phaseRef.current !== "guest-fly") return;
+      if (e.target !== flyingRef.current) return;
+      setFly(null);
+      setSeatFilled(true);
+      setPhaseSafe("done");
+    },
+    [setPhaseSafe],
+  );
 
   useEffect(() => {
     if (!isActive) {
-      setGuestSeated(false);
-      setTablesVisible(false);
+      setPhaseSafe("idle");
+      setSeatFilled(false);
+      setGuestGhost(false);
+      setFly(null);
+      setSideReveal(true);
+      setTableDocked(true);
+      flyStartedRef.current = false;
       return;
     }
     if (reduced) {
-      setGuestSeated(true);
-      setTablesVisible(true);
+      setPhaseSafe("done");
+      setSeatFilled(true);
+      setGuestGhost(false);
+      setFly(null);
+      setTableDocked(true);
+      flyStartedRef.current = false;
       return;
     }
-    setGuestSeated(false);
-    setTablesVisible(false);
-    const t1 = setTimeout(() => setTablesVisible(true), 300);
-    const t2 = setTimeout(() => setGuestSeated(true), 1400);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, [isActive, reduced, animKey]);
 
-  const tablePositions = [
-    { top: "38%", left: "16%" },
-    { top: "38%", left: "58%" },
-    { top: "72%", left: "38%" },
-  ];
-  const showTables = !isActive || tablesVisible;
+    flyStartedRef.current = false;
+
+    setPhaseSafe("base-tables");
+    setSeatFilled(false);
+    setGuestGhost(false);
+    setFly(null);
+    setSideReveal(false);
+    setTableDocked(false);
+
+    let revealOuter = 0;
+    let revealInner = 0;
+    revealOuter = window.requestAnimationFrame(() => {
+      revealInner = window.requestAnimationFrame(() => setSideReveal(true));
+    });
+    const slideTimer = window.setTimeout(() => setPhaseSafe("table-slide"), 700);
+    return () => {
+      window.cancelAnimationFrame(revealOuter);
+      window.cancelAnimationFrame(revealInner);
+      window.clearTimeout(slideTimer);
+    };
+  }, [isActive, reduced, animKey, setPhaseSafe]);
+
+  useLayoutEffect(() => {
+    if (phase !== "table-slide" || reduced || !isActive) return;
+    setTableDocked(false);
+    let outer = 0;
+    let inner = 0;
+    outer = window.requestAnimationFrame(() => {
+      inner = window.requestAnimationFrame(() => setTableDocked(true));
+    });
+    return () => {
+      window.cancelAnimationFrame(outer);
+      window.cancelAnimationFrame(inner);
+    };
+  }, [phase, reduced, isActive, animKey]);
 
   return (
     <div className="relative flex size-full flex-col rounded-card-sm bg-white p-5 shadow-card">
@@ -681,84 +879,93 @@ function SeatingVisual({ isActive }: VisualProps) {
         </span>
       </div>
 
-      <div className="mt-3 flex flex-1 gap-3 overflow-hidden">
-        {/* Guest sidebar */}
-        <div className="flex w-[72px] shrink-0 flex-col gap-2 border-r border-beige-border pr-2">
+      {/* Stage — guest list, floor plan & flying chip share one coordinate space */}
+      <div ref={stageRef} className="relative mt-3 flex min-h-[11rem] flex-1 gap-3">
+        <div className="flex w-[76px] shrink-0 flex-col gap-2 border-r border-beige-border pr-2">
           <p className="text-tiny uppercase tracking-cta text-ink-soft">Hosté</p>
-          <div className="relative">
-            {!guestSeated && (
-              <span
-                key={isActive ? animKey : "idle"}
-                className={`block rounded-pill bg-primary/10 px-2 py-1 text-tiny font-medium text-primary ${
-                  isActive && !reduced && !guestSeated ? "animate-sf-guest-to-seat" : ""
-                }`}
-              >
-                Marie N.
-              </span>
-            )}
-            {guestSeated && isActive && (
-              <span className="block rounded-pill border border-dashed border-ink/15 px-2 py-1 text-tiny text-ink-soft">
-                + host
-              </span>
-            )}
-          </div>
+          <span
+            ref={guestRef}
+            className={`block rounded-pill bg-primary/10 px-2 py-1 text-tiny font-medium text-primary transition-opacity duration-300 ${
+              guestGhost ? "opacity-0" : "opacity-100"
+            }`}
+            aria-hidden={guestGhost}
+          >
+            Marie N.
+          </span>
+          {(seatFilled && (isActive || reduced)) || guestGhost ? (
+            <span className="block rounded-pill border border-dashed border-ink/15 px-2 py-1 text-tiny text-ink-soft">
+              + host
+            </span>
+          ) : null}
         </div>
 
-        {/* Floor plan */}
-        <div className="relative flex-1">
-          <div className="absolute left-1/2 top-2 flex -translate-x-1/2 flex-col items-center">
+        <div className="relative min-h-[10rem] flex-1">
+          <div className="pointer-events-none absolute left-1/2 top-0 flex -translate-x-1/2 flex-col items-center">
             <HeartIcon />
             <span className="mt-0.5 text-micro text-ink-soft">Obřad</span>
           </div>
 
-          {tablePositions.map((pos, i) => (
-            <div
-              key={i}
-              className={`absolute flex size-[4.5rem] items-center justify-center transition-all duration-500 ease-out ${
-                showTables ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-90 opacity-0"
-              }`}
-              style={{
-                top: pos.top,
-                left: pos.left,
-                transitionDelay: reduced ? "0ms" : `${i * 120}ms`,
-              }}
-            >
-              <div className="relative size-full">
-                {[0, 1, 2, 3, 4, 5].map((s) => {
-                  const angle = (s / 6) * 2 * Math.PI - Math.PI / 2;
-                  const r = 34;
-                  const x = 36 + r * Math.cos(angle);
-                  const y = 36 + r * Math.sin(angle);
-                  const isTarget = i === 1 && s === 2;
-                  const filled = isTarget && guestSeated && isActive;
-                  return (
-                    <span
-                      key={s}
-                      className={`absolute flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 text-[7px] font-medium transition-all duration-300 ${
-                        filled
-                          ? "border-primary bg-primary text-white"
-                          : "border-beige-border bg-white text-ink-soft"
-                      }`}
-                      style={{
-                        left: x,
-                        top: y,
-                        animation:
-                          filled && !reduced
-                            ? "sf-seat-fill 0.35s ease forwards"
-                            : undefined,
-                      }}
-                    >
-                      {filled ? "MN" : ""}
-                    </span>
-                  );
-                })}
-                <div className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-warm-gray ring-1 ring-beige-border">
-                  <span className="text-micro font-medium text-ink-body">{i + 1}</span>
-                </div>
+          {SEATING_TABLES.map((slot) => {
+            const isSliding = slot.id === SEATING_TARGET_TABLE;
+            const isSide = !isSliding;
+
+            let transform = "translate(0, 0)";
+            let opacity = 1;
+
+            if (isSliding) {
+              transform = tableDocked ? "translate(0, 0)" : "translate(120%, 0)";
+              opacity = tableDocked ? 1 : 0.15;
+            } else if (isSide && isActive && !reduced && !sideReveal) {
+              transform = "translate(0, 10px)";
+              opacity = 0;
+            }
+
+            return (
+              <div
+                key={slot.id}
+                ref={isSliding ? tableSlideRef : undefined}
+                className="absolute will-change-transform"
+                style={{
+                  top: slot.top,
+                  left: slot.left,
+                  transform,
+                  opacity,
+                  transition:
+                    isActive && !reduced
+                      ? "transform 0.75s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 0.5s ease"
+                      : undefined,
+                }}
+                onTransitionEnd={isSliding ? handleTableSlideEnd : undefined}
+              >
+                <SeatingRoundTable
+                  label={slot.id + 1}
+                  targetSeatRef={targetSeatRef}
+                  seatFilled={seatFilled && isSliding}
+                  isTargetTable={isSliding}
+                />
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {fly && (
+          <div
+            ref={flyingRef}
+            className="pointer-events-none absolute z-30 flex items-center justify-center rounded-pill bg-primary px-2 py-1 text-tiny font-medium text-white shadow-md ring-2 ring-primary/20"
+            style={{
+              left: fly.left,
+              top: fly.top,
+              width: fly.width,
+              height: fly.height,
+              transform: fly.transform,
+              transition: fly.transition,
+              opacity: fly.opacity,
+            }}
+            onTransitionEnd={handleGuestFlyEnd}
+          >
+            Marie N.
+          </div>
+        )}
       </div>
     </div>
   );
@@ -783,7 +990,7 @@ function HeartIcon() {
 function PhotosVisual({ isActive }: VisualProps) {
   const reduced = usePrefersReducedMotion();
   const animKey = useActiveAnimKey(isActive);
-  const [visibleCount, setVisibleCount] = useState(reduced ? 6 : 0);
+  const [visibleCount, setVisibleCount] = useState(0);
 
   const tiles = [
     { palette: "from-[#f5d9d2] to-[#e8a89a]" },
@@ -792,7 +999,10 @@ function PhotosVisual({ isActive }: VisualProps) {
     { palette: "from-[#e4dde8] to-[#c0b4cc]" },
     { palette: "from-[#f9f0eb] to-[#e8d6c8]" },
     { palette: "from-[#d4b8a4] to-[#8a6a54]" },
+    { palette: "from-[#dce8f0] to-[#a8c4d4]" },
+    { palette: "from-[#f0e4db] to-[#d8b8a4]" },
   ];
+  const CENTER_CELL = 4;
 
   useEffect(() => {
     if (!isActive) {
@@ -805,7 +1015,7 @@ function PhotosVisual({ isActive }: VisualProps) {
     }
     setVisibleCount(0);
     const timers = tiles.map((_, i) =>
-      setTimeout(() => setVisibleCount(i + 1), 400 + i * 180),
+      setTimeout(() => setVisibleCount(i + 1), 350 + i * 140),
     );
     return () => timers.forEach(clearTimeout);
   }, [isActive, reduced, animKey]);
@@ -817,41 +1027,45 @@ function PhotosVisual({ isActive }: VisualProps) {
       <div className="flex items-center justify-between">
         <p className="font-serif text-h4 text-ink">Galerie</p>
         <span className="rounded-pill bg-primary/10 px-3 py-1 text-tiny uppercase tracking-cta text-primary">
-          {isActive && visibleCount > 0 ? visibleCount : 128} fotek
+          {isActive && visibleCount > 0 ? visibleCount + 1 : 128} fotek
         </span>
       </div>
 
-      <div className="relative mt-5 flex-1">
-        <div className="grid h-full grid-cols-3 gap-2">
-          {tiles.map((t, i) => {
-            const visible = i < shown;
+      <div className="mt-5 grid min-h-0 flex-1 grid-cols-3 grid-rows-3 gap-2">
+        {Array.from({ length: 9 }, (_, cell) => {
+          if (cell === CENTER_CELL) {
             return (
               <div
-                key={i}
-                className={`rounded-card-sm bg-gradient-to-br ${t.palette} transition-all duration-300 ${
-                  visible ? "scale-100 opacity-100" : "scale-90 opacity-0"
+                key="qr"
+                className={`flex flex-col items-center justify-center rounded-card-sm bg-white p-2 text-center shadow-prominent ${
+                  isActive && !reduced ? "sf-anim-pulse-soft" : ""
                 }`}
-                style={
-                  visible && isActive && !reduced && i < shown
-                    ? { animation: `sf-pop 0.4s ease ${i * 0.08}s forwards` }
-                    : undefined
-                }
-              />
+              >
+                <QrIcon />
+                <p className="mt-1.5 text-tiny uppercase tracking-cta text-ink-soft">Naskenujte</p>
+                <p className="font-serif text-small leading-tight text-ink">Přidat fotku</p>
+              </div>
             );
-          })}
-        </div>
+          }
 
-        <div
-          className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 rounded-card-sm bg-white p-4 text-center shadow-prominent ${
-            isActive && !reduced ? "animate-sf-pulse-soft" : ""
-          }`}
-        >
-          <QrIcon />
-          <div className="flex flex-col items-center">
-            <p className="text-tiny uppercase tracking-cta text-ink-soft">Naskenujte</p>
-            <p className="font-serif text-small text-ink">Přidat fotku</p>
-          </div>
-        </div>
+          const photoIndex = cell < CENTER_CELL ? cell : cell - 1;
+          const t = tiles[photoIndex];
+          const visible = photoIndex < shown;
+
+          return (
+            <div
+              key={cell}
+              className={`rounded-card-sm bg-gradient-to-br ${t.palette} ${
+                visible && isActive && !reduced ? "sf-anim-pop" : ""
+              } ${visible ? "opacity-100" : "scale-90 opacity-0"}`}
+              style={
+                visible && isActive && !reduced
+                  ? { animationDelay: `${photoIndex * 70}ms`, animationDuration: "0.4s" }
+                  : undefined
+              }
+            />
+          );
+        })}
       </div>
     </div>
   );
