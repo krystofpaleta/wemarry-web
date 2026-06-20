@@ -53,8 +53,8 @@ const breadcrumb = {
       <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#5a4a42] via-[#8a7367] to-[#c9a796]"></div>
       <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/55"></div>
 
-      <div class="container-site flex min-h-[520px] flex-col justify-center pb-16 pt-40 md:min-h-[620px] md:pb-24 md:pt-48">
-        <div class="max-w-2xl">
+      <div class="container-site grid grid-cols-1 items-center gap-10 pb-16 pt-40 md:pb-24 md:pt-48 lg:min-h-[620px] lg:grid-cols-2 lg:gap-16">
+        <div class="max-w-xl">
           <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Svatební web</p>
           <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
             Svatební web s RSVP
@@ -69,13 +69,9 @@ const breadcrumb = {
             <a href="/sablony" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">Prohlédnout šablony →</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Ukázka produktu -->
-    <section class="bg-cream py-16 md:py-20">
-      <div class="container-site">
-        <img src="/img/product/web-rsvp.png" alt="Svatební web s RSVP formulářem a vícejazyčnou verzí" loading="lazy" class="mx-auto w-full max-w-3xl" />
+        <div class="relative">
+          <img src="/img/product/web-rsvp.png" alt="Svatební web s RSVP formulářem a vícejazyčnou verzí" class="w-full drop-shadow-2xl" />
+        </div>
       </div>
     </section>
 
