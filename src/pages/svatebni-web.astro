@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/sections/Faq.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE, absoluteUrl } from "../config/site";
+
+const title = "Svatební web s RSVP zdarma vytvoříte za 5 minut | WeMarry";
+const description =
+  "Vytvořte si vlastní svatební web s RSVP formulářem, vícejazyčnou verzí a vlastní doménou. Ověřené šablony, sběr odpovědí hostů i sdílená galerie — vše na jednom místě.";
+
+const benefits = [
+  { title: "RSVP formulář", text: "Hosté potvrdí účast jedním kliknutím — včetně dietních požadavků, ubytování a písniček. Odpovědi se sbírají automaticky." },
+  { title: "Vícejazyčná verze", text: "Svatební web jedním kliknutím i v angličtině či dalším jazyce. Ideální pro zahraniční hosty." },
+  { title: "Vlastní doména", text: "Adresa ve stylu novakovi.cz místo dlouhého odkazu. Vypadá profesionálně a snadno se pamatuje." },
+  { title: "Ověřené šablony", text: "Šest designových šablon na výběr. Vyberete styl, doplníte fotky a obsah — hotovo." },
+  { title: "Všechny informace pohromadě", text: "Program dne, místo a čas, menu i tipy na dary. Hosté najdou vše na jedné adrese." },
+  { title: "Sdílená galerie", text: "V den svatby se web promění v živou galerii, kam hosté nahrávají fotky přes QR kód." },
+];
+
+const steps = [
+  { n: "01", title: "Vyberte šablonu", text: "Zvolte si z ověřených svatebních šablon tu, která sedne vašemu stylu." },
+  { n: "02", title: "Doplňte obsah a fotky", text: "Jména, datum, místo, program a fotky. Web sestavíte během pár minut, bez technických znalostí." },
+  { n: "03", title: "Pošlete hostům odkaz", text: "Rozešlete link s pozvánkou a nechte aplikaci automaticky sbírat RSVP odpovědi." },
+];
+
+const faq = [
+  { q: "Jak si vytvořím svatební web?", a: "Zaregistrujete se zdarma, vyberete šablonu, doplníte jména, datum, místo a fotky a pošlete hostům odkaz. Většina párů má web hotový za jeden večer, bez jakýchkoliv technických znalostí." },
+  { q: "Je svatební web zdarma?", a: "Plánování i tvorba webu jsou zdarma. Platíte až ve chvíli, kdy se rozhodnete web zveřejnit hostům — jednorázově 1 490 Kč, žádné měsíční poplatky." },
+  { q: "Kolik svatební web stojí?", a: "Jednorázově 1 490 Kč při zveřejnění. V ceně je RSVP, vícejazyčnost, vlastní doména, zasedací pořádek i sdílená galerie. Více v ceníku." },
+  { q: "Můžu mít svatební web ve více jazycích?", a: "Ano. Vícejazyčnou verzi přepnete jedním kliknutím — hosté si sami zvolí češtinu, angličtinu nebo další jazyk." },
+  { q: "Potřebuji k tvorbě webu technické znalosti?", a: "Ne. Pokud zvládáte e-mail, zvládnete i svatební web. Vše se ovládá jednoduše bez kódování." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "WeMarry", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Svatební web", item: absoluteUrl("/svatebni-web") },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={[faqSchema, breadcrumb]}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#5a4a42] via-[#8a7367] to-[#c9a796]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/55"></div>
+
+      <div class="container-site flex min-h-[520px] flex-col justify-center pb-16 pt-40 md:min-h-[620px] md:pb-24 md:pt-48">
+        <div class="max-w-2xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Svatební web</p>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+            Svatební web s RSVP
+            <span class="not-italic"> vytvoříte za 5 minut.</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-body text-white/90">
+            Vlastní svatební web s RSVP formulářem, vícejazyčnou verzí a vlastní doménou.
+            Ušetříte si hromadu telefonátů a hosté mají všechny informace na jednom místě.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={SITE.app.signup} class="btn-primary">Vytvořit svatební web zdarma</a>
+            <a href="/sablony" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">Prohlédnout šablony →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Co svatební web umí -->
+    <section class="bg-white py-20 md:py-28 lg:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Co svatební web umí</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Vše, co svatební web potřebuje</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Svatební web ve WeMarry není jen vizitka. Je to centrum vašich příprav i pomocník v den D.
+          </p>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {
+            benefits.map((b) => (
+              <article class="rounded-card border border-beige-border bg-cream p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{b.title}</h3>
+                <p class="mt-3 text-body text-ink-muted">{b.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Jak vytvořit svatební web -->
+    <section class="bg-cream py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Jak na to</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Jak vytvořit svatební web</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
+          {
+            steps.map((s) => (
+              <div class="flex flex-col gap-3">
+                <span class="font-serif text-hero italic text-primary">{s.n}</span>
+                <h3 class="font-serif text-h3 text-ink">{s.title}</h3>
+                <p class="text-body text-ink-muted">{s.text}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Související -->
+    <section class="bg-white py-16 md:py-20">
+      <div class="container-site">
+        <p class="text-center text-body text-ink-muted">
+          Se svatebním webem získáte i <a href="/zasedaci-poradek" class="text-primary underline hover:text-primary-hover">zasedací pořádek</a>,
+          <a href="/svatebni-oznameni" class="text-primary underline hover:text-primary-hover"> online svatební oznámení</a> a
+          <a href="/cenik" class="text-primary underline hover:text-primary-hover"> vše za jednu férovou cenu</a>.
+        </p>
+      </div>
+    </section>
+
+    <Faq title="Časté otázky o svatebním webu" items={faq} />
+    <HandsCTA />
+  </main>
+</BaseLayout>

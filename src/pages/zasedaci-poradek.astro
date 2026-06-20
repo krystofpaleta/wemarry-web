@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/sections/Faq.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE, absoluteUrl } from "../config/site";
+
+const title = "Zasedací pořádek na svatbu online — drag & drop | WeMarry";
+const description =
+  "Sestavte zasedací pořádek na svatbu jednoduše: interaktivní drag & drop nástroj napojený na RSVP, všechny tvary stolů, tisk i PDF export. Rozsaďte hosty bez stresu.";
+
+const benefits = [
+  { title: "Drag & drop", text: "Přesouvejte stoly a hosty myší, dokud nesedí každý detail. Žádné přepisování papírových plánků." },
+  { title: "Napojení na RSVP", text: "Jakmile host potvrdí účast, automaticky přiskočí do seznamu k usazení. Pracujete vždy s aktuálním počtem." },
+  { title: "Všechny tvary stolů", text: "Kulaté, obdélníkové i královská tabule. Přidávejte stoly a židle, jak potřebujete." },
+  { title: "Tisk a PDF export", text: "Finální verzi stáhnete jako PDF nebo vytisknete — pro catering i pro hosty u vchodu." },
+];
+
+const steps = [
+  { n: "01", title: "Importujte hosty z RSVP", text: "Seznam potvrzených hostů se načte automaticky z vašeho svatebního webu." },
+  { n: "02", title: "Rozmístěte stoly", text: "Přidejte stoly všech tvarů a rozmístěte je podle prostoru vaší hostiny." },
+  { n: "03", title: "Usaďte hosty a vytiskněte", text: "Přetáhněte hosty ke stolům, dolaďte detaily a finální plán vytiskněte nebo exportujte do PDF." },
+];
+
+const faq = [
+  { q: "Jak udělat zasedací pořádek na svatbu?", a: "Ve WeMarry naimportujete hosty z RSVP, rozmístíte stoly a přetažením usadíte hosty. Hotový plán pak vytisknete nebo uložíte jako PDF. Vše bez papíru a přepisování." },
+  { q: "Jak rozsadit hosty na svatbě?", a: "Osvědčuje se sázet k sobě lidi, kteří se znají nebo mají společná témata, a hlídat rodinné citlivosti. Díky drag & drop můžete varianty zkoušet, dokud nesedí každý stůl." },
+  { q: "Kolik hostů se vejde k jednomu stolu?", a: "U kulatého stolu obvykle 8–10 hostů, u obdélníkového záleží na délce. V nástroji si počet židlí u každého stolu nastavíte sami." },
+  { q: "Je zasedací pořádek napojený na seznam hostů?", a: "Ano. Zasedací pořádek je propojený s RSVP odpověďmi ze svatebního webu, takže pracujete vždy s aktuálním počtem potvrzených hostů." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "WeMarry", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Zasedací pořádek", item: absoluteUrl("/zasedaci-poradek") },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={[faqSchema, breadcrumb]}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#3a4a40] via-[#6b7a68] to-[#a6c1a7]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/55"></div>
+
+      <div class="container-site flex min-h-[520px] flex-col justify-center pb-16 pt-40 md:min-h-[620px] md:pb-24 md:pt-48">
+        <div class="max-w-2xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Zasedací pořádek</p>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+            Zasedací pořádek na svatbu
+            <span class="not-italic"> snadno a bez stresu.</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-body text-white/90">
+            Interaktivní drag & drop nástroj napojený přímo na RSVP. Přesouvejte stoly,
+            přidávejte židle a rozsaďte hosty tak, aby se všichni bavili.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+            <a href="/svatebni-web" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">Vše o svatebním webu →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefity -->
+    <section class="bg-white py-20 md:py-28 lg:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Co nástroj umí</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Rozsazení hostů bez papíru a tužky</h2>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+          {
+            benefits.map((b) => (
+              <article class="rounded-card border border-beige-border bg-cream p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{b.title}</h3>
+                <p class="mt-3 text-body text-ink-muted">{b.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Jak na to -->
+    <section class="bg-cream py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Jak na to</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Zasedací pořádek ve třech krocích</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
+          {
+            steps.map((s) => (
+              <div class="flex flex-col gap-3">
+                <span class="font-serif text-hero italic text-primary">{s.n}</span>
+                <h3 class="font-serif text-h3 text-ink">{s.title}</h3>
+                <p class="text-body text-ink-muted">{s.text}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <Faq title="Časté otázky o zasedacím pořádku" items={faq} />
+    <HandsCTA />
+  </main>
+</BaseLayout>

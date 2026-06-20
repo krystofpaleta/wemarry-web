@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Faq from "../components/sections/Faq.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE, absoluteUrl } from "../config/site";
+
+const title = "Svatební oznámení a pozvánky online s RSVP | WeMarry";
+const description =
+  "Vytvořte si online svatební oznámení a pozvánky na svatbu s RSVP formulářem. Rozešlete je e-mailem nebo odkazem, sbírejte odpovědi automaticky a ušetřete za tisk i poštu.";
+
+const benefits = [
+  { title: "Online pozvánka s RSVP", text: "Digitální svatební oznámení s formulářem, kde hosté rovnou potvrdí účast i speciální požadavky." },
+  { title: "Rozeslání na pár kliknutí", text: "Pošlete pozvánku e-mailem nebo sdílejte odkaz. Žádné obálky, známky ani běhání na poštu." },
+  { title: "Automatický sběr odpovědí", text: "Kdo dorazí, kdo má alergii, kdo potřebuje nocleh — vše se sbírá samo a exportuje do tabulky." },
+  { title: "Vícejazyčná verze", text: "Pozvánku přepnete jedním kliknutím do angličtiny i dalšího jazyka pro zahraniční hosty." },
+];
+
+const steps = [
+  { n: "01", title: "Vyberte design", text: "Zvolte si šablonu oznámení, která ladí se stylem vaší svatby." },
+  { n: "02", title: "Doplňte text a údaje", text: "Jména, datum, místo a vzkaz hostům. Pomůžeme i s tím, co na oznámení napsat." },
+  { n: "03", title: "Rozešlete a sbírejte RSVP", text: "Pošlete odkaz hostům a sledujte, jak se odpovědi sbírají samy." },
+];
+
+const faq = [
+  { q: "Jak vytvořit svatební oznámení online?", a: "Ve WeMarry vyberete šablonu, doplníte jména, datum, místo a vzkaz hostům a pošlete odkaz e-mailem nebo přes sociální sítě. Součástí je RSVP formulář, takže se odpovědi sbírají automaticky." },
+  { q: "Co napsat na svatební oznámení?", a: "Základ tvoří jména snoubenců, datum a místo obřadu, čas a prosba o potvrzení účasti. Přidat můžete dress code, informace k darům i program dne. Vše doplníte přímo do online oznámení." },
+  { q: "Kolik stojí online svatební oznámení?", a: "Online oznámení je součástí svatebního webu WeMarry — jednorázově 1 490 Kč za celý balíček, bez nákladů na tisk, obálky a poštovné." },
+  { q: "Jsou online pozvánky lepší než papírové?", a: "Online pozvánky ušetří čas i peníze, rozešlou se okamžitě a samy sbírají odpovědi. Papírové oznámení můžete navíc zachovat pro prarodiče — obojí se nevylučuje." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "WeMarry", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Svatební oznámení", item: absoluteUrl("/svatebni-oznameni") },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={[faqSchema, breadcrumb]}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#6b4a42] via-[#9a7868] to-[#edd4cb]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/55"></div>
+
+      <div class="container-site flex min-h-[520px] flex-col justify-center pb-16 pt-40 md:min-h-[620px] md:pb-24 md:pt-48">
+        <div class="max-w-2xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Svatební oznámení</p>
+          <h1 class="font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+            Svatební oznámení a pozvánky
+            <span class="not-italic"> online s RSVP.</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-body text-white/90">
+            Digitální svatební oznámení s RSVP formulářem rozešlete na pár kliknutí.
+            Hosté potvrdí účast a vy máte všechny odpovědi přehledně na jednom místě.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={SITE.app.signup} class="btn-primary">Vytvořit oznámení zdarma</a>
+            <a href="/sablony" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">Prohlédnout šablony →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefity -->
+    <section class="bg-white py-20 md:py-28 lg:py-32">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Proč online</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Pozvánky, které samy sbírají odpovědi</h2>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+          {
+            benefits.map((b) => (
+              <article class="rounded-card border border-beige-border bg-cream p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{b.title}</h3>
+                <p class="mt-3 text-body text-ink-muted">{b.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Jak na to -->
+    <section class="bg-cream py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Jak na to</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Online oznámení ve třech krocích</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
+          {
+            steps.map((s) => (
+              <div class="flex flex-col gap-3">
+                <span class="font-serif text-hero italic text-primary">{s.n}</span>
+                <h3 class="font-serif text-h3 text-ink">{s.title}</h3>
+                <p class="text-body text-ink-muted">{s.text}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <Faq title="Časté otázky o svatebním oznámení" items={faq} />
+    <HandsCTA />
+  </main>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  items: { q: string; a: string }[];
+}
+const { eyebrow = "Časté otázky", title = "Časté otázky", items } = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden py-20 md:py-28">
+  <div class="container-site">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-tiny uppercase tracking-cta text-primary">{eyebrow}</p>
+      <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">{title}</h2>
+    </div>
+
+    <div class="mx-auto mt-12 flex max-w-3xl flex-col gap-3">
+      {
+        items.map((f) => (
+          <details class="group rounded-card bg-white p-6 shadow-card md:p-8">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-h4 text-ink">
+              {f.q}
+              <span class="shrink-0 text-primary transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-3 text-body text-ink-muted" set:html={f.a}></p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
