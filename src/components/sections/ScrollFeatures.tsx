@@ -288,8 +288,8 @@ function ChecklistVisual({ isActive }: VisualProps) {
   const items = [
     { text: "Stanovit datum svatby", done: true },
     { text: "Určit rozpočet", done: true },
+    { text: "Vytvořit svatební web", done: false },
     { text: "Rezervovat místo konání", done: false },
-    { text: "Zarezervovat fotografa", done: false },
     { text: "Rozeslat pozvánky", done: false },
   ];
   const idleDone = 2;
@@ -714,8 +714,8 @@ function SeatingVisual({ isActive }: VisualProps) {
           {tablePositions.map((pos, i) => (
             <div
               key={i}
-              className={`absolute flex size-[4.5rem] items-center justify-center transition-all duration-500 ${
-                showTables ? "scale-100 opacity-100" : "scale-75 opacity-0"
+              className={`absolute flex size-[4.5rem] items-center justify-center transition-all duration-500 ease-out ${
+                showTables ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-90 opacity-0"
               }`}
               style={{
                 top: pos.top,
@@ -842,12 +842,12 @@ function PhotosVisual({ isActive }: VisualProps) {
         </div>
 
         <div
-          className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 rounded-card-sm bg-white p-3 shadow-prominent ${
+          className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 rounded-card-sm bg-white p-4 text-center shadow-prominent ${
             isActive && !reduced ? "animate-sf-pulse-soft" : ""
           }`}
         >
           <QrIcon />
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             <p className="text-tiny uppercase tracking-cta text-ink-soft">Naskenujte</p>
             <p className="font-serif text-small text-ink">Přidat fotku</p>
           </div>

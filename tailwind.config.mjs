@@ -123,9 +123,9 @@ export default {
         },
         "sf-guest-to-seat": {
           "0%": { transform: "translate(0, 0) scale(1)", opacity: "1" },
-          "40%": { transform: "translate(-28px, -18px) scale(1.08)", opacity: "1" },
-          "70%": { transform: "translate(-52px, -42px) scale(0.95)", opacity: "1" },
-          "100%": { transform: "translate(-52px, -42px) scale(1)", opacity: "0" },
+          "35%": { transform: "translate(40px, 6px) scale(1.06)", opacity: "1" },
+          "75%": { transform: "translate(78px, 16px) scale(0.85)", opacity: "0.85" },
+          "100%": { transform: "translate(104px, 24px) scale(0.6)", opacity: "0" },
         },
         "sf-seat-fill": {
           "0%": { transform: "scale(0)", opacity: "0" },
@@ -144,7 +144,7 @@ export default {
         "sf-pop": "sf-pop 0.4s ease forwards",
         "sf-slide-up": "sf-slide-up 0.45s ease forwards",
         "sf-pulse-soft": "sf-pulse-soft 2.4s ease-in-out infinite",
-        "sf-guest-to-seat": "sf-guest-to-seat 1.8s ease-in-out forwards",
+        "sf-guest-to-seat": "sf-guest-to-seat 1.2s ease-in forwards",
         "sf-seat-fill": "sf-seat-fill 0.35s ease forwards",
         "sf-lang-blink": "sf-lang-blink 0.6s ease 2.2s 2",
         "sf-star-fill": "sf-star-fill 0.7s ease forwards",
