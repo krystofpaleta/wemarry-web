@@ -3,10 +3,12 @@ import { SITE } from "../../config/site";
 ---
 
 <section class="relative isolate overflow-hidden">
-  <!-- Background — dočasný warm gradient, nahradit fotkou páru -->
+  <!-- Background — reálná foto páru -->
   <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#c9a796] via-[#a78b7d] to-[#6b5b52]"></div>
+  <img src="/img/hero-home.png" alt="" aria-hidden="true" class="absolute inset-0 -z-10 size-full object-cover object-center" />
   <!-- Overlay pro čitelnost textu -->
-  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-r from-black/65 via-black/40 to-black/30"></div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/25 via-transparent to-black/40"></div>
 
   <div class="container-site flex min-h-[640px] flex-col justify-center pb-20 pt-40 md:min-h-[720px] md:pb-32 md:pt-48 lg:min-h-[820px]">
     <div class="max-w-2xl">

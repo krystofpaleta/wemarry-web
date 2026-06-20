@@ -4,37 +4,33 @@ import SectionIntro from "./SectionIntro.astro";
 type Story = {
   quote: string;
   coupleName: string;
-  weddingDate: string;
-  location: string;
-  palette: string;
+  meta: string;
+  image: string;
   highlight?: boolean;
 };
 
 const stories: Story[] = [
   {
     quote:
-      "Bez WeMarry bych se zbláznila. Checklist mě provedl každým krokem a rozpočet nám zachránil asi tak pětkrát, když jsme chtěli utrácet hlouposti.",
-    coupleName: "Tereza & Martin",
-    weddingDate: "Červen 2025",
-    location: "Zámek Liblice",
-    palette: "from-[#edd4cb] via-[#d4b6a8] to-[#a78b7d]",
+      "WeMarry doporučuji. Sdílela jsem ho společně se svou koordinátorkou a mohly jsme tak obě zaznamenávat poznámky k svatebnímu dni i rozvržení stolů. Elektronické pozvánky se moc líbily i našim hostům a možnost nahrát fotky přes QR kód do sdíleného alba je úžasná!",
+    coupleName: "Frantovi",
+    meta: "Svatba pro 40 hostů",
+    image: "/img/reviews/frantovi.jpg",
   },
   {
     quote:
-      "RSVP formulář nám ušetřil stovky telefonátů. Babička sice ještě chvíli volala, ale to je asi dáno spíš tou babičkou než aplikací 😊",
-    coupleName: "Klára & Honza",
-    weddingDate: "Září 2024",
-    location: "Stodola Suška",
-    palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]",
+      "S WeMarry jsme byli opravdu velmi spokojeni. Oceňuji krásnou a přehlednou grafiku, jednoduché ovládání a také možnost mít web ve dvou jazycích. Super byla funkce rozpočtu, fungoval i zasedací pořádek a nadchly nás také online pozvánky.",
+    coupleName: "Čáky",
+    meta: "Svatba pro 100 hostů",
+    image: "/img/reviews/caky.jpg",
     highlight: true,
   },
   {
     quote:
-      "Zasedací pořádek jsem přerovnávala asi 30×, a drag and drop mě pokaždé zachránil. Na papíře bych to dávno vzdala.",
-    coupleName: "Nikola & Filip",
-    weddingDate: "Květen 2025",
-    location: "Vinařství Sonberk",
-    palette: "from-[#f5d9d2] via-[#e8a89a] to-[#b66b5c]",
+      "V dnešní době je svatební web téměř nutnost — nejefektivnější a nejrychlejší způsob, jak oslovit všechny hosty. Rozhodli jsme se pro WeMarry, protože se nám nejvíc líbil jejich design, šablony i celkové uživatelské prostředí.",
+    coupleName: "Macurovi",
+    meta: "Svatba pro 120 hostů",
+    image: "/img/reviews/macurovi.jpg",
   },
 ];
 ---
@@ -58,8 +54,9 @@ const stories: Story[] = [
                 : "border-beige-border bg-white",
             ]}
           >
-            <div class:list={["aspect-[4/3] w-full bg-gradient-to-br relative", story.palette]} aria-hidden="true">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            <div class="relative aspect-[4/3] w-full overflow-hidden">
+              <img src={story.image} alt={`Svatba — ${story.coupleName}`} loading="lazy" class="absolute inset-0 size-full object-cover" />
+              <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
 
             <div class="flex flex-1 flex-col gap-5 p-8 md:p-10">
@@ -71,11 +68,8 @@ const stories: Story[] = [
               </blockquote>
 
               <div class="mt-auto flex items-center justify-between pt-4">
-                <div>
-                  <p class="font-serif text-body text-ink">{story.coupleName}</p>
-                  <p class="text-small text-ink-soft">{story.location}</p>
-                </div>
-                <p class="text-tiny uppercase tracking-cta text-primary">{story.weddingDate}</p>
+                <p class="font-serif text-body text-ink">{story.coupleName}</p>
+                <p class="text-tiny uppercase tracking-cta text-primary">{story.meta}</p>
               </div>
             </div>
           </article>
