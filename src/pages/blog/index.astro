@@ -33,6 +33,7 @@ const grid = await getGrid();
             featured && (
               <a href={`/blog/${featured.slug}`} class="group relative flex aspect-[4/3] flex-col overflow-hidden rounded-card shadow-card transition-all hover:shadow-prominent md:aspect-[16/10]">
                 <div aria-hidden="true" class:list={["absolute inset-0 bg-gradient-to-br", featured.data.palette]}></div>
+                {featured.data.image && <img src={featured.data.image} alt={featured.data.title} class="absolute inset-0 size-full object-cover" />}
                 <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-black/15 via-black/25 to-black/65"></div>
 
                 <div class="relative z-10 p-6 md:p-8">
@@ -61,8 +62,9 @@ const grid = await getGrid();
                 popular.map((p) => (
                   <li>
                     <a href={`/blog/${p.slug}`} class="group flex items-center gap-4 py-5 transition-colors">
-                      <div aria-hidden="true" class:list={["relative size-20 shrink-0 overflow-hidden rounded-card-sm bg-gradient-to-br", p.data.palette]}>
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30"></div>
+                      <div class:list={["relative size-20 shrink-0 overflow-hidden rounded-card-sm bg-gradient-to-br", p.data.palette]}>
+                        {p.data.image && <img src={p.data.image} alt={p.data.title} loading="lazy" class="absolute inset-0 size-full object-cover" />}
+                        <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30"></div>
                       </div>
                       <div class="flex-1">
                         <p class="text-small font-medium text-ink transition-colors group-hover:text-primary">{p.data.title}</p>
@@ -123,6 +125,7 @@ const grid = await getGrid();
               <article class="group flex flex-col">
                 <a href={`/blog/${p.slug}`} class="relative aspect-[4/3] overflow-hidden rounded-card shadow-card transition-all group-hover:shadow-prominent">
                   <div aria-hidden="true" class:list={["absolute inset-0 bg-gradient-to-br", p.data.palette]}></div>
+                  {p.data.image && <img src={p.data.image} alt={p.data.title} loading="lazy" class="absolute inset-0 size-full object-cover" />}
                   <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/45"></div>
                   <div class="relative p-5 md:p-6">
                     <span class="rounded-pill bg-white/15 px-3 py-1 text-tiny uppercase tracking-cta text-white backdrop-blur-sm">{p.data.category}</span>

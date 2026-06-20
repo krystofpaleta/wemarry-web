@@ -1,12 +1,12 @@
 ---
 title: "Svatební den: Jak bude probíhat minutu po minutě?"
 category: "Plánování svatby"
-excerpt: ""
+excerpt: "Jak zkoordinovat svatbu tak, aby na sebe vše hezky navazovalo? Objevte ideální průběh svatebního dne."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#d4b8a4] via-[#b89a82] to-[#8a6a54]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-day-scaled.jpg"
+image: "/blog/prubeh-svatby-minutu-po-minute.jpg"
 sourceUrl: "https://wemarry.io/cs/prubeh-svatby-minutu-po-minute/"
 list: "grid"
 order: 3

@@ -1,12 +1,12 @@
 ---
-title: "Jak naplánovat svatbu? Zjistěte, na co nesmíte zapomenout"
+title: "Jak naplánovat svatbu? Zjistěte, na co nesmíte zapomenout."
 category: "Plánování svatby"
-excerpt: ""
+excerpt: "Rozhodli jste se. Vezmete se. Co teď? Jak začít plánovat svatbu? Přečtěte si, na co musíte myslet."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 5
 palette: "from-[#d4b8a4] via-[#b89a82] to-[#8a6a54]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/how-to-plan-a-wedding-scaled.jpg"
+image: "/blog/jak-naplanovat-svatbu.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-naplanovat-svatbu/"
 list: "featured"
 order: 0

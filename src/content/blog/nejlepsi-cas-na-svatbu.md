@@ -1,12 +1,12 @@
 ---
 title: "Kdy se vzít? Vyberte to nejlepší období pro vaši svatbu"
 category: "Plánování svatby"
-excerpt: ""
+excerpt: "Tápete, jaký vybrat termín pro svou svatbu? Zjistěte, co vzít v potaz a na čem opravdu záleží."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#d4b8a4] via-[#b89a82] to-[#8a6a54]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/when-to-get-married-scaled.jpg"
+image: "/blog/nejlepsi-cas-na-svatbu.jpg"
 sourceUrl: "https://wemarry.io/cs/nejlepsi-cas-na-svatbu/"
 list: "grid"
 order: 12

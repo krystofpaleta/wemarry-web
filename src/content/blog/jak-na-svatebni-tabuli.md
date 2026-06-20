@@ -1,12 +1,12 @@
 ---
 title: "Jak připravit svatební tabuli ve 4 krocích"
 category: "Místo a dekorace"
-excerpt: ""
+excerpt: "Nestíháte a nevíte, co vymyslet na svatební občerstvení? V klidu vydechněte — poradíme, jak připravit svatební tabuli krok po kroku."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding_table-scaled.jpg"
+image: "/blog/jak-na-svatebni-tabuli.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-na-svatebni-tabuli/"
 list: "grid"
 order: 6

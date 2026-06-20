@@ -1,12 +1,12 @@
 ---
-title: "Účes pro nevěstu přehledně: Tipy pro všechny délky vlasů"
+title: "Svatební účesy: Velký průvodce trendy roku 2022"
 category: "Vzhled a styl"
-excerpt: ""
+excerpt: "Inspirujte se tipy na trendy svatební účesy. Dlouhé, krátké, nebo polodlouhé, ženichovi se z nich zaručeně podlomí kolena."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#f9f0eb] via-[#edd9c8] to-[#e4c8b4]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/bride-preparing-hairstyle-for-wedding--scaled.jpg"
+image: "/blog/uces-pro-nevestu-prehledne-tipy-pro-vsechny-delky-vlasu.jpg"
 sourceUrl: "https://wemarry.io/cs/uces-pro-nevestu-prehledne-tipy-pro-vsechny-delky-vlasu/"
 list: "grid"
 order: 8

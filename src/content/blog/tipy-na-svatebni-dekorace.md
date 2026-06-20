@@ -1,12 +1,12 @@
 ---
 title: "Ultimátní inspirace na svatební dekorace, které musíte mít"
 category: "Místo a dekorace"
-excerpt: ""
+excerpt: "Inspirace dochází? Podívejte se, jaké dekorace nesmí na vaší svatbě chybět a zjistěte, kterými originálními nápady ji můžete ozvláštnit."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-decoration-details-scaled.jpg"
+image: "/blog/tipy-na-svatebni-dekorace.jpg"
 sourceUrl: "https://wemarry.io/cs/tipy-na-svatebni-dekorace/"
 list: "grid"
 order: 11

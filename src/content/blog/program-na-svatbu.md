@@ -1,12 +1,12 @@
 ---
 title: "Svatební program: Jak zařídit, aby se vaši hosté bavili"
 category: "Plánování svatby"
-excerpt: ""
+excerpt: "Svatební dort nakrojený, kytice úspěšně odhozená. Co teď? Nechte se inspirovat 12 tipy na svatební oslavu."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#d4b8a4] via-[#b89a82] to-[#8a6a54]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-program-scaled.jpg"
+image: "/blog/program-na-svatbu.jpg"
 sourceUrl: "https://wemarry.io/cs/program-na-svatbu/"
 list: "grid"
 order: 2

@@ -1,12 +1,12 @@
 ---
 title: "Svatební kytice: Kolik stojí, jakou vybrat a kde ji sehnat"
 category: "Dodavatelé a inspirace"
-excerpt: ""
+excerpt: "Jakou kytici zvolit na svou svatbu? Podívejte se, jaká se na vaši svatbu hodí, podle čeho se rozhodnout a jakou cenu můžete očekávat."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#e8a89a] via-[#d98b7c] to-[#c97a6c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-bouquet-scaled.jpg"
+image: "/blog/jak-vybrat-svatebni-kytici.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-svatebni-kytici/"
 list: "grid"
 order: 0

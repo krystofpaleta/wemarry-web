@@ -14,6 +14,7 @@ const posts = entries.map((e) => ({
   readTime: `${e!.data.readMinutes} min čtení`,
   href: `/blog/${e!.slug}`,
   palette: e!.data.palette,
+  image: e!.data.image,
 }));
 ---
 
@@ -35,8 +36,9 @@ const posts = entries.map((e) => ({
       {
         posts.map((post) => (
           <a href={post.href} class="group flex flex-col gap-5 outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
-            <div class:list={["aspect-[4/3] w-full overflow-hidden rounded-card bg-gradient-to-br shadow-card transition-shadow group-hover:shadow-prominent", post.palette]}>
-              <div class="flex size-full items-end p-6">
+            <div class:list={["relative aspect-[4/3] w-full overflow-hidden rounded-card bg-gradient-to-br shadow-card transition-shadow group-hover:shadow-prominent", post.palette]}>
+              {post.image && <img src={post.image} alt={post.title} loading="lazy" class="absolute inset-0 size-full object-cover" />}
+              <div class="relative flex size-full items-end p-6">
                 <span class="rounded-pill bg-white/90 px-3 py-1 text-tiny uppercase tracking-cta text-ink">{post.category}</span>
               </div>
             </div>

@@ -1,12 +1,12 @@
 ---
-title: "Fotograf a kameraman na svatbu: Jak ho vybrat?"
+title: "Svatební fotograf a kameraman: Jak ho vybrat?"
 category: "Dodavatelé a inspirace"
-excerpt: ""
+excerpt: "Jak získat dokonalé fotky z vašeho velkého dne? Ať už budete mít sebelepší podmínky, vše stojí a padá s kvalitou fotografa. Zjistěte, jak najít toho pravého."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#e8a89a] via-[#d98b7c] to-[#c97a6c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/how-to-choose-a-wedding-photographer-scaled.jpg"
+image: "/blog/jak-vybrat-svatebniho-fotografa.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-svatebniho-fotografa/"
 list: "popular"
 order: 0

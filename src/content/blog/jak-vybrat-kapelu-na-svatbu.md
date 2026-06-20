@@ -1,12 +1,12 @@
 ---
 title: "Kapela na svatbu: Kdy ji potřebujete a jakou vybrat?"
 category: "Dodavatelé a inspirace"
-excerpt: ""
+excerpt: "Na jaké tóny si zatančíte první novomanželský tanec? Zjistěte, jak vybrat kapelu na svatbu, aby vám sedla."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 2
 palette: "from-[#e8a89a] via-[#d98b7c] to-[#c97a6c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-band-scaled.jpg"
+image: "/blog/jak-vybrat-kapelu-na-svatbu.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-kapelu-na-svatbu/"
 list: "grid"
 order: 4

@@ -1,12 +1,12 @@
 ---
-title: "Jak založit svatební web na WeMarry krok po kroku"
+title: "Zakládáme si svatební web onasisvatbe.cz"
 category: "Plánování svatby"
-excerpt: ""
+excerpt: "Vytvořit si vlastní svatební web je záležitost tří kliků a pěti minut. Zjistěte, jak na to."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 2
 palette: "from-[#d4b8a4] via-[#b89a82] to-[#8a6a54]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/how-to-create-a-wedding-website-scaled.jpg"
+image: "/blog/jak-zalozit-svatebni-web-na-wemarry-krok-po-kroku.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-zalozit-svatebni-web-na-wemarry-krok-po-kroku/"
 list: "grid"
 order: 14

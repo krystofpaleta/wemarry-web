@@ -1,12 +1,12 @@
 ---
 title: "Jak vybrat svatební závoj krok za krokem"
 category: "Vzhled a styl"
-excerpt: ""
+excerpt: "Patří závoj k vašemu svatebnímu outfitu? Podívejte se, jaké existují druhy, jak ho vybrat i kolik stojí."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#f9f0eb] via-[#edd9c8] to-[#e4c8b4]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/how-to-choose-wedding-veil-scaled.jpg"
+image: "/blog/jak-vybrat-svatebni-zavoj.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-svatebni-zavoj/"
 list: "grid"
 order: 7

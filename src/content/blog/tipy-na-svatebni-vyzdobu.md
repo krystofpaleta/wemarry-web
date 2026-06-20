@@ -1,12 +1,12 @@
 ---
-title: "Jak rozzářit veselku svatební výzdobou? 3 tipy, co a jak zkrášlit"
+title: "Jak na svatební výzdobou? 3 tipy, co a jak zkrášlit"
 category: "Místo a dekorace"
-excerpt: ""
+excerpt: "Svatba je za dveřmi, ale stále nevíte, jakou výzdobou svatebčany okouzlit? Zjistěte, jak výzdobu naplánovat, co můžete vyzkoušet a kolik to stojí."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-decoration-scaled.jpg"
+image: "/blog/tipy-na-svatebni-vyzdobu.jpg"
 sourceUrl: "https://wemarry.io/cs/tipy-na-svatebni-vyzdobu/"
 list: "grid"
 order: 10

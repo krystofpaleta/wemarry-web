@@ -1,12 +1,12 @@
 ---
-title: "Jak vybrat svatební oblek pro ženicha? 7 věcí, na které dát pozor"
+title: "Jak vybrat svatební oblek? 7 věcí, na které dát pozor"
 category: "Vzhled a styl"
-excerpt: ""
+excerpt: "Vybrat oblek pro ženicha není zdaleka tak těžké jako nevěstiny šaty? Omyl. Objevte všechny možnosti a zjistěte, co by měl oblek splňovat."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#f9f0eb] via-[#edd9c8] to-[#e4c8b4]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/the-groom-puts-on-a-wedding-suit-scaled.jpg"
+image: "/blog/jak-vybrat-oblek-pro-zenicha.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-oblek-pro-zenicha/"
 list: "grid"
 order: 9

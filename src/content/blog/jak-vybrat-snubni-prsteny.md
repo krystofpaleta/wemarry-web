@@ -1,12 +1,12 @@
 ---
 title: "Jak na snubní prsteny? Zjistěte, z čeho můžete vybírat"
 category: "Plánování svatby"
-excerpt: ""
+excerpt: "Budete je nosit celý život. Výběr snubních prstýnků nepodceňte. Zjistěte, jaký typ se k vám hodí nejlépe."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 2
 palette: "from-[#d4b8a4] via-[#b89a82] to-[#8a6a54]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-rings-scaled.jpg"
+image: "/blog/jak-vybrat-snubni-prsteny.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-snubni-prsteny/"
 list: "popular"
 order: 2

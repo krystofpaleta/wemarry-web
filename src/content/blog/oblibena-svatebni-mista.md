@@ -1,12 +1,12 @@
 ---
-title: "8 nejlepších míst pro svatební obřad: Stodola, louka nebo zámek"
+title: "Kde se vzít? Svatba ve stodole, na louce nebo zámku?"
 category: "Místo a dekorace"
-excerpt: ""
+excerpt: "Přemýšlíte, kde uspořádat svatbu? Podívejte se, jaká svatební místa vedou a které se hodí pro vás."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#d4e3d0] via-[#a6c1a7] to-[#7a9d7c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-ceremony-locations-scaled.jpg"
+image: "/blog/oblibena-svatebni-mista.jpg"
 sourceUrl: "https://wemarry.io/cs/oblibena-svatebni-mista/"
 list: "grid"
 order: 13

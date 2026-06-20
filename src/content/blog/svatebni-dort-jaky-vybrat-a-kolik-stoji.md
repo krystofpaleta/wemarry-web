@@ -1,12 +1,12 @@
 ---
 title: "Svatební dort: Jaký vybrat a kolik stojí?"
 category: "Dodavatelé a inspirace"
-excerpt: ""
+excerpt: "Bez svatebního dortu není svatba. Zjistěte, dle čeho ho vybrat, jaké máte možnosti a na kolik vás vyjde."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#e8a89a] via-[#d98b7c] to-[#c97a6c]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-cake-scaled.jpg"
+image: "/blog/svatebni-dort-jaky-vybrat-a-kolik-stoji.jpg"
 sourceUrl: "https://wemarry.io/cs/svatebni-dort-jaky-vybrat-a-kolik-stoji/"
 list: "popular"
 order: 3

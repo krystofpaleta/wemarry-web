@@ -1,12 +1,12 @@
 ---
 title: "Svatební oznámení: Co na něm nesmí chybět a jaké vybrat?"
 category: "Hosté a organizace"
-excerpt: ""
+excerpt: "Jak dát okolí vědět, že se budete brát? Svatební oznámení a web jsou dva nejlepší pomocníci. Zjistěte, jak je vybrat a co na nich nesmí chybět."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#e8dfd4] via-[#cdbf9f] to-[#c9b89f]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/wedding-announcements-scaled.jpg"
+image: "/blog/jak-vybrat-svatebni-oznameni.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-svatebni-oznameni/"
 list: "grid"
 order: 5

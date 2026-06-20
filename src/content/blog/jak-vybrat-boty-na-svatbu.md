@@ -1,12 +1,12 @@
 ---
 title: "Velký průvodce svatebními botami: Jak si nezničit nohy?"
 category: "Vzhled a styl"
-excerpt: ""
+excerpt: "Jaké svatební boty obout, abyste v nich vydržela od ranního obřadu až na večerní párty? Zjistěte, jak si je vybrat."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 3
 palette: "from-[#f9f0eb] via-[#edd9c8] to-[#e4c8b4]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/how-to-choose-wedding-shoes-scaled.jpg"
+image: "/blog/jak-vybrat-boty-na-svatbu.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-boty-na-svatbu/"
 list: "grid"
 order: 1

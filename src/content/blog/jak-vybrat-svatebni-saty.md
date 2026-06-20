@@ -1,12 +1,12 @@
 ---
 title: "Rozcestník svatebních šatů: Jaké jsou možnosti a jak vybrat ty správné?"
 category: "Vzhled a styl"
-excerpt: ""
+excerpt: "Svatební šaty patří k nejdůležitějším položkám každé svatby. Jak vybrat takové, aby se v nich nevěsta cítila nádherně? Objevte náš seznam tipů."
 date: "25. 7. 2025"
 isoDate: 2025-07-25
 readMinutes: 4
 palette: "from-[#f9f0eb] via-[#edd9c8] to-[#e4c8b4]"
-image: "https://wemarry.io/wp-content/uploads/2025/07/how-to-choose-a-wedding-dress-scaled.jpg"
+image: "/blog/jak-vybrat-svatebni-saty.jpg"
 sourceUrl: "https://wemarry.io/cs/jak-vybrat-svatebni-saty/"
 list: "popular"
 order: 1
