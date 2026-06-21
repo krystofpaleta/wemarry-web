@@ -148,9 +148,11 @@ export default function ScrollFeatures() {
   }, []);
 
   return (
+    <>
+    {/* Desktop — Apple-style sticky scroll (skryto na mobilu) */}
     <section
       ref={sectionRef}
-      className="relative bg-warm-gray/40"
+      className="relative hidden bg-warm-gray/40 lg:block"
       style={{ height: `${steps.length * 100}vh` }}
       aria-label="Funkce WeMarry"
     >
@@ -271,6 +273,95 @@ export default function ScrollFeatures() {
         </span>
       </div>
     </section>
+
+    {/* Mobil — normální stacknutý seznam kroků (žádný sticky scroll) */}
+    <section className="bg-warm-gray/40 py-16 lg:hidden" aria-label="Funkce WeMarry">
+      <div className="container-site flex flex-col gap-14">
+        <p className="text-tiny uppercase tracking-cta text-primary">
+          Vše, co svatba potřebuje
+        </p>
+        {steps.map((step) => (
+          <MobileStep key={step.title} step={step} />
+        ))}
+      </div>
+    </section>
+    </>
+  );
+}
+
+function MobileStep({ step }: { step: Step }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="flex flex-col gap-7">
+      <div className="flex flex-col gap-4">
+        <p className="text-tiny uppercase tracking-cta text-ink-soft">
+          {step.eyebrow}
+        </p>
+        <h2 className="font-serif text-hero-sm text-ink">{step.title}</h2>
+        <p className="text-body text-ink-muted">{step.description}</p>
+        <ul className="mt-1 flex flex-col gap-3">
+          {step.bullets.map((b) => (
+            <li
+              key={b}
+              className="flex items-start gap-3 text-body text-ink-body"
+            >
+              <span
+                className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-sage"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 12 12"
+                  className="size-3 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M2.5 6.5L5 9L10 3.5" />
+                </svg>
+              </span>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="relative h-[400px] w-full">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <FeatureVisual step={step} isActive={inView} />
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-5">
+        <a href={SITE.app.signup} className="btn-primary">
+          Vyzkoušet zdarma
+        </a>
+        {step.href && (
+          <a
+            href={step.href}
+            className="text-micro uppercase tracking-cta text-primary transition-colors hover:text-primary-hover"
+          >
+            Zjistit víc →
+          </a>
+        )}
+      </div>
+    </div>
   );
 }
 
