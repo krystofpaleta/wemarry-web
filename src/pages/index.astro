@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/sections/Hero.astro";
-import FeatureCards from "../components/sections/FeatureCards.astro";
 import Testimonials from "../components/sections/Testimonials.astro";
 import PricingCompare from "../components/sections/PricingCompare.astro";
 import ScrollFeatures from "../components/sections/ScrollFeatures.tsx";
@@ -43,10 +42,9 @@ const productSchema = {
 <BaseLayout title={title} description={description} jsonld={productSchema}>
   <main class="relative min-h-screen bg-white">
     <Hero />
-    <FeatureCards />
+    <ScrollFeatures client:visible />
     <Testimonials />
     <PricingCompare />
-    <ScrollFeatures client:visible />
     <PhotoBreak />
     <TemplatesGallery client:visible />
     <Pricing />
