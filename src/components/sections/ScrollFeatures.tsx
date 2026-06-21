@@ -348,7 +348,7 @@ function MobileStep({ step }: { step: Step }) {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-5">
+      <div className="flex flex-wrap items-center justify-center gap-5">
         <a href={SITE.app.signup} className="btn-primary">
           Vyzkoušet zdarma
         </a>
