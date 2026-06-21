@@ -342,7 +342,7 @@ function MobileStep({ step }: { step: Step }) {
         </ul>
       </div>
 
-      <div className="relative h-[400px] w-full">
+      <div className="relative h-[520px] w-full overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <FeatureVisual step={step} isActive={inView} />
         </div>
