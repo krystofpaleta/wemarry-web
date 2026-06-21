@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PricingTiers from "../components/sections/PricingTiers.astro";
+import PricingCompare from "../components/sections/PricingCompare.astro";
+import HandsCTA from "../components/sections/HandsCTA.astro";
+import { SITE } from "../config/site";
+
+// PREVIEW nového ceníku (3 balíčky). Není to zatím aktuální ceník — noindex,
+// mimo navigaci, patičku i sitemap. Stávající /cenik zůstává beze změny.
+const title = "Ceník balíčků (náhled) — WeMarry";
+const description =
+  "Náhled nového ceníku WeMarry: svatební web zdarma, Web + RSVP za 1 490 Kč a Komplet za 1 990 Kč. Plánovač je vždy zdarma.";
+
+const faq = [
+  { q: "Kolik WeMarry stojí?", a: "Plánování svatby je zdarma. Svatební web pro hosty je zdarma, Web + RSVP stojí jednorázově 1 490 Kč a Komplet (web, RSVP i sdílená galerie) 1 990 Kč. Žádné měsíční poplatky." },
+  { q: "Co znamená 30denní garance vrácení peněz?", a: "Pokud do 30 dní zjistíte, že vám WeMarry nesedí, vrátíme vám peníze bez otázek. Napište nám e-mail a peníze jsou zpět do pár dní." },
+  { q: "Potřebuji kreditku pro vyzkoušení?", a: "Ne. Registrace a celý plánovač jsou zdarma. Platíte až ve chvíli, kdy chcete svatební web zveřejnit hostům." },
+  { q: "Co je v ceně u každého balíčku?", a: "Ke každému balíčku zdarma získáte checklist úkolů, kalkulačku rozpočtu, katalog dodavatelů i zasedací pořádek." },
+  { q: "Jaký je rozdíl mezi balíčky?", a: "Svatební web je informační stránka pro hosty. Web + RSVP přidává potvrzování účasti, e-mailové pozvánky a propojení se zasedacím pořádkem. Komplet navíc obsahuje sdílenou fotogalerii se sběrem fotek přes QR kód." },
+  { q: "Jak je to s fakturou a DPH?", a: "Standardní faktura vám přijde automaticky na e-mail. Pokud potřebujete IČO a DIČ, doplníte je při platbě." },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+
+<BaseLayout title={title} description={description} noindex={true} jsonld={faqSchema}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#6b5b52] via-[#8a7a6e] to-[#c9a796]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
+
+      <div class="container-site flex min-h-[460px] flex-col items-center justify-center pb-16 pt-40 text-center md:min-h-[540px] md:pb-20 md:pt-48">
+        <p class="mb-5 text-tiny uppercase tracking-cta text-white/85">Ceník</p>
+        <h1 class="max-w-3xl font-serif text-hero-sm italic text-white md:text-hero lg:text-hero-xl">
+          Od zdarma po komplet.
+          <span class="not-italic"> Vyberte si balíček.</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-body text-white/85">
+          Plánovač je vždy zdarma. Platíte jednorázově až při zveřejnění webu — žádné
+          měsíční poplatky, 30denní garance vrácení peněz.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 balíčky -->
+    <PricingTiers />
+
+    <!-- Podrobné srovnání s konkurencí (zachováno) -->
+    <PricingCompare background="warm-gray" />
+
+    <!-- FAQ -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Platba a balíčky</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Časté otázky k ceně</h2>
+        </div>
+
+        <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+          {
+            faq.map((f) => (
+              <article class="rounded-card bg-white p-6 shadow-card md:p-8">
+                <h3 class="font-serif text-h3 text-ink">{f.q}</h3>
+                <p class="mt-3 text-body text-ink-muted">{f.a}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+    </section>
+
+    <HandsCTA />
+  </main>
+</BaseLayout>

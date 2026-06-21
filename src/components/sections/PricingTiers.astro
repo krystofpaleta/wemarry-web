@@ -1,0 +1,139 @@
+---
+import { SITE } from "../../config/site";
+import {
+  PRICING_TIERS,
+  SAVES_BREAKDOWN,
+  SAVES_ESTIMATE_NOTE,
+  TIER_FEATURES,
+  FREE_INCLUDED,
+  TRUST_BADGES,
+} from "../../config/pricing";
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+const {
+  eyebrow = "Ceník",
+  title = "Vyberte si balíček",
+  subtitle = "Plánovač je vždy zdarma. Platíte až ve chvíli, kdy svatební web zveřejníte hostům.",
+} = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden py-20 md:py-28 lg:py-32">
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-warm-peach/25 via-cream to-white"></div>
+
+  <div class="container-site">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-tiny uppercase tracking-cta text-primary">{eyebrow}</p>
+      <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">{title}</h2>
+      {subtitle && <p class="mt-4 text-body text-ink-muted">{subtitle}</p>}
+    </div>
+
+    <!-- Karty -->
+    <div class="mx-auto mt-14 grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-7">
+      {
+        PRICING_TIERS.map((tier) => (
+          <article
+            class:list={[
+              "relative flex flex-col gap-6 rounded-card bg-white p-8 md:p-9",
+              tier.popular
+                ? "order-first shadow-prominent ring-1 ring-primary/30 lg:order-none lg:-translate-y-3"
+                : "shadow-card",
+            ]}
+          >
+            {tier.popular && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-pill bg-primary px-4 py-1 text-tiny uppercase tracking-cta text-white">
+                Nejoblíbenější
+              </span>
+            )}
+
+            <header class="flex flex-col gap-2">
+              <h3 class="font-serif text-h2 text-ink">{tier.name}</h3>
+              <p class="text-small text-ink-muted">{tier.desc}</p>
+            </header>
+
+            <div class="flex items-end gap-1">
+              <span class="font-serif text-hero text-ink leading-none">{tier.priceLabel}</span>
+            </div>
+
+            {/* Ušetřené hodiny + rozklad */}
+            <details class="group rounded-mini bg-cream px-4 py-3">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-2 text-small text-ink-body">
+                <span class="flex items-center gap-2">
+                  <svg viewBox="0 0 24 24" class="size-4 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                  Ušetří vám <strong class="font-semibold text-ink">~{tier.savesHours} h</strong> práce
+                </span>
+                <span class="text-tiny uppercase tracking-cta text-primary transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <ul class="mt-3 flex flex-col gap-1.5 border-t border-beige-border pt-3">
+                {SAVES_BREAKDOWN[tier.id].map((row) => (
+                  <li class="flex items-center justify-between gap-3 text-tiny text-ink-muted">
+                    <span>{row.label}</span>
+                    <span class="shrink-0 text-ink-soft">~{row.hours} h</span>
+                  </li>
+                ))}
+                <li class="mt-1 text-tiny text-ink-light">{SAVES_ESTIMATE_NOTE}</li>
+              </ul>
+            </details>
+
+            {/* Feature matrix */}
+            <ul class="flex flex-1 flex-col gap-3 border-t border-beige-border pt-5">
+              {
+                TIER_FEATURES.map((feat) => {
+                  const v = feat.values[tier.id];
+                  const on = v !== false;
+                  return (
+                    <li class:list={["flex items-start gap-3 text-small", on ? "text-ink-body" : "text-ink-light"]}>
+                      {on ? (
+                        <span aria-hidden="true" class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                          <svg viewBox="0 0 14 14" class="size-3 text-primary" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"/></svg>
+                        </span>
+                      ) : (
+                        <span aria-hidden="true" class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-ink/5">
+                          <svg viewBox="0 0 14 14" class="size-2.5 text-ink-light" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4L10 10M10 4L4 10"/></svg>
+                        </span>
+                      )}
+                      <span>
+                        {feat.label}
+                        {typeof v === "string" && <span class="text-ink-soft"> — {v}</span>}
+                      </span>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+
+            <a
+              href={SITE.app.signup}
+              class:list={[
+                "mt-auto w-full px-8 py-4 text-center",
+                tier.popular ? "btn-primary" : "btn-outline border-primary/40 text-primary hover:bg-primary/5",
+              ]}
+            >
+              {tier.ctaLabel}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Ke každému balíčku zdarma -->
+    <p class="mx-auto mt-10 max-w-2xl text-center text-small text-ink-muted">
+      Ke každému balíčku <strong class="text-ink">zdarma</strong>: {FREE_INCLUDED.join(" · ")}.
+    </p>
+
+    <!-- Trust badges -->
+    <div class="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3">
+      {
+        TRUST_BADGES.map((b) => (
+          <div class="flex flex-col items-center gap-1 text-center">
+            <p class="font-serif text-h4 text-ink">{b.title}</p>
+            <p class="text-small text-ink-soft">{b.sub}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

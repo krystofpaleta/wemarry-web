@@ -21,6 +21,7 @@ export default defineConfig({
     react(),
     // hreflang alternativy řešíme přímo v <head> (BaseLayout). Sitemap i18n
     // option je v kombinaci s prefixDefaultLocale:false bugnutá (reduce of undefined).
-    sitemap(),
+    // /cenik-new je skrytý náhled nového ceníku — ven ze sitemapy.
+    sitemap({ filter: (page) => !page.includes("/cenik-new") }),
   ],
 });
