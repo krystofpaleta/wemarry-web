@@ -4,6 +4,7 @@ dist/
 
 # sandbox artefakty (přerušená instalace/git — složky .nm_broken_* a .git_broken_* můžeš smazat)
 .nm_broken_*
+.astro_old_*
 .git_broken_*
 
 # dependencies

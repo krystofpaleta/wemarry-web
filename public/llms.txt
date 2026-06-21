@@ -1,0 +1,20 @@
+# WeMarry
+
+> Online svatební plánovač pro české páry: svatební web s RSVP, checklist úkolů, kalkulačka rozpočtu, zasedací pořádek a sdílená fotogalerie — vše na jednom místě.
+
+WeMarry provede páry celým plánováním svatby. Plánovač je zdarma; platí se jednorázově až ve chvíli, kdy svatební web zveřejníte hostům (od zdarma, Web + RSVP 1 490 Kč, Komplet 1 990 Kč). Součástí je 30denní garance vrácení peněz.
+
+## Hlavní stránky
+- [Jak to funguje](https://wemarry.cz/jak-to-funguje): plánovač krok za krokem od registrace po den svatby
+- [Šablony svatebního webu](https://wemarry.cz/sablony): designové šablony s RSVP formulářem
+- [Ceník](https://wemarry.cz/cenik): jednorázová platba bez měsíčních poplatků
+
+## Funkce
+- [Svatební web s RSVP](https://wemarry.cz/svatebni-web): vlastní web s potvrzením účasti a vícejazyčnou verzí
+- [Zasedací pořádek](https://wemarry.cz/zasedaci-poradek): drag & drop nástroj napojený na RSVP
+- [Svatební oznámení online](https://wemarry.cz/svatebni-oznameni): digitální pozvánky se sběrem odpovědí
+- [Svatební checklist](https://wemarry.cz/svatebni-checklist): úkoly od zkušené koordinátorky
+- [Svatební rozpočet](https://wemarry.cz/svatebni-rozpocet): kalkulačka nákladů a sledování výdajů
+
+## Blog
+- [Svatební blog](https://wemarry.cz/blog): rady, tipy a inspirace k plánování svatby

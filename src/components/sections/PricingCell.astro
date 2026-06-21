@@ -8,11 +8,11 @@ const { value, emphasis } = Astro.props;
 
 {
   value === true ? (
-    <span aria-label="Ano" class:list={["mx-auto flex size-6 items-center justify-center rounded-full", emphasis === "primary" ? "bg-primary/10" : "bg-sage/20"]}>
+    <span role="img" aria-label="Ano" class:list={["mx-auto flex size-6 items-center justify-center rounded-full", emphasis === "primary" ? "bg-primary/10" : "bg-sage/20"]}>
       <svg viewBox="0 0 14 14" class:list={["size-3.5", emphasis === "primary" ? "text-primary" : "text-sage-deep"]} fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"></path></svg>
     </span>
   ) : value === false ? (
-    <span aria-label="Ne" class="mx-auto flex size-6 items-center justify-center rounded-full bg-[#d97a6c]/10">
+    <span role="img" aria-label="Ne" class="mx-auto flex size-6 items-center justify-center rounded-full bg-[#d97a6c]/10">
       <svg viewBox="0 0 14 14" class="size-3 text-[#d97a6c]" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4L10 10M10 4L4 10"></path></svg>
     </span>
   ) : (

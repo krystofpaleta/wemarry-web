@@ -227,13 +227,18 @@ export default function ScrollFeatures() {
                   </ul>
 
                   <div className="mt-4 flex flex-wrap items-center gap-5">
-                    <a href={SITE.app.signup} className="btn-primary">
+                    <a
+                      href={SITE.app.signup}
+                      className="btn-primary"
+                      tabIndex={i === activeStep ? undefined : -1}
+                    >
                       Vyzkoušet zdarma
                     </a>
                     {step.href && (
                       <a
                         href={step.href}
                         className="text-micro uppercase tracking-cta text-primary transition-colors hover:text-primary-hover"
+                        tabIndex={i === activeStep ? undefined : -1}
                       >
                         Zjistit víc →
                       </a>
