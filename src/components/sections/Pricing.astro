@@ -38,19 +38,22 @@ const savesNote = "Odhad pro průměrnou svatbu ~60 hostů.";
   <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-warm-peach/30 via-cream to-white"></div>
 
   <div class="container-site">
-    <div class="mx-auto grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-      <!-- WeMarry card -->
-      <article class="relative flex flex-col gap-8 rounded-card bg-white p-8 shadow-prominent md:p-10 lg:p-12">
-        <header class="flex flex-col gap-4">
+    <div class="mx-auto grid max-w-4xl grid-cols-1 items-start gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-7">
+      <!-- WeMarry — zvýrazněná karta (Nejoblíbenější) -->
+      <article class="relative flex flex-col gap-6 rounded-card bg-white p-8 shadow-prominent ring-1 ring-primary/30 md:p-9 lg:-translate-y-3">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-pill bg-primary px-4 py-1 text-tiny uppercase tracking-cta text-white">
+          Nejoblíbenější
+        </span>
+
+        <header class="flex flex-col gap-2">
           <h3 class="font-serif text-h2 text-ink">WeMarry</h3>
-          <p class="text-body text-ink-muted">nejdříve zdarma, při zveřejnění webu za</p>
+          <p class="text-small text-ink-muted">Nejdříve zdarma, při zveřejnění webu zaplatíte jednorázově.</p>
         </header>
 
-        <div class="flex items-start">
-          <span class="font-serif text-hero text-ink leading-none md:text-hero-xl">1490</span>
-          <span class="ml-1 mt-2 text-h4 text-ink md:mt-3">Kč</span>
+        <div class="flex items-end gap-2">
+          <span class="font-serif text-hero text-ink leading-none">1 490 Kč</span>
+          <span class="mb-1 text-small text-ink-muted">jednorázově</span>
         </div>
-        <p class="-mt-4 text-body text-ink-muted">jednorázově</p>
 
         {/* Ušetřený čas + rozklad */}
         <details class="group rounded-mini bg-cream px-4 py-3">
@@ -74,14 +77,14 @@ const savesNote = "Odhad pro průměrnou svatbu ~60 hostů.";
           </ul>
         </details>
 
-        <ul class="mt-2 flex flex-col gap-4">
+        <ul class="flex flex-1 flex-col gap-3 border-t border-beige-border pt-5">
           {
             weMarryItems.map((label) => (
-              <li class="flex items-start gap-3">
-                <span aria-hidden="true" class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-primary/70 bg-white">
-                  <svg viewBox="0 0 14 14" class="size-3.5 text-primary" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"></path></svg>
+              <li class="flex items-start gap-3 text-small text-ink-body">
+                <span aria-hidden="true" class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <svg viewBox="0 0 14 14" class="size-3 text-primary" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"></path></svg>
                 </span>
-                <span class="text-body text-ink-body">{label}</span>
+                <span>{label}</span>
               </li>
             ))
           }
@@ -90,33 +93,32 @@ const savesNote = "Odhad pro průměrnou svatbu ~60 hostů.";
         <a href={SITE.app.signup} class="btn-primary mt-auto w-full px-8 py-4">Vyzkoušet zdarma</a>
       </article>
 
-      <!-- Ostatní řešení card -->
-      <article class="relative flex flex-col gap-8 rounded-card bg-white p-8 shadow-card md:p-10 lg:p-12">
-        <header class="flex flex-col gap-4">
-          <h3 class="font-serif text-h2 text-ink">Ostatní řešení</h3>
-          <p class="text-body text-ink-muted">ve srovnání s WeMarry</p>
+      <!-- Ostatní řešení — menší srovnávací karta -->
+      <article class="relative flex flex-col gap-5 rounded-card bg-white p-6 shadow-card md:p-7 lg:mt-4">
+        <header class="flex flex-col gap-1.5">
+          <h3 class="font-serif text-h3 text-ink">Ostatní řešení</h3>
+          <p class="text-small text-ink-muted">ve srovnání s WeMarry</p>
         </header>
 
-        <div class="flex items-start">
-          <span class="font-serif text-hero text-ink/80 leading-none md:text-hero-xl">10 000</span>
-          <span class="ml-1 mt-2 text-h4 text-ink/80 md:mt-3">Kč</span>
+        <div class="flex items-end gap-2">
+          <span class="font-serif text-h1 text-ink/70 leading-none">10 000 Kč</span>
+          <span class="mb-1 text-small text-ink-muted">klidně i víc</span>
         </div>
-        <p class="-mt-4 text-body text-ink-muted">klidně i víc</p>
 
-        <ul class="mt-2 flex flex-col gap-4">
+        <ul class="flex flex-1 flex-col gap-2.5 border-t border-beige-border pt-5">
           {
             othersItems.map((label) => (
-              <li class="flex items-start gap-3">
-                <span aria-hidden="true" class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-[#d97a6c]/70 bg-white">
-                  <svg viewBox="0 0 14 14" class="size-3 text-[#d97a6c]" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4L10 10M10 4L4 10"></path></svg>
+              <li class="flex items-start gap-3 text-small">
+                <span aria-hidden="true" class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-[#d97a6c]/10">
+                  <svg viewBox="0 0 14 14" class="size-2.5 text-[#d97a6c]" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4L10 10M10 4L4 10"></path></svg>
                 </span>
-                <span class="text-body text-ink-soft line-through decoration-ink-soft/60">{label}</span>
+                <span class="text-ink-soft line-through decoration-ink-soft/50">{label}</span>
               </li>
             ))
           }
         </ul>
 
-        <a href={SITE.app.signup} class="btn-outline mt-auto w-full border-primary/50 px-8 py-4 text-primary hover:bg-primary/5">
+        <a href={SITE.app.signup} class="btn-outline mt-auto w-full border-primary/40 px-6 py-3 text-primary hover:bg-primary/5">
           Vyzkoušet WeMarry
         </a>
       </article>
