@@ -27,7 +27,18 @@ export const SITE = {
     tiktok: "https://tiktok.com/@wemarry",
   },
 
-  contactEmail: "info@wemarry.cz",
+  contactEmail: "info@wemarry.io",
+
+  /** Provozovatel — fakturační a NAP údaje (Organization schema, Kontakt). */
+  company: {
+    legalName: "WeMarry s.r.o.",
+    ico: "22269347",
+    street: "Hořanská 1510",
+    city: "Praha",
+    postalCode: "130 00",
+    phone: "+420608003789",
+    phoneDisplay: "608 003 789",
+  },
 
   /**
    * Reálné Google hodnocení (Firemní profil) — jeden zdroj pravdy pro

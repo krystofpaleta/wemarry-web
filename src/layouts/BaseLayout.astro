@@ -52,13 +52,29 @@ const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE.name,
+  legalName: SITE.company.legalName,
   url: SITE.url,
   logo: absoluteUrl("/logo.png"),
+  email: SITE.contactEmail,
+  telephone: SITE.company.phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.company.street,
+    addressLocality: SITE.company.city,
+    postalCode: SITE.company.postalCode,
+    addressCountry: "CZ",
+  },
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "ICO",
+    value: SITE.company.ico,
+  },
   sameAs: [
     SITE.social.instagram,
     SITE.social.facebook,
     SITE.social.pinterest,
     SITE.social.tiktok,
+    SITE.rating.profileUrl,
   ],
 };
 const websiteSchema = {

@@ -6,8 +6,8 @@ const title = "Kontakt | WeMarry";
 const description =
   "Máte dotaz nebo návrh na zlepšení? Ozvěte se týmu WeMarry — odpovídáme do jednoho pracovního dne.";
 
-const phoneDisplay = "608 003 789";
-const phoneHref = "tel:+420608003789";
+const phoneDisplay = SITE.company.phoneDisplay;
+const phoneHref = `tel:${SITE.company.phone}`;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -48,9 +48,9 @@ const phoneHref = "tel:+420608003789";
       <div class="mx-auto mt-8 max-w-4xl rounded-card bg-cream p-8">
         <p class="text-tiny uppercase tracking-cta text-ink-soft">Fakturační údaje</p>
         <div class="mt-4 grid grid-cols-1 gap-x-8 gap-y-2 text-body text-ink-body sm:grid-cols-2">
-          <p><span class="text-ink-soft">Společnost:</span> WeMarry s.r.o.</p>
-          <p><span class="text-ink-soft">IČO:</span> 22269347</p>
-          <p class="sm:col-span-2"><span class="text-ink-soft">Sídlo:</span> Hořanská 1510, 130 00 Praha 3</p>
+          <p><span class="text-ink-soft">Společnost:</span> {SITE.company.legalName}</p>
+          <p><span class="text-ink-soft">IČO:</span> {SITE.company.ico}</p>
+          <p class="sm:col-span-2"><span class="text-ink-soft">Sídlo:</span> {SITE.company.street}, {SITE.company.postalCode} Praha 3</p>
         </div>
       </div>
 
