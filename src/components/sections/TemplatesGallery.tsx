@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { templates, type Template } from "../../data/templates";
 
 /**
@@ -11,114 +11,96 @@ import { templates, type Template } from "../../data/templates";
  * TODO: Placeholder gradienty nahradit reálnými fotkami z Figmy.
  */
 
-/** Kolik viewportů scrollu dostane každá šablona. */
-const STEP_VH = 70;
-
 export default function TemplatesGallery() {
-  const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const updateFromScroll = useCallback(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const viewportH = window.innerHeight;
-    const scrolled = -rect.top;
-    const scrollable = rect.height - viewportH;
-    if (scrollable <= 0) return;
-    const p = Math.max(0, Math.min(1, scrolled / scrollable));
-    const idx = Math.min(templates.length - 1, Math.floor(p * templates.length));
-    setActiveIndex(idx);
-  }, []);
+  // Posun carouselu na konkrétní kartu (šipky / tečky). Žádné navázání na scroll stránky.
+  const goTo = (i: number) => {
+    const clamped = Math.max(0, Math.min(templates.length - 1, i));
+    const track = trackRef.current;
+    if (track) {
+      const cards = track.querySelectorAll<HTMLElement>("[data-template-card]");
+      const card = cards[clamped];
+      if (card) {
+        const target = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+        track.scrollTo({ left: target, behavior: "smooth" });
+      }
+    }
+    setActiveIndex(clamped);
+  };
 
-  useEffect(() => {
-    updateFromScroll();
-    window.addEventListener("scroll", updateFromScroll, { passive: true });
-    window.addEventListener("resize", updateFromScroll);
-    return () => {
-      window.removeEventListener("scroll", updateFromScroll);
-      window.removeEventListener("resize", updateFromScroll);
-    };
-  }, [updateFromScroll]);
-
-  useEffect(() => {
+  // Při ručním swipu synchronizuj zvýrazněnou kartu podle středu viewportu tracku.
+  const handleTrackScroll = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
+    const center = track.scrollLeft + track.clientWidth / 2;
     const cards = track.querySelectorAll<HTMLElement>("[data-template-card]");
-    const card = cards[activeIndex];
-    if (!card) return;
-    const target = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
-    track.scrollTo({ left: target, behavior: "smooth" });
-  }, [activeIndex]);
-
-  const scrollToIndex = (i: number) => {
-    const sec = sectionRef.current;
-    if (!sec) return;
-    const clamped = Math.max(0, Math.min(templates.length - 1, i));
-    const rect = sec.getBoundingClientRect();
-    const absoluteTop = window.scrollY + rect.top;
-    const scrollable = sec.offsetHeight - window.innerHeight;
-    const targetProgress = (clamped + 0.5) / templates.length;
-    const targetScroll = absoluteTop + targetProgress * scrollable;
-    window.scrollTo({ top: targetScroll, behavior: "smooth" });
-  };
+    let best = 0;
+    let bestDist = Infinity;
+    cards.forEach((c, i) => {
+      const cc = c.offsetLeft + c.offsetWidth / 2;
+      const d = Math.abs(cc - center);
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
+    });
+    setActiveIndex((prev) => (prev === best ? prev : best));
+  }, []);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative isolate bg-gradient-to-b from-warm-peach/25 via-cream/40 to-white"
-      style={{ height: `${templates.length * STEP_VH}vh` }}
+      className="relative isolate bg-gradient-to-b from-warm-peach/25 via-cream/40 to-white py-20 md:py-28"
       aria-label="Šablony svatebních webů"
     >
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-10 md:py-12">
-        <div className="container-site">
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
-            <h2 className="font-serif text-h2 text-ink md:text-hero-sm">
-              5 minut práce a váš svatební web je hotový
-            </h2>
-            <p className="max-w-2xl text-small text-ink-muted md:text-body">
-              Díky praktickým funkcím proběhne vaše svatba hladce a bez stresu.
-              Aplikace pak sama automaticky sesbírá odpovědi o účasti vašich hostů.
-            </p>
-          </div>
+      <div className="container-site">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+          <h2 className="font-serif text-h2 text-ink md:text-hero-sm">
+            5 minut práce a váš svatební web je hotový
+          </h2>
+          <p className="max-w-2xl text-small text-ink-muted md:text-body">
+            Díky praktickým funkcím proběhne vaše svatba hladce a bez stresu.
+            Aplikace pak sama automaticky sesbírá odpovědi o účasti vašich hostů.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative mt-10 md:mt-12">
+        <div
+          ref={trackRef}
+          onScroll={handleTrackScroll}
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <div aria-hidden="true" className="shrink-0 basis-[10%] md:basis-[20%]" />
+          {templates.map((t, i) => (
+            <TemplateCard key={t.slug} template={t} isActive={i === activeIndex} />
+          ))}
+          <div aria-hidden="true" className="shrink-0 basis-[10%] md:basis-[20%]" />
+        </div>
+      </div>
+
+      <div className="container-site mt-8 flex flex-col items-center gap-4 md:mt-10">
+        <div className="flex items-center gap-2">
+          {templates.map((t, i) => (
+            <button
+              key={t.slug}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Přejít na šablonu ${t.name}`}
+              className={`h-1 rounded-full transition-all duration-300 ${
+                i === activeIndex ? "w-10 bg-primary" : "w-5 bg-ink/20 hover:bg-ink/40"
+              }`}
+            />
+          ))}
         </div>
 
-        <div className="relative mt-8 md:mt-10">
-          <div
-            ref={trackRef}
-            className="flex gap-4 overflow-x-hidden scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-          >
-            <div aria-hidden="true" className="shrink-0 basis-[10%] md:basis-[20%]" />
-            {templates.map((t, i) => (
-              <TemplateCard key={t.slug} template={t} isActive={i === activeIndex} />
-            ))}
-            <div aria-hidden="true" className="shrink-0 basis-[10%] md:basis-[20%]" />
-          </div>
-        </div>
-
-        <div className="container-site mt-6 flex flex-col items-center gap-4 md:mt-8">
-          <div className="flex items-center gap-2">
-            {templates.map((t, i) => (
-              <button
-                key={t.slug}
-                type="button"
-                onClick={() => scrollToIndex(i)}
-                aria-label={`Přejít na šablonu ${t.name}`}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === activeIndex ? "w-10 bg-primary" : "w-5 bg-ink/20 hover:bg-ink/40"
-                }`}
-              />
-            ))}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <CarouselBtn direction="prev" disabled={activeIndex === 0} onClick={() => scrollToIndex(activeIndex - 1)} />
-            <span className="text-tiny uppercase tracking-cta text-ink-soft">
-              {String(activeIndex + 1).padStart(2, "0")} / {String(templates.length).padStart(2, "0")}
-            </span>
-            <CarouselBtn direction="next" disabled={activeIndex === templates.length - 1} onClick={() => scrollToIndex(activeIndex + 1)} />
-          </div>
+        <div className="flex items-center gap-3">
+          <CarouselBtn direction="prev" disabled={activeIndex === 0} onClick={() => goTo(activeIndex - 1)} />
+          <span className="text-tiny uppercase tracking-cta text-ink-soft">
+            {String(activeIndex + 1).padStart(2, "0")} / {String(templates.length).padStart(2, "0")}
+          </span>
+          <CarouselBtn direction="next" disabled={activeIndex === templates.length - 1} onClick={() => goTo(activeIndex + 1)} />
         </div>
       </div>
     </section>
@@ -129,7 +111,7 @@ function TemplateCard({ template, isActive }: { template: Template; isActive: bo
   return (
     <article
       data-template-card
-      className={`group relative shrink-0 basis-[75%] overflow-hidden rounded-card transition-all duration-500 ease-out sm:basis-[52%] lg:basis-[44%] ${
+      className={`group relative shrink-0 basis-[75%] snap-center overflow-hidden rounded-card transition-all duration-500 ease-out sm:basis-[52%] lg:basis-[44%] ${
         isActive ? "opacity-100 shadow-prominent scale-100" : "opacity-60 shadow-card scale-[0.88]"
       }`}
     >
