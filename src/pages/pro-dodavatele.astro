@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+const title = "Pro svatební dodavatele — oslovte páry plánující svatbu | WeMarry";
+const description =
+  "Staňte se součástí svatebního plánovače WeMarry, který každý měsíc využívají stovky párů. Buďte vidět v katalogu dodavatelů přesně tam, kde vás zákazníci hledají.";
+
+const heroBenefits = [
+  "Přímé propojení s páry plánujícími svatbu",
+  "Možnost prezentace vaší nabídky",
+  "Pokročilé cílení skrz upozornění či e-mailing",
+];
+
+const listed = [
+  "Získejte více poptávek — ukažte svou nabídku těm, kteří právě hledají služby jako ty vaše.",
+  "Inspirujte budoucí novomanžele — představte svou práci tak, aby si vás hned zapamatovali.",
+  "Efektivní cílení — získejte přístup k páru, který hledá přesně to, co nabízíte.",
+];
+
+const profile = [
+  "Poutavý popis služeb — sdělte svůj příběh a ukažte svou vášeň pro svatby.",
+  "Fotogalerie a reference — přidejte ukázky své práce, které přesvědčí na první pohled.",
+  "Jednoduchý kontakt — umožněte klientům vás snadno oslovit díky jasně viditelným údajům.",
+];
+
+const vendorMailto =
+  "mailto:info@wemarry.io?subject=Dodavatelsk%C3%BD%20profil%20WeMarry";
+
+const Check = `<svg viewBox="0 0 14 14" class="size-3.5 text-primary" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"/></svg>`;
+---
+
+<BaseLayout title={title} description={description} transparentHeader={false}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-sage/30 via-cream to-warm-peach/30"></div>
+      <div class="container-site flex flex-col items-center pb-16 pt-40 text-center md:pt-48">
+        <p class="mb-5 text-tiny uppercase tracking-cta text-primary">Pro svatební dodavatele</p>
+        <h1 class="max-w-3xl font-serif text-hero-sm text-ink md:text-hero lg:text-hero-xl">
+          Oslovte více snoubenců, kteří <span class="italic">plánují svatbu</span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-body text-ink-muted">
+          Buďte součástí našeho svatebního plánovače, který každý měsíc využívají stovky
+          párů. Díky pokročilým funkcím a intuitivnímu rozhraní budou vaše služby přesně
+          tam, kde je zákazníci hledají.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href={vendorMailto} class="btn-primary">Chci být v katalogu</a>
+          <a href="/kontakt" class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">
+            Kontaktovat nás →
+          </a>
+        </div>
+
+        <ul class="mt-10 flex flex-col items-center gap-2 text-small text-ink-body sm:flex-row sm:gap-8">
+          {
+            heroBenefits.map((b) => (
+              <li class="flex items-center gap-2">
+                <span aria-hidden="true" class="flex size-5 items-center justify-center rounded-full bg-primary/10" set:html={Check} />
+                {b}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- Buďte vidět v seznamu -->
+    <section class="container-site py-20 md:py-28">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="font-serif text-hero-sm text-ink md:text-hero">Buďte vidět v našem seznamu dodavatelů</h2>
+        <p class="mt-5 text-body text-ink-muted">
+          Váš profil se zobrazí v přehledném seznamu, kde si jej budoucí novomanželé
+          mohou snadno vyhledat podle kategorie nebo lokality.
+        </p>
+        <ul class="mt-8 flex flex-col gap-4">
+          {
+            listed.map((l) => (
+              <li class="flex items-start gap-3">
+                <span aria-hidden="true" class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10" set:html={Check} />
+                <span class="text-body text-ink-body">{l}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 text-body text-ink-muted">
+          Neztrácejte čas s obecným marketingem. S námi budete přímo tam, kde vás
+          zákazníci hledají. Připojte se do našeho katalogu a dejte vědět, že jste tady pro ně!
+        </p>
+      </div>
+    </section>
+
+    <!-- Detail profilu -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-cream"></div>
+      <div class="container-site">
+        <div class="mx-auto max-w-3xl">
+          <h2 class="font-serif text-hero-sm text-ink md:text-hero">Zaujměte detailem svého profilu</h2>
+          <p class="mt-5 text-body text-ink-muted">
+            Ukažte, co dělá vaše služby jedinečnými! Na detailní kartě dodavatele
+            můžete představit vše, co novomanželé potřebují vědět.
+          </p>
+          <ul class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-1">
+            {
+              profile.map((l) => (
+                <li class="flex items-start gap-3 rounded-card bg-white p-5 shadow-card">
+                  <span aria-hidden="true" class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10" set:html={Check} />
+                  <span class="text-body text-ink-body">{l}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-6 text-body text-ink-muted">
+            Váš profil je víc než jen vizitka — je to první krok k získání nových
+            zakázek. Zaujměte a nechte své služby vyniknout!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Závěrečné CTA -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#0c948c] to-[#0a7d76]"></div>
+      <div class="container-site text-center">
+        <h2 class="mx-auto max-w-2xl font-serif text-hero-sm text-white md:text-hero">
+          Staňte se součástí našeho katalogu
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-body text-white/85">
+          Zaujala vás nabídka a chcete oslovit více snoubenců? Napište nám pro více informací.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href={vendorMailto} class="inline-flex items-center justify-center rounded-pill bg-white px-8 py-4 text-micro font-medium uppercase tracking-cta text-primary transition-colors hover:bg-white/90">
+            Chci být v katalogu
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
