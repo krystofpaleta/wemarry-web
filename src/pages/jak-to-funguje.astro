@@ -8,12 +8,14 @@ const description =
   "Od registrace po den svatby: jak vám svatební plánovač WeMarry krok za krokem pomůže s webem, RSVP, rozpočtem i zasedacím pořádkem.";
 
 const steps = [
-  { n: "01", eyebrow: "Registrace", title: "Zaregistrujte se za pár vteřin", description: "Zadáte jméno, e-mail a datum svatby. Hotovo — už žádné papírové deníky ani 15 různých aplikací.", bullets: ["Stačí e-mail, žádná kreditka", "Přístup z mobilu i počítače", "První svatební checklist je připravený hned"] },
-  { n: "02", eyebrow: "Svatební web", title: "Vytvořte svůj svatební web", description: "Vyberte si z ověřených šablon, přidejte foto, adresu a klíčové informace. Všechno na vlastní doméně.", bullets: ["6 designových šablon na výběr", "Vícejazyčná verze pro zahraniční hosty", "Vlastní doména ve stylu novakovi.cz"] },
-  { n: "03", eyebrow: "Pozvánky & RSVP", title: "Rozešlete pozvánky a sesbírejte odpovědi", description: "Místo neustálých telefonátů tetičkám pošlete krásnou digitální pozvánku s RSVP formulářem.", bullets: ["Hromadné pozvánky e-mailem i odkazem", "Automatický sběr odpovědí včetně alergií", "Export do tabulek pro catering a sedák"] },
-  { n: "04", eyebrow: "Plánování", title: "Mějte náklady a úkoly pod kontrolou", description: "Checklist od zkušené koordinátorky, kalkulačka nákladů do poslední koruny a katalog ověřených dodavatelů.", bullets: ["Přednastavený checklist s termíny", "Kalkulačka: rozpočet vs. reálné výdaje", "Doporučení fotografů, floristů, cateringu"] },
-  { n: "05", eyebrow: "Zasedací pořádek", title: "Rozsaďte hosty za pár minut", description: "Drag & drop nástroj s napojením na RSVP. Všechny tvary stolů, export a tisk.", bullets: ["Napojení na seznam hostů z RSVP", "Kulaté, obdélníkové i královské tabule", "Tisk a PDF export pro catering"] },
-  { n: "06", eyebrow: "Den svatby", title: "Sdílejte fotky v reálném čase", description: "V den D se váš web promění v živou galerii. Hosté nahrávají fotky přes QR kód, vy je máte všechny na jednom místě.", bullets: ["QR kód pro rychlé nahrávání z mobilu", "Profesionální fotky od fotografa doplníte později", "Dostupné kdykoliv a kdekoliv"] },
+  { n: "01", eyebrow: "Registrace", title: "Vytvořte si účet ve WeMarry", description: "Stačí vám e-mailová adresa a je to. Ihned po registraci se otevře online aplikace a vy můžete začít plánovat.", bullets: ["Stačí e-mail, žádná kreditka", "Aplikace se otevře hned po registraci", "Plánujete z mobilu i počítače"] },
+  { n: "02", eyebrow: "Svatební web", title: "Naklikejte si svůj svatební web", description: "V editoru postupně zadáte informace o své svatbě. Na výběr máte 3 responzivní šablony, které si barevně doladíte podle stylu vaší svatby.", bullets: ["3 responzivní šablony, barevně laditelné", "Úvodní foto, lokalita, program i dress code", "Součástí je RSVP formulář pro potvrzení účasti"] },
+  { n: "03", eyebrow: "Publikace", title: "Zveřejněte svůj web za 1 490 Kč", description: "Jakmile jste s podobou webu spokojení, můžete ho zveřejnit. Publikace na dobu 18 měsíců stojí 1 490 Kč.", bullets: ["Platba kartou nebo přes Apple Pay", "Web upravíte kdykoliv i po zveřejnění", "Vyberete doménu (novakovi.wemarry.cz) nebo propojíte vlastní"] },
+  { n: "04", eyebrow: "Pozvánky & RSVP", title: "Rozešlete pozvánky online", description: "V sekci Pozvánky rozešlete pozvánky odkazem na web nebo přímo do e-mailových schránek hostů. Ti na webu najdou vše podstatné.", bullets: ["RSVP formulář je součástí každého webu", "Sběr preferencí hostů (dieta, písničky) automaticky", "Nevyplněným hostům se WeMarry sám připomene"] },
+  { n: "05", eyebrow: "Komunikace", title: "Komunikaci s hosty řeší WeMarry za vás", description: "Díky automatickému ukládání odpovědí z RSVP si ušetříte desítky opakujících se telefonátů. Informace jsou hostům dostupné 24/7.", bullets: ["Web v několika jazykových mutacích", "Odpovědi hostů snadno exportujete do tabulky", "Seznam darů, odkazy na produkty i QR finanční dar"] },
+  { n: "06", eyebrow: "Rozpočet", title: "Ohlídejte si rozpočet s kalkulačkou", description: "Naplánujte si svatební rozpočet podle svých možností a pak sledujte všechny výdaje a platby. Jednotlivé položky průběžně upravujete.", bullets: ["Graficky znázorněný rozpočet a jeho čerpání", "Přehled o stavu proběhlých plateb", "Méně mentální zátěže při plánování"] },
+  { n: "07", eyebrow: "Zasedací pořádek", title: "Rozvrhněte si zasedací pořádek hostů", description: "V interaktivním nástroji přesouváte stoly a přidáváte či ubíráte židle, dokud nebude mít každý host pocit, že právě jeho místo je to nejlepší.", bullets: ["Všechny změny vidíte okamžitě", "Všechny tvary a velikosti stolů", "Plán snadno stáhnete a vytisknete"] },
+  { n: "08", eyebrow: "Den svatby", title: "Sdílejte momentky se svými nejbližšími", description: "V den svatby se váš web změní na online galerii, kam hosté během dne sdílejí dojemné momentky přímo z mobilu. Profesionální snímky doplníte později.", bullets: ["Hosté sdílejí fotky snadno přes QR kód", "K fotkám se dostanete kdykoliv a kdekoliv", "Žádné zdlouhavé posílání fotek e-mailem"] },
 ];
 
 const faq = [
@@ -49,7 +51,7 @@ const faqSchema = {
             <span class="not-italic"> Provedeme vás celou cestou.</span>
           </h1>
           <p class="mt-6 max-w-xl text-body text-white/85">
-            Šest kroků, které promění chaos ve svatbu, na jakou jste čekali.
+            Osm kroků, které promění chaos ve svatbu, na jakou jste čekali.
             Bez excelů, bez telefonátů tetičkám a bez stresu.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-4 md:mt-10">
@@ -66,7 +68,7 @@ const faqSchema = {
     <section id="kroky" class="relative isolate overflow-hidden bg-cream py-20 md:py-28 lg:py-32">
       <div class="container-site">
         <div class="mx-auto max-w-2xl text-center">
-          <p class="text-tiny uppercase tracking-cta text-primary">Šest kroků</p>
+          <p class="text-tiny uppercase tracking-cta text-primary">Krok za krokem</p>
           <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">Jak WeMarry funguje v praxi</h2>
           <p class="mt-4 text-body text-ink-muted">
             Každý krok je navržený tak, aby vám ušetřil čas a pár jasně navigoval k dalšímu kroku.
