@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+const title = "Svatební web — jak a proč ho vytvořit? | WeMarry";
+const description =
+  "Svatební web je stále populárnějším pomocníkem při plánování svatby. Zjistěte, jak a proč byste ho měli mít — a co na něj rozhodně patří.";
+
+const why = [
+  "Všechny důležité informace o vaší svatbě na jednom místě",
+  "Ušetříte spoustu práce při komunikaci s pozvanými hosty",
+  "Přehled o vašich hostech díky formuláři potvrzení účasti",
+  "Levnější než tištěné svatební oznámení",
+  "Ekologičtější než tištěné oznámení",
+];
+
+const inspiration = [
+  "Datum, čas a místo obřadu",
+  "Informace o parkování, ubytování či odvozu",
+  "Dresscode včetně obuvi (ne vždy se hodí podpatky)",
+  "Svatební dary — nebojte se hostům sdělit, jaké přijdou vhod",
+  "Svatební menu",
+  "Svatební program — aby hosté věděli, co je čeká a jak den proběhne",
+  "Společné fotografie — pro ještě osobnější dojem",
+];
+---
+
+<BaseLayout title={title} description={description} transparentHeader={false}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-warm-peach/30 via-cream to-sage/30"></div>
+      <div class="container-site flex flex-col items-center pb-14 pt-40 text-center md:pt-48">
+        <p class="mb-4 text-tiny uppercase tracking-cta text-primary">Svatební web</p>
+        <h1 class="max-w-3xl font-serif text-hero-sm text-ink md:text-hero lg:text-hero-xl">
+          Jak a proč vytvořit svatební web?
+        </h1>
+        <p class="mt-6 max-w-2xl text-body text-ink-muted">
+          V dnešním digitálním světě je svatební web stále populárnějším trendem mezi
+          snoubenci. Je to skvělý způsob, jak sdílet informace o vašem velkém dni
+          s blízkými a přáteli. Proč ho vytvořit a jak na to?
+        </p>
+      </div>
+    </section>
+
+    <section class="container-site py-16 md:py-24">
+      <div class="mx-auto flex max-w-3xl flex-col gap-12">
+        <div>
+          <h2 class="font-serif text-h2 text-ink">Svatební web — co to je?</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Svatební web je čím dál populárnější doplněk či úplná náhrada svatebního
+            oznámení. V podstatě jde o online svatební oznámení, na které se bez problému
+            vejdou veškeré informace, které potřebujete hostům předat, aby váš den proběhl
+            hladce. Navíc za vás dokáže získat důležité odpovědi a reálně pomoci
+            s plánováním svatby.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-h2 text-ink">5× proč mít svatební web</h2>
+          <ul class="mt-6 flex flex-col gap-3">
+            {
+              why.map((w) => (
+                <li class="flex items-start gap-3 text-body text-ink-body">
+                  <span aria-hidden="true" class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                    <svg viewBox="0 0 14 14" class="size-3.5 text-primary" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"/></svg>
+                  </span>
+                  {w}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-h2 text-ink">Inspirace pro váš svatební web</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Fantazii se meze nekladou, ale myslete na to, že svatební web je především
+            praktický pomocník, ne umělecké dílo. Na své stránky doporučujeme napsat:
+          </p>
+          <ul class="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
+            {
+              inspiration.map((x) => (
+                <li class="flex items-start gap-3 rounded-card bg-cream p-4 text-body text-ink-body">
+                  <span aria-hidden="true" class="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
+                  {x}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-h2 text-ink">Jak vytvořit svatební web a na co myslet?</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Na jedné straně můžete web vytvořit nástrojem jako WordPress a podobné redakční
+            systémy. Kromě toho, že jde o technicky náročnější disciplínu, budete muset řešit
+            doménu, webhosting i samotnou strukturu a vzhled — a zabere vám to spoustu času.
+            Nehledě na to, že tyto systémy automaticky neobsahují dotazník, kam vám hosté
+            potvrdí účast a sdělí své požadavky.
+          </p>
+          <p class="mt-4 text-body text-ink-muted">
+            Na druhé straně je WeMarry, které vzniklo proto, abyste svatební web vytvořili
+            jednoduše. Nemusíte řešit žádný webhosting ani doménu, strukturu jsme vymysleli
+            za vás — v podstatě stačí vyplnit informace, vybrat šablonu a je to. Klidně
+            i z mobilu. Dotazník je součástí každého webu a veškeré informace pak máte
+            přehledně na nástěnce svého účtu.
+          </p>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-16 max-w-3xl rounded-card bg-gradient-to-br from-[#0c948c] to-[#0a7d76] p-8 text-center md:p-10">
+        <h2 class="font-serif text-h2 text-white">Vytvořit svatební web nebylo nikdy jednodušší</h2>
+        <p class="mt-3 text-body text-white/85">
+          WeMarry vzniklo proto, aby tvorba svatebního webu byla opravdu jednoduchá — klidně i z mobilu.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+          <a href={SITE.app.signup} class="inline-flex items-center justify-center rounded-pill bg-white px-8 py-4 text-micro font-medium uppercase tracking-cta text-primary transition-colors hover:bg-white/90">
+            Vyzkoušet zdarma
+          </a>
+          <a href="/navod-k-vytvoreni-svatebniho-webu" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">
+            Návod krok za krokem →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,143 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+const title = "Jak vytvořit svatební web? Návod krok za krokem | WeMarry";
+const description =
+  "Přečtěte si, jak vytvořit svatební web na WeMarry — registrace, vyplnění informací, výběr šablony, RSVP formulář, platba, doména a rozeslání pozvánek. Krok za krokem.";
+
+type Step = { title: string; paras: string[]; bullets?: { label: string; text: string }[] };
+
+const steps: Step[] = [
+  {
+    title: "Dokončení registrace",
+    paras: [
+      "Abychom mohli vytvořit web, je potřeba se zaregistrovat. Stačí kliknout na tlačítko Zaregistrovat se v pravém horním rohu, nebo na tlačítko Vyzkoušet uprostřed úvodní stránky.",
+      "Vyplňte e-mail a dokončete registraci. Vložené údaje můžete později kdykoliv upravit.",
+    ],
+  },
+  {
+    title: "Vyplnění informací",
+    paras: [
+      "Úprava webu je velmi intuitivní. V levé části obrazovky uvidíte editor rozdělený do jednotlivých sekcí, v pravé části aktuální náhled webu.",
+      "Druhý jazyk webu přidáte jednoduše v záložce Nastavení. Jazyková mutace se nepřekládá automaticky, takže ji vyplníte sami.",
+      "Fotografie nahrajete přes tlačítko Nahrát, z jakéhokoliv zařízení — nemusíte je přesouvat do počítače. Po vyplnění informací nezapomeňte kliknout na Uložit změny.",
+    ],
+  },
+  {
+    title: "Výběr šablony a úpravy vzhledu",
+    paras: [
+      "Pokud chcete vyzkoušet, jak by váš web vypadal v jiném kabátě, můžete kdykoliv změnit šablonu v záložce Vzhled. Zde také měníte barvy a další prvky.",
+      "Vzhled webu lze upravit kdykoliv — i po jeho zveřejnění a rozeslání hostům.",
+    ],
+  },
+  {
+    title: "Svatební dary",
+    paras: [
+      "V sekci svatebních darů můžete dát hostům vědět, co byste si přáli. Máte několik možností:",
+    ],
+    bullets: [
+      { label: "QR platba", text: "stále častěji finanční dary nahrazují hmotné. Nahrajete na web QR kód s platbou vygenerovanou ve svém bankovnictví, takže máte jistotu, že peníze přijdou tam, kam mají." },
+      { label: "Seznam darů", text: "můžete vypsat seznam hmotných darů, které by vám udělaly radost." },
+    ],
+  },
+  {
+    title: "Formulář potvrzení účasti (RSVP)",
+    paras: [
+      "Nejdříve nastavte heslo formuláře v záložce Nastavení. Heslo je povinné a z bezpečnostních důvodů ho nelze vypnout. Aby ho hosté nemuseli zadávat, můžete jim poslat speciální odkaz, který formulář automaticky odemkne (najdete ho po zaplacení na Nástěnce pod QR kódem).",
+      "V editoru formuláře máte Vestavěné i Vlastní otázky — vyplňte ty, které vám pomohou s plánováním. Celkový počet potvrzených hostů a dětí uvidíte na Nástěnce, jednotlivé odpovědi v sekci Pozvánky.",
+    ],
+  },
+  {
+    title: "Platba a výběr domény",
+    paras: [
+      "Tvorbu webu si vyzkoušíte zdarma. Až ho budete chtít sdílet s hosty, je potřeba web zveřejnit kliknutím na Zaplatit — platíte jednoduše kartou. Po zaplacení uvidíte možnost Vybrat doménu:",
+    ],
+    bullets: [
+      { label: "Doména WeMarry", text: "vyberete předponu a hlavní doménu, na které bude web dostupný, např. modern.wemarry.io." },
+      { label: "Vlastní doména", text: "pokud máte koupenou vlastní doménu (např. novakovi.cz), uvidíte návod na změnu DNS záznamů, po které bude web dostupný na této adrese." },
+    ],
+  },
+  {
+    title: "Rozeslání pozvánek",
+    paras: [
+      "Web jste vyplnili, zaplatili a teď byste rádi pozvali hosty. Máte několik možností:",
+    ],
+    bullets: [
+      { label: "Odkaz bez hesla", text: "pošlete hostům obyčejný odkaz (např. modern.wemarry.io) — budou ale potřebovat heslo, aby potvrdili účast." },
+      { label: "Odkaz s heslem", text: "po zaplacení na Nástěnce uvidíte odkaz s heslem v URL — formulář se odemkne automaticky a hosté ho nemusí vyplňovat." },
+      { label: "Rozeslání na e-mail", text: "pokud znáte e-mailové adresy hostů, můžete pozvánky rozeslat přímo z aplikace." },
+    ],
+  },
+  {
+    title: "Nástěnka",
+    paras: [
+      "Nástěnka funguje jako přehled a rozcestník do dalších sekcí aplikace. Najdete zde odpočet do svatby, přehled o hostech, to-do list, QR kód ke stažení i odkaz, se kterým hosté nemusí zadávat heslo k formuláři.",
+      "QR kód či odkaz na svatební web můžete přidat i na tištěné svatební oznámení, aby hosté věděli, kde najdou všechny důležité detaily.",
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} transparentHeader={false}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-sage/30 via-cream to-warm-peach/30"></div>
+      <div class="container-site flex flex-col items-center pb-14 pt-40 text-center md:pt-48">
+        <p class="mb-4 text-tiny uppercase tracking-cta text-primary">Návod</p>
+        <h1 class="max-w-3xl font-serif text-hero-sm text-ink md:text-hero lg:text-hero-xl">
+          Jak vytvořit svatební web?
+        </h1>
+        <p class="mt-6 max-w-2xl text-body text-ink-muted">
+          Krátká ukázka toho, jak jednoduché je vytvořit svatební web na platformě
+          WeMarry a jak využít jeho potenciál na maximum.
+        </p>
+      </div>
+    </section>
+
+    <!-- Kroky -->
+    <section class="container-site py-16 md:py-24">
+      <ol class="mx-auto flex max-w-3xl flex-col gap-10">
+        {
+          steps.map((step, i) => (
+            <li class="flex gap-5">
+              <span aria-hidden="true" class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 font-serif text-h4 text-primary">
+                {i + 1}
+              </span>
+              <div class="flex-1">
+                <h2 class="font-serif text-h3 text-ink">{step.title}</h2>
+                {step.paras.map((p) => (
+                  <p class="mt-3 text-body text-ink-muted">{p}</p>
+                ))}
+                {step.bullets && (
+                  <ul class="mt-4 flex flex-col gap-2">
+                    {step.bullets.map((b) => (
+                      <li class="flex items-start gap-3 text-body text-ink-body">
+                        <span aria-hidden="true" class="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
+                        <span><strong class="text-ink">{b.label}</strong> — {b.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="mx-auto mt-16 max-w-3xl rounded-card bg-cream p-8 text-center md:p-10">
+        <h2 class="font-serif text-h2 text-ink">Jednodušší to být nemůže</h2>
+        <p class="mt-3 text-body text-ink-muted">
+          Vytvořte své online svatební oznámení ještě dnes a usnadněte si plánování veselky.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+          <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+          <a href="/svatebni-web-jak-a-proc" class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">
+            Proč mít svatební web →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

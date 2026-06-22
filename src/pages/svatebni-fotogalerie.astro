@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+const title = "Sdílená svatební fotogalerie s hosty | WeMarry";
+const description =
+  "Vytvořte si online svatební fotogalerii. Hosté nahrávají fotky přes QR kód a vy sdílíte snímky od svatebního fotografa — vše na vašem svatebním webu, na jednom místě.";
+
+const features = [
+  "Sdílení a nahrávání fotek přes QR kód",
+  "Dostupné kdykoliv a kdekoliv",
+  "Vše na jedné adrese — na vašem svatebním webu",
+];
+---
+
+<BaseLayout title={title} description={description} transparentHeader={false}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-warm-peach/30 via-cream to-sage/30"></div>
+      <div class="container-site grid items-center gap-12 pb-16 pt-40 md:pt-48 lg:grid-cols-2 lg:gap-16">
+        <div class="max-w-xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-primary">Sdílená fotogalerie</p>
+          <h1 class="font-serif text-hero-sm text-ink md:text-hero lg:text-hero-xl">
+            Sdílená svatební <span class="italic">fotogalerie</span>
+          </h1>
+          <p class="mt-6 text-body text-ink-muted">
+            Získejte spontánní momentky od přátel pomocí QR kódu a později sdílejte
+            profesionální snímky od svého fotografa. To vše na vašem svatebním webu,
+            na jednom místě.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+            <a href="/svatebni-web" class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">
+              Svatební web →
+            </a>
+          </div>
+          <ul class="mt-8 flex flex-col gap-3">
+            {
+              features.map((f) => (
+                <li class="flex items-center gap-3 text-body text-ink-body">
+                  <span aria-hidden="true" class="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                    <svg viewBox="0 0 14 14" class="size-3.5 text-primary" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"/></svg>
+                  </span>
+                  {f}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/img/product/gallery.png"
+            alt="Sdílená svatební fotogalerie WeMarry — nahrávání fotek hostů přes QR kód"
+            loading="lazy"
+            class="w-full rounded-card shadow-prominent"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Fotky od hostů -->
+    <section class="container-site py-20 md:py-28">
+      <div class="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h2 class="font-serif text-h2 text-ink">Získejte fotografie od vašich hostů</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Už nemusíte žádat hosty, aby vám posílali fotky jednotlivě. S fotogalerií máte
+            všechny záběry z různých úhlů na jednom místě. Ve své galerii vytvoříte album,
+            kliknete na „Získat fotky od ostatních" a objeví se QR kód i obyčejný odkaz.
+            Ten stačí sdílet s hosty — a ti už jen nahrají fotky, které chtějí sdílet.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-serif text-h2 text-ink">Přidejte profesionální fotky</h2>
+          <p class="mt-4 text-body text-ink-muted">
+            Vaši hosté ocení i možnost vidět oficiální snímky. Přidejte do galerie
+            profesionální fotografie od svatebního fotografa a vytvořte tak kompletní
+            sbírku těch nejdůležitějších momentů — všechno přehledně na jedné adrese.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#0c948c] to-[#0a7d76]"></div>
+      <div class="container-site text-center">
+        <h2 class="mx-auto max-w-2xl font-serif text-hero-sm text-white md:text-hero">
+          Získejte svatební galerii
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-body text-white/85">
+          Sdílejte radost a vzpomínky se svou svatební fotogalerií.
+        </p>
+        <div class="mt-8">
+          <a href={SITE.app.signup} class="inline-flex items-center justify-center rounded-pill bg-white px-8 py-4 text-micro font-medium uppercase tracking-cta text-primary transition-colors hover:bg-white/90">
+            Vyzkoušet zdarma
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
