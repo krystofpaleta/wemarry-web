@@ -27,14 +27,18 @@ const productSchema = {
   url: SITE.url,
   offers: {
     "@type": "Offer",
-    price: "1490",
+    price: String(SITE.priceCzk),
     priceCurrency: "CZK",
+    availability: "https://schema.org/InStock",
+    url: SITE.url + "/cenik",
     description: "Jednorázová platba při zveřejnění svatebního webu.",
   },
   aggregateRating: {
     "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "248",
+    ratingValue: String(SITE.rating.value),
+    ratingCount: String(SITE.rating.count),
+    bestRating: "5",
+    worstRating: "1",
   },
 };
 ---

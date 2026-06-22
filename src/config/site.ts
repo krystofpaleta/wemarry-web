@@ -29,6 +29,19 @@ export const SITE = {
 
   contactEmail: "info@wemarry.cz",
 
+  /**
+   * Reálné Google hodnocení (Firemní profil) — jeden zdroj pravdy pro
+   * strukturovaná data i viditelný odznak v UI. Drž v souladu s Google profilem.
+   */
+  rating: {
+    value: 4.8,
+    count: 76,
+    profileUrl: "https://g.page/r/CePgbgdGXelDEAI",
+  },
+
+  /** Aktuální jednorázová cena (CZK) — musí ladit s viditelnou cenou na webu. */
+  priceCzk: 1490,
+
   /** Analytics — GA4 measurement ID. Doplň reálné G-XXXX a načte se v BaseLayout. */
   ga4Id: "G-XXXXXXXXXX",
 } as const;

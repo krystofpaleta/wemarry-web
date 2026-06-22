@@ -104,5 +104,5 @@ export const FREE_INCLUDED = [
 export const TRUST_BADGES = [
   { title: "30 dní záruka", sub: "Vrátíme peníze bez otázek" },
   { title: "Přes 2 000 svateb", sub: "Páry už spustily svůj web" },
-  { title: "4,9 ★ na Google", sub: "Ze stovek recenzí" },
+  { title: "4,8 ★ na Google", sub: "Ze 76 recenzí" },
 ];

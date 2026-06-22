@@ -1,5 +1,7 @@
 ---
 import { SITE } from "../../config/site";
+
+const ratingValue = String(SITE.rating.value).replace(".", ",");
 ---
 
 <section class="relative isolate overflow-hidden">
@@ -28,6 +30,28 @@ import { SITE } from "../../config/site";
           Jak to funguje ↓
         </a>
       </div>
+
+      <!-- Reálné Google hodnocení s proklikem na Firemní profil -->
+      <a
+        href={SITE.rating.profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 inline-flex items-center gap-2.5 text-small text-white/85 transition-colors hover:text-white"
+      >
+        <span class="flex items-center gap-0.5 text-[#fbbf24]" aria-hidden="true">
+          {
+            [0, 1, 2, 3, 4].map(() => (
+              <svg viewBox="0 0 20 20" class="size-4" fill="currentColor">
+                <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.78L10 14.77l-5.2 2.73.99-5.78-4.21-4.1 5.82-.85L10 1.5z" />
+              </svg>
+            ))
+          }
+        </span>
+        <span>
+          <strong class="font-semibold text-white">{ratingValue}</strong>
+          {" · "}{SITE.rating.count} hodnocení na&nbsp;Googlu
+        </span>
+      </a>
     </div>
   </div>
 </section>

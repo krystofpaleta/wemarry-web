@@ -1,4 +1,6 @@
 ---
+import { SITE } from "../../config/site";
+
 const mediaLogos = [
   { name: "Novinky.cz", src: "/img/press/novinky.png" },
   { name: "Svatbona", src: "/img/press/svatbona.png" },
@@ -6,6 +8,8 @@ const mediaLogos = [
   { name: "Fintree", src: "/img/press/fintree.png" },
   { name: "Aha!", src: "/img/press/aha.png" },
 ];
+
+const ratingValue = String(SITE.rating.value).replace(".", ",");
 ---
 
 <section class="bg-white py-14 md:py-20">
@@ -38,7 +42,9 @@ const mediaLogos = [
       </div>
       <p class="flex items-center gap-2 text-small text-ink-muted">
         <img src="/img/google.svg" alt="Google" class="h-4 w-auto" loading="lazy" />
-        <span class="font-semibold text-ink">4,9 / 5</span> na základě 248 recenzí spokojených párů
+        <a href={SITE.rating.profileUrl} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-ink">
+          <span class="font-semibold text-ink">{ratingValue} / 5</span> na základě {SITE.rating.count} recenzí spokojených párů
+        </a>
       </p>
     </div>
   </div>
