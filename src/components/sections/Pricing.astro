@@ -19,6 +19,19 @@ const othersItems = [
   "Vlastní doména např. novakovi.cz",
   "Neustálý vývoj",
 ];
+
+// Odhad ušetřeného času (balíček zahrnuje web, RSVP i galerii).
+const savesHours = 30;
+const savesBreakdown = [
+  { label: "Odpovídání na opakované dotazy hostů", hours: 8 },
+  { label: "Obvolávání hostů kvůli potvrzení účasti", hours: 8 },
+  { label: "Sledování a urgování odpovědí", hours: 4 },
+  { label: "Finální seznam pro dodavatele a zasedací pořádek", hours: 2 },
+  { label: "Aktualizace informací a rozeslání změn", hours: 2 },
+  { label: "Sbírání a třídění fotek od hostů", hours: 4 },
+  { label: "Založení a sdílení fotoalba", hours: 2 },
+];
+const savesNote = "Odhad pro průměrnou svatbu ~60 hostů.";
 ---
 
 <section class="relative isolate overflow-hidden py-20 md:py-28 lg:py-32">
@@ -38,6 +51,28 @@ const othersItems = [
           <span class="ml-1 mt-2 text-h4 text-ink md:mt-3">Kč</span>
         </div>
         <p class="-mt-4 text-body text-ink-muted">jednorázově</p>
+
+        {/* Ušetřený čas + rozklad */}
+        <details class="group rounded-mini bg-cream px-4 py-3">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-2 text-small text-ink-body">
+            <span class="flex items-center gap-2">
+              <svg viewBox="0 0 24 24" class="size-4 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+              Ušetří vám <strong class="font-semibold text-ink">~{savesHours} h</strong> práce
+            </span>
+            <span class="text-tiny uppercase tracking-cta text-primary transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <ul class="mt-3 flex flex-col gap-1.5 border-t border-beige-border pt-3">
+            {
+              savesBreakdown.map((row) => (
+                <li class="flex items-center justify-between gap-3 text-tiny text-ink-muted">
+                  <span>{row.label}</span>
+                  <span class="shrink-0 text-ink-soft">~{row.hours} h</span>
+                </li>
+              ))
+            }
+            <li class="mt-1 text-tiny text-ink-light">{savesNote}</li>
+          </ul>
+        </details>
 
         <ul class="mt-2 flex flex-col gap-4">
           {
