@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalContent from "../components/LegalContent.astro";
+import blocks from "../data/legal/obchodni-podminky.json";
+
+const title = "Obchodní podmínky | WeMarry";
+const description =
+  "Všeobecné obchodní podmínky služby WeMarry — svatební web a plánovač.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="relative min-h-screen bg-white">
+    <section class="container-site pb-24 pt-36 md:pt-44">
+      <LegalContent blocks={blocks} />
+    </section>
+  </main>
+</BaseLayout>

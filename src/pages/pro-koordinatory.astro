@@ -1,0 +1,143 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+const title = "Svatební web pro koordinátory a agentury | WeMarry";
+const description =
+  "Plánujte svatby svých klientů z jednoho místa. Speciální rozhraní pro svatební koordinátory a agentury — tvorba a správa svatebních webů, RSVP a zasedacího pořádku na míru.";
+
+const benefits = [
+  {
+    title: "Ušetříte čas i peníze",
+    desc: "Tvorba a správa webů z jednoho rozhraní. Méně e-mailů, telefonátů a ručního přepisování seznamů.",
+  },
+  {
+    title: "Nabídnete lepší služby",
+    desc: "Profesionální svatební web, RSVP a zasedací pořádek jako součást vašeho balíčku — bez práce navíc.",
+  },
+  {
+    title: "Vše přehledně na jednom místě",
+    desc: "Klienti, weby i odpovědi hostů pod jednou střechou. Žádné roztříštěné tabulky a soubory.",
+  },
+];
+
+const helps = [
+  "Hosté mají všechny důležité informace o svatbě na jednom místě 24/7",
+  "Díky potvrzení účasti máte přehled o pozvaných hostech a jejich preferencích (např. diety)",
+  "Jednoduše přidáte druhý jazyk pro zahraniční hosty, ať se nic neztratí v překladu",
+  "Je levnější a ekologičtější než tištěné pozvánky a oznámení",
+  "Zasedací pořádek napojený přímo na odpovědi hostů z RSVP",
+  "Sdílená fotogalerie pro hosty i profesionální snímky po svatbě",
+];
+
+const agencyMailto =
+  "mailto:info@wemarry.cz?subject=Agenturn%C3%AD%20%C3%BA%C4%8Det%20WeMarry";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-sage/30 via-cream to-warm-peach/30"></div>
+      <div class="container-site grid items-center gap-12 pb-16 pt-40 md:pt-48 lg:grid-cols-2 lg:gap-16">
+        <div class="max-w-xl">
+          <p class="mb-5 text-tiny uppercase tracking-cta text-primary">Pro koordinátory a agentury</p>
+          <h1 class="font-serif text-hero-sm text-ink md:text-hero lg:text-hero-xl">
+            Plánujte svatby svých klientů <span class="italic">z jednoho místa</span>
+          </h1>
+          <p class="mt-6 text-body text-ink-muted">
+            Pro organizátory svateb máme speciální rozhraní pro jednoduchou tvorbu
+            a správu svatebních webů. Ušetříte čas, nabídnete klientům víc a vše máte
+            přehledně pohromadě.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href={agencyMailto} class="btn-primary">Chci agenturní účet</a>
+            <a href={SITE.app.signup} class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">
+              Vyzkoušet zdarma →
+            </a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/img/product/planner.png"
+            alt="Rozhraní WeMarry pro koordinátory — správa svatebních webů a zasedacího pořádku"
+            loading="lazy"
+            class="w-full rounded-card shadow-prominent"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefity -->
+    <section class="container-site py-20 md:py-28">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        {
+          benefits.map((b) => (
+            <article class="flex flex-col gap-3 rounded-card border border-beige-border bg-white p-8 shadow-card">
+              <h2 class="font-serif text-h3 text-ink">{b.title}</h2>
+              <p class="text-body text-ink-muted">{b.desc}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- S čím pomůže -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-cream"></div>
+      <div class="container-site">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-tiny uppercase tracking-cta text-primary">Výhody</p>
+          <h2 class="mt-4 font-serif text-hero-sm text-ink md:text-hero">S čím vám svatební web pomůže?</h2>
+        </div>
+        <ul class="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
+          {
+            helps.map((h) => (
+              <li class="flex items-start gap-3 rounded-card bg-white p-5 shadow-card">
+                <span aria-hidden="true" class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <svg viewBox="0 0 14 14" class="size-3.5 text-primary" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5L6 10.5L11 4"/></svg>
+                </span>
+                <span class="text-body text-ink-body">{h}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- Reference -->
+    <section class="container-site py-16 text-center md:py-20">
+      <p class="text-tiny uppercase tracking-cta text-primary">Reference</p>
+      <h2 class="mx-auto mt-4 max-w-2xl font-serif text-h2 text-ink md:text-hero-sm">
+        Co o nás říkají páry i lidé z oboru
+      </h2>
+      <a href={SITE.rating.profileUrl} target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-body text-ink-muted transition-colors hover:text-ink">
+        <span class="font-semibold text-ink">{String(SITE.rating.value).replace(".", ",")} / 5</span>
+        na základě {SITE.rating.count} recenzí na Googlu
+      </a>
+    </section>
+
+    <!-- Závěrečné CTA -->
+    <section class="relative isolate overflow-hidden py-20 md:py-28">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#0c948c] to-[#0a7d76]"></div>
+      <div class="container-site text-center">
+        <h2 class="mx-auto max-w-2xl font-serif text-hero-sm text-white md:text-hero">
+          Nabídněte s námi ještě lepší služby svým klientům
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-body text-white/85">
+          Udělejte ze svatebního webu váš nový standard pro každého klienta.
+          Pro aktivaci agenturního účtu nám stačí napsat.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href={agencyMailto} class="inline-flex items-center justify-center rounded-pill bg-white px-8 py-4 text-micro font-medium uppercase tracking-cta text-primary transition-colors hover:bg-white/90">
+            Získat speciální nabídku
+          </a>
+          <a href="/kontakt" class="text-micro uppercase tracking-cta text-white/90 hover:text-white">
+            Kontaktovat nás →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

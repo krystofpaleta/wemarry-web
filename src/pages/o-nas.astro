@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+const title = "O nás | WeMarry";
+const description =
+  "Kdo je za WeMarry? Malý startup z Prahy, který chce zjednodušit a zkrásnit tvorbu svatebních webů pro páry z celého světa.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-sage/30 via-cream to-warm-peach/30"></div>
+      <div class="container-site flex min-h-[320px] flex-col items-center justify-center pb-12 pt-40 text-center md:pt-48">
+        <p class="mb-4 text-tiny uppercase tracking-cta text-primary">O nás</p>
+        <h1 class="max-w-3xl font-serif text-hero-sm text-ink md:text-hero lg:text-hero-xl">
+          Děláme plánování svatby <span class="italic">jednodušší a krásnější</span>
+        </h1>
+      </div>
+    </section>
+
+    <section class="container-site py-16 md:py-24">
+      <div class="mx-auto flex max-w-3xl flex-col gap-5 text-body text-ink-muted">
+        <p>
+          <strong class="text-ink">WeMarry je malý startup z Prahy.</strong> Jsme parta
+          dlouholetých přátel, které pojí spousta společných zážitků. Jak se vztahy naše
+          i našich přátel vyvíjely, začaly se postupně krystalizovat svatební plány.
+        </p>
+        <p>
+          Všechny tyto plány sjednocoval jeden překvapivý nedostatek — velmi nízká kvalita
+          webových služeb pro tvorbu svatebního webu. To bylo docela šokující zjištění,
+          zejména v kontextu dnešní digitální doby.
+        </p>
+        <p>
+          Okamžitě jsme začali vyvíjet tuto platformu, abychom umožnili tisícům párů
+          z celého světa tuto činnost maximálně zjednodušit a designově povýšit —
+          samozřejmě v nejvyšším možném režimu soukromí a zabezpečení dat.
+        </p>
+        <p class="font-serif text-h4 italic text-ink">
+          Vítejte a přejeme vám nádhernou svatbu. — tým WeMarry
+        </p>
+      </div>
+
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+        <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+        <a href="/kontakt" class="text-micro uppercase tracking-cta text-primary hover:text-primary-hover">
+          Kontaktovat nás →
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

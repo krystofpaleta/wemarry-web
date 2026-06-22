@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Zásady používání cookies | WeMarry";
+const description =
+  "Jak WeMarry používá cookies a obdobné technologie na svých webových stránkách.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="relative min-h-screen bg-white">
+    <section class="container-site pb-24 pt-36 md:pt-44">
+      <div class="mx-auto max-w-[52rem]">
+        <h1 class="font-serif text-hero-sm text-ink md:text-hero">Zásady používání cookies</h1>
+
+        <div class="mt-8 flex flex-col gap-4 text-body text-ink-muted">
+          <p>
+            Cookies jsou malé textové soubory, které se ukládají do vašeho prohlížeče
+            při návštěvě webových stránek. Pomáhají nám zajistit správné fungování webu
+            a rozumět tomu, jak je web používán.
+          </p>
+
+          <h2 class="mt-6 font-serif text-h3 text-ink">Jaké cookies používáme</h2>
+          <p>
+            <strong class="text-ink">Nezbytné cookies</strong> — umožňují základní fungování
+            webu (zapamatování jazyka, zabezpečení). Bez nich web nefunguje správně, proto
+            je nelze vypnout.
+          </p>
+          <p>
+            <strong class="text-ink">Analytické cookies</strong> — pomocí služby Google
+            Analytics (GA4) anonymně měříme návštěvnost a chování na webu, abychom ho mohli
+            zlepšovat. Tato data nás neidentifikují jako konkrétní osobu.
+          </p>
+
+          <h2 class="mt-6 font-serif text-h3 text-ink">Jak cookies spravovat</h2>
+          <p>
+            Ukládání cookies můžete kdykoliv omezit nebo zakázat v nastavení svého
+            prohlížeče. Vypnutí některých cookies ale může ovlivnit funkčnost webu.
+          </p>
+
+          <h2 class="mt-6 font-serif text-h3 text-ink">Více informací</h2>
+          <p>
+            Podrobnosti o tom, jak nakládáme s osobními údaji, najdete v dokumentu
+            <a href="/ochrana-soukromi" class="text-primary underline-offset-2 hover:underline">Ochrana soukromí a zpracování osobních údajů</a>.
+            V případě dotazů nás kontaktujte na
+            <a href="mailto:info@wemarry.cz" class="text-primary underline-offset-2 hover:underline">info@wemarry.cz</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

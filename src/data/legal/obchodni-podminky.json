@@ -1,0 +1,458 @@
+[
+{
+"t": "h1",
+"c": "VŠEOBECNÉ OBCHODNÍ PODMÍNKY"
+},
+{
+"t": "p",
+"c": "Informace:"
+},
+{
+"t": "p",
+"c": "Obchodní firma: WeMarry s.r.o."
+},
+{
+"t": "p",
+"c": "Sídlo: Hořanská 1510, 130 00 Praha 3"
+},
+{
+"t": "p",
+"c": "IČO: 22269347"
+},
+{
+"t": "p",
+"c": "Kontaktní údaje provozovatele:"
+},
+{
+"t": "p",
+"c": "Adresa elektronické pošty:  info@wemarry.io (dále jen „kontaktní email“)"
+},
+{
+"t": "p",
+"c": "Telefon: (+420) 608003789 (dále jen „kontaktní telefon“)"
+},
+{
+"t": "p",
+"c": "1. Úvodní ustanovení"
+},
+{
+"t": "p",
+"c": "1.1 Tyto obchodní podmínky (dále jen „obchodní podmínky“) ve smyslu § 1751 zákona č. 89/2012 Sb., občanského zákoníku, v platném znění (dále jen „občanský zákoník“) upravují vztahy mezi smluvními stranami smlouvy o poskytování služeb uzavřené prostřednictvím webového rozhraní na internetových stránkách provozovatele (dále jen „internetové stránky“). Veškeré vztahy mezi uživatelem internetových stránek a provozovatelem se řídí obchodními podmínkami a vztahy jimi neupravené občanským zákoníkem, a je-li smluvní stranou spotřebitel, též zákonem č. 634/1992 Sb., o ochraně spotřebitele, ve znění pozdějších předpisů."
+},
+{
+"t": "p",
+"c": "1.2 Pro účely těchto obchodních podmínek se rozumí:"
+},
+{
+"t": "p",
+"c": "a) podnikatelem - každá osoba, která uzavírá smlouvu v souvislosti s vlastní obchodní, výrobní nebo obdobnou činností či při samostatném výkonu svého povolání, popřípadě osoba, která jedná jménem nebo na účet podnikatele,"
+},
+{
+"t": "p",
+"c": "b) službami – služby, internetové stránky a aplikace provozovatele umístěné na doménách provozovaných provozovatelem (zejména na webovém serveru www.wemarry.io a odvozených doménách třetí a vyšší úrovně), přičemž se jedná především o služby online prezentace svatby, poskytnutí šablony pro tvorbu vlastní svatební internetové stránky na přidělené subdoméně, poskytnutí aplikací pro správu jednotlivých svatebních agend."
+},
+{
+"t": "p",
+"c": "c) smlouvou – smlouva o poskytování služeb či jiná smlouva, uzavřená mezi provozovatelem a uživatelem dle těchto obchodních podmínek,"
+},
+{
+"t": "p",
+"c": "d) spotřebitelem - fyzická osoba, která při uzavírání a plnění smlouvy nejedná v rámci své podnikatelské činnosti nebo v rámci samostatného výkonu svého povolání,"
+},
+{
+"t": "p",
+"c": "e) uživatelem - spotřebitel nebo podnikatel, který uzavírá s provozovatelem smlouvu prostřednictvím webového rozhraní na internetových stránkách provozovaných provozovatelem nebo pomocí některého dalšího prostředku komunikace na dálku, který provozovatel umožňuje."
+},
+{
+"t": "p",
+"c": "1.3 Uživatel, který v rámci zadání identifikačních či fakturačních údajů uvede IČO se pro účely posouzení povahy vztahu mezi provozovatelem a uživatelem považuje za podnikatele. Uživatel je s tímto srozuměn, souhlasí s uvedeným způsobem rozlišení a zavazuje se neuvádět IČO, pokud při uzavírání a plnění smlouvy nejedná v rámci své podnikatelské činnosti nebo v rámci samostatného výkonu svého povolání."
+},
+{
+"t": "p",
+"c": "1.4 Ustanovení obchodních podmínek jsou nedílnou součástí smlouvy. Ujednání ve smlouvě, která se odchylují od znění obchodních podmínek, mají před ustanoveními obchodních podmínek přednost. Smlouva se uzavírá v českém jazyce, ledaže se uživatel a provozovatel výslovně dohodnou jinak. Bude-li smlouva vyhotovena ve více jazykových verzích, platí pro případ rozporu mezi zněním smlouvy v českém a jiném jazyce, že má přednost české znění."
+},
+{
+"t": "p",
+"c": "2. Poskytované služby"
+},
+{
+"t": "p",
+"c": "2.1 Služby na internetových stránkách provozovatele umožňují tvorbu vlastní svatební internetové stránky uživatele na přidělené subdoméně a správu jednotlivých agend (dále jen „svatební stránky“)."
+},
+{
+"t": "p",
+"c": "2.2 Provozovatel si vyhrazuje právo provést jakékoliv změny svatebních stránek, svatební stránky vůbec nezveřejnit, případně svatební stránky odstranit bez náhrady, budou-li v rozporu s platnými zákony České republiky, obchodními podmínkami nebo dobrými mravy."
+},
+{
+"t": "p",
+"c": "2.3 Svatební stránky budou dostupné po dobu 18 měsíců, neuvede-li uživatel v rámci registrace jinak. Po této lhůtě budou svatební stránky automaticky vymazány společně se všemi údaji, které v nich uživatel uvedl. Uživatel si je vědom toho, že pokud bude chtít svatební stránky odstranit před uplynutím dohodnuté doby, musí tak učinit sám v uživatelském účtu."
+},
+{
+"t": "p",
+"c": "3. Registrace uživatele"
+},
+{
+"t": "p",
+"c": "3.1 Pro užívání některých služeb je nezbytné provedení registrace. I v případě, že kterákoli služba pro její užívání (i jen omezené) nevyžaduje provedení registrace, řídí se užívání služby těmito podmínkami. Uživatel je i v takovém případě povinen se s těmito podmínkami seznámit a vyslovuje s těmito podmínkami souhlas zahájením užívání služeb. Pokud uživatel s těmito podmínkami nesouhlasí, je povinen zdržet se užívání služeb. S provedením registrace není spojen žádný poplatek."
+},
+{
+"t": "p",
+"c": "3.2 Registrace se provádí vyplněním a odesláním registračního formuláře na příslušné internetové stránce ke službě, kde je přesně popsán registrační proces. Registrační formulář je oprávněna vyplnit a odeslat pouze osoba starší 18 let plně způsobilá k právním úkonům."
+},
+{
+"t": "p",
+"c": "3.3 Při registraci je uživatel povinen uvést správné a úplné údaje o své osobě, jakož i o osobě druhého budoucího manžela či partnera, které jsou označené za povinné (dále jen „povinné osobní údaje“). Bez poskytnutí povinných osobních údajů není možné dokončit registraci a užívat vybrané služby provozovatele. Ostatní údaje poskytuje uživatel dobrovolně. Poskytnuté údaje může uživatel kdykoli doplnit, změnit či upravit. Uživatel je srozuměn s tím, že některé z poskytnutých údajů mají povahu osobních údajů ve smyslu platných právních předpisů. Na tyto údaje se použije ustanovení čl. 7. těchto podmínek."
+},
+{
+"t": "p",
+"c": "3.4 Před dokončením registrace je uživatel povinen seznámit se s těmito podmínkami. Udělení souhlasu je nezbytnou podmínkou pro dokončení registrace a užívání služeb."
+},
+{
+"t": "p",
+"c": "3.5 Okamžikem dokončení registrace (tj. obdržením potvrzení o úspěšném dokončení registrace) je založen smluvní vztah mezi uživatelem a provozovatelem, který se řídí těmito podmínkami. Pro vyloučení pochybností strany prohlašují, že provedením registrace uživatel vyslovuje souhlas s těmito podmínkami, výslovně akceptuje veškerá jejich ustanovení a zavazuje se dodržovat pravidla v nich stanovená. Tímto ujednáním není dotčena možnost vzniku smluvního vztahu faktickým zahájením užívání služby bez předchozí registrace."
+},
+{
+"t": "p",
+"c": "3.6 Dokončením registrace je uživateli založen uživatelský účet (dále jen „uživatelský účet“)."
+},
+{
+"t": "p",
+"c": "4. Finanční podmínky"
+},
+{
+"t": "p",
+"c": "4.1 Užívání služeb provozovatele pro neregistrované uživatele (zejm. pozvané svatební hosty) je bezplatné s výjimkou doplňkových služeb."
+},
+{
+"t": "p",
+"c": "4.2 Registrovaný uživatel je oprávněn si v uživatelském účtu objednat balíček služeb dle ceníku. Cena objednávaných služeb je registrovanému uživateli zobrazena v nákupním košíku vždy před odesláním objednávky a platby, a to jako cena konečná včetně všech daní (např. DPH) a poplatků.  Za samotné dodání služeb nejsou žádné další poplatky účtovány."
+},
+{
+"t": "p",
+"c": "4.3 Po dokončení objednávky je registrovaný uživatel vyzván k zaplacení ceny služeb prostřednictvím platební brány Stripe (provozované společností Stripe, Inc.)."
+},
+{
+"t": "p",
+"c": "5. Odstoupení od smlouvy"
+},
+{
+"t": "p",
+"c": "5.1 Provozovatel je oprávněn odstoupit od smlouvy, je-li uživatel v prodlení s úhradou ceny služeb nebo jakékoliv její části."
+},
+{
+"t": "p",
+"c": "5.2 Uživatel, který je spotřebitelem má právo odstoupit od smlouvy ve lhůtě 14 dnů ode dne uzavření smlouvy. Odstoupení od smlouvy musí být provozovateli odesláno ve lhůtě dle předcházející věty, a to na jeho kontaktní adresu nebo na kontaktní email provozovatele info@wemarry.io."
+},
+{
+"t": "p",
+"c": "5.3 Odstoupení od smlouvy podle předchozího odstavce není možné mimo jiné v případě smlouvy o dodávce zboží, které bylo upraveno podle přání uživatele nebo pro jeho osobu, a od smlouvy o poskytování služeb, jestliže byly splněny s předchozím výslovným souhlasem uživatele před uplynutím lhůty pro odstoupení od smlouvy. Uživatel bere na vědomí, že mimo jiné zveřejněním jím vytvořených svatebních stránek či rozesláním pozvánek na svatbu dochází k plnění smlouvy o poskytování služeb, poté tak již není možné odstoupit od smlouvy podle předchozího odstavce."
+},
+{
+"t": "p",
+"c": "5.4 V případě odstoupení od smlouvy se smlouva od počátku ruší. Provozovatel vrátí uživateli peněžní prostředky, které od něho na základě smlouvy přijal, a to do 14 dnů od odstoupení od smlouvy."
+},
+{
+"t": "p",
+"c": "6. Práva, povinnosti a prohlášení smluvních stran"
+},
+{
+"t": "p",
+"c": "6.1 Uživatel vůči provozovateli prohlašuje a zaručuje, že"
+},
+{
+"t": "p",
+"c": "a) je plně způsobilý k právním úkonům, a to zejména s ohledem na svůj věk,"
+},
+{
+"t": "p",
+"c": "b) nebyl zbaven způsobilosti k právním úkonům,"
+},
+{
+"t": "p",
+"c": "c) jeho způsobilost k právním úkonům nebyla omezena v rozsahu znemožňujícím mu vyslovení souhlasu s těmito podmínkami a užívání služeb,"
+},
+{
+"t": "p",
+"c": "d) veškeré údaje, které o sobě při registraci poskytl, jsou pravdivé, úplné, přesné a správné,"
+},
+{
+"t": "p",
+"c": "e) používáním služeb ze strany uživatele za podmínek uvedených v těchto podmínkách nedojde k porušení právních předpisů,"
+},
+{
+"t": "p",
+"c": "f) se před zahájením užívání služeb důkladně seznámil s těmito podmínkami, že těmto podmínkám zcela rozumí a souhlasí s nimi,"
+},
+{
+"t": "p",
+"c": "6.2 Uživatel se, bez ohledu na jiná ustanovení těchto podmínek, zavazuje, že:"
+},
+{
+"t": "p",
+"c": "a) neprovede registraci, pokud by jejím provedením ze strany uživatele došlo k porušení právních předpisů,"
+},
+{
+"t": "p",
+"c": "b) nebude používat služby, pokud by jejich použitím ze strany uživatele došlo k porušení právních předpisů,"
+},
+{
+"t": "p",
+"c": "c) používat služby pouze k účelu, k němuž jsou určeny,"
+},
+{
+"t": "p",
+"c": "d) pro přístup ke službám nebude využívat (ani se nebude snažit využívat) jiné rozhraní než rozhraní poskytnuté za tím účelem provozovatelem,"
+},
+{
+"t": "p",
+"c": "e) zajistí důvěrnost veškerých identifikačních údajů a hesel nezbytných pro přihlášení uživatele a pro přístup ke službám, zejména tyto identifikační údaje a hesla nesdělí žádné třetí osobě,"
+},
+{
+"t": "p",
+"c": "f) pokud zjistí zneužití svých identifikačních údajů a hesel jakoukoli třetí osobou, okamžitě to sdělí provozovateli,"
+},
+{
+"t": "p",
+"c": "g) nebude se v souvislosti s užíváním služeb dopouštět žádného protiprávního či neetického jednání,"
+},
+{
+"t": "p",
+"c": "h) nebude činit nic, co by narušovalo nebo poškozovalo služby (nebo sítě a servery připojené ke službám)."
+},
+{
+"t": "p",
+"c": "6.3 Provozovatel je, bez ohledu na jiná ustanovení podmínek, oprávněn:"
+},
+{
+"t": "p",
+"c": "a) kdykoli dle svého uvážení a bez nutnosti o tomto předem informovat uživatele pozastavit nebo omezit poskytování jakékoli služby či jakkoli změnit způsob poskytování jakékoli služby, a to ve vztahu ke všem uživatelům nebo pouze ve vztahu k některým uživatelům, bez nutnosti o tomto předem informovat uživatele, a to včetně smazání, odstranění nebo znepřístupnění jakékoliv nabídky uživatele,"
+},
+{
+"t": "p",
+"c": "b) kdykoli dle svého uvážení a bez nutnosti o tomto předem informovat uživatele ukončit poskytování jakékoli služby, a to ve vztahu ke všem uživatelům nebo pouze ve vztahu k některým uživatelům."
+},
+{
+"t": "p",
+"c": "6.4 Provozovatel uděluje uživateli ke službě, software a jiným autorským dílům provozovatele („předmět licence uživateli“) bezplatnou, nepřevoditelnou a nevýhradní licenci platnou ve všech zemí světa, k užití služeb, obsahu provozovatele a software provozovatele (dále jen „licence uživateli“). Licence uživateli je udělena pouze v rozsahu sloužícímu k řádnému a obvyklému užití služeb provozovatele, a to s omezeními dle následující věty. Kromě případů výslovně uvedených v těchto podmínkách uživatel nesmí pozměnit či upravovat, kopírovat ani jinak rozmnožovat, distribuovat, sdělovat veřejnosti, jinak rozšiřovat, předávat, pronajmout, půjčovat, zobrazovat, provádět, reprodukovat, publikovat, poskytovat podlicence, převádět nebo prodávat jakékoli informace, originál či rozmnoženiny předmětu licence uživateli, ani z nich vytvářet souborná, či odvozená díla. Uživatel není oprávněn využívat služby k jakýmkoli účelům odporujícím těmto podmínkám nebo aplikovatelným právním předpisům. Uživatel nesmí služby využívat způsobem, který by mohl snižovat hodnotu předmětu licence uživateli, nebo poškodit, znemožnit, přetížit nebo zhoršit funkci serverů provozovaných provozovatelem nebo propojenými osobami, nebo rušit používání těchto serverů nebo služeb třetími osobami. Uživatel nesmí jakýmkoli způsobem získávat ani se pokoušet získávat jakékoli rozmnoženiny předmětu licence uživateli (ani pro osobní potřebu), jakékoli materiály či informace týkající se služeb, které nejsou nebo nebyly veřejně zpřístupněny nebo poskytnuty prostřednictvím internetových stránek provozovaných provozovatelem."
+},
+{
+"t": "p",
+"c": "6.5 Pokud uživatel v souvislosti s využíváním služby předá provozovateli své texty, obrázky, videa, autorská díla či jiný obsah uživatele (dále jen „předmět licence provozovateli“), bezplatně, výslovně a dobrovolně tím poskytuje provozovateli nevýhradní licenci k níže uvedeným způsobům užití předmětu licence provozovateli. Předmětem licence provozovateli se rozumí dokument, informace nebo jiná data, která uživatel odešle nebo jinak přenese prostřednictvím služby na webové stránky jakéhokoli serveru, jehož prostřednictvím uživatelé využívají kteroukoli službu provozovatele."
+},
+{
+"t": "p",
+"c": "a) Uživatel vůči provozovateli prohlašuje a zaručuje, že je oprávněn provozovateli poskytnout licenci k předmětu licence provozovateli dle těchto podmínek, a že poskytnutím takové licence uživatelem ani jejím užíváním ze strany provozovatele nedojde k porušení práv třetích osob."
+},
+{
+"t": "p",
+"c": "b) Provozovatel je oprávněn všemi způsoby v neomezeném rozsahu používat, pozměnit a upravovat, kopírovat, distribuovat, předávat a jiným způsobem předmět licence provozovateli sdělovat veřejnosti, či jinak jej rozšiřovat, zobrazovat, provádět, reprodukovat, publikovat, či jinak jej zveřejňovat, poskytovat tato oprávnění a udělovat podlicence k předmětu licence provozovateli třetím osobám, a vytvářet z nich souborná, či odvozená díla."
+},
+{
+"t": "p",
+"c": "c) Provozovatel není povinen předmět licence uživatele jakkoli užívat a je oprávněn předmět licence uživatele kdykoli na základě vlastního uvážení odstranit ze serverů provozovaných provozovatelem."
+},
+{
+"t": "p",
+"c": "d) Uživatel se zavazuje dodržovat při předávání jakéhokoli obsahu uživatele provozovateli povinnosti uvedené v čl. 6.6 obchodních podmínek."
+},
+{
+"t": "p",
+"c": "e) Předávání jakéhokoli obsahu uživatele, vč. příspěvků, názorů nebo připomínek uživatelem je dobrovolné a za poskytnutí licence dle tohoto čl. 6.5 obchodních podmínek nenáleží uživateli žádná úplata."
+},
+{
+"t": "p",
+"c": "6.6 Zásady chování uživatele."
+},
+{
+"t": "p",
+"c": "a) Uživatel nese odpovědnost za důsledky svých činů spojených s užíváním služeb a souhlasí s tím, že služby nebude používat k žádným aktivitám, které jsou nebo by mohly být v rozporu s právními předpisy vztahujících se na uživatele, pravidly používání služeb provozovatele a jeho oprávněnými zájmy, těmito podmínkami jakož i obecně uznávanými zásadami používání služeb poskytovaných prostřednictvím sítě internet."
+},
+{
+"t": "p",
+"c": "b) Uživatel je povinen vždy respektovat práva provozovatele a třetích osob, zejména při nakládání autorskými díly a jinými předměty práv duševního vlastnictví."
+},
+{
+"t": "p",
+"c": "c) Uživatel zejména nesmí:"
+},
+{
+"t": "p",
+"c": "I. užívat kteroukoli službu provozovatele v rozporu s těmito podmínkami,"
+},
+{
+"t": "p",
+"c": "II. komerčně užívat kterékoli služby způsobem způsobilým poškodit provozovatele,"
+},
+{
+"t": "p",
+"c": "III. získávat přihlašovací jména a/nebo hesla jiných uživatelů služeb provozovatele i služeb a produktů třetích osob,"
+},
+{
+"t": "p",
+"c": "IV. zneužívat, blokovat, modifikovat či jinak měnit jakoukoliv součást služby, nebo se i jen pokusit narušit stabilitu, chod nebo data služeb,"
+},
+{
+"t": "p",
+"c": "V. přístupové údaje poskytnout třetí osobě,"
+},
+{
+"t": "p",
+"c": "VI. porušovat práva provozovatele nebo třetích osob jiným způsobem, než je uvedeno v předchozích bodech,"
+},
+{
+"t": "p",
+"c": "VII. pokusit se jednat, kterýmkoli zde zakázaným způsobem."
+},
+{
+"t": "p",
+"c": "d) Uživateli se dále výslovně zakazuje předávat provozovateli (tj. umisťovat, nahrávat, odkazovat či jinak šířit) obsah uživatele, který zejména:"
+},
+{
+"t": "p",
+"c": "I. porušuje práva duševního vlastnictví (autorská práva, práva související s právem autorským, průmyslová práva apod.) jiných osob,"
+},
+{
+"t": "p",
+"c": "II. obsahuje neoprávněně užité ochranné známky, obchodní jména a chráněná označení původu, k nimž přísluší výhradní právo třetí osobě, nebo jakékoliv označení s ním zaměnitelné,"
+},
+{
+"t": "p",
+"c": "III. je v jakémkoli jiném pohledu v rozporu s dobrými mravy."
+},
+{
+"t": "p",
+"c": "e) V případě, že uživatel užívá kteroukoli službu provozovatele v rozporu s těmito podmínkami, má provozovatel v souladu s čl. 6.3 podmínek právo kdykoli, bez předchozího upozornění a bez jakéhokoli nároku ze strany uživatele ukončit či omezit poskytování služeb, smazat, odstranit nebo jinak znepřístupnit obsah uživatele, nebo zrušit či zablokovat uživatelský účet. Uživatel bere na vědomí a souhlasí s tím, že porušení zákazů uvedených v čl. 6.6 těchto podmínek může vést ke shora uvedeným následkům včetně zrušení uživatelského účtu."
+},
+{
+"t": "p",
+"c": "6.7 Služby poskytované provozovatelem uživateli jsou poskytovány „tak jak jsou“. Provozovatel neposkytuje uživateli žádné záruky ohledně služeb, obsahu provozovatele a obsahu třetích stran, zejména žádné záruky ohledně funkčnosti a dostupnosti služeb. Zejména uživateli nezaručuje, že:"
+},
+{
+"t": "p",
+"c": "a) služby budou dostupné nepřetržitě dvacet čtyři hodin denně, sedm dní v týdnu,"
+},
+{
+"t": "p",
+"c": "b) služby budou plně funkční po celou dobu dostupnosti služeb,"
+},
+{
+"t": "p",
+"c": "c) služby budou poskytovány bez chyb,"
+},
+{
+"t": "p",
+"c": "d) obsah provozovatele či obsah třetích osob je přesný či správný a neporušuje žádná práva třetích osob,"
+},
+{
+"t": "p",
+"c": "e) budou řádně a včas dodány na stránkách provozovatele nabízené produkty třetími osobami, nezaručuje ani jejich parametry, zejm. množství, kvality či termínu dodání,"
+},
+{
+"t": "p",
+"c": "f) budou informace a údaje uvedené u produktů vždy správné, pravdivé a nikoli zavádějící."
+},
+{
+"t": "p",
+"c": "6.8 Uživatel prohlašuje, že bere na vědomí, že provozovatel neposkytuje ohledně poskytování služeb žádné záruky, a že je proto poskytování služeb spojeno s určitým rizikem a toto riziko akceptuje a zavazuje se učinit veškeré přiměřené kroky k tomu, aby v maximální možné míře vyloučil či omezil možnost vzniku újmy či jiných nepříznivých následků na svojí straně v souvislosti s užíváním služeb."
+},
+{
+"t": "p",
+"c": "a) K tomu se uživatel zejména zavazuje pravidelně vhodným způsobem zálohovat veškerý obsah uživatele a činit další vhodná opatření."
+},
+{
+"t": "p",
+"c": "b) Provozovatel uživateli neodpovídá za jakoukoli přímou či nepřímou újmu či škodu, která uživateli vznikne v souvislosti s používáním služeb, obsahu provozovatele či obsahu třetích osob, omezením či ukončením poskytování služeb. Provozovatel vůči uživateli zejména neodpovídá za:"
+},
+{
+"t": "p",
+"c": "I. nefunkčnost, nedostupnost či špatnou dostupnost či funkčnost jakékoliv služby,"
+},
+{
+"t": "p",
+"c": "II. ztrátu, neuložení nebo poškození jakéhokoliv obsahu uživatele,"
+},
+{
+"t": "p",
+"c": "III. jakýkoliv následek poskytnutí nesprávných, nepřesných či neúplných údajů o uživateli při registraci,"
+},
+{
+"t": "p",
+"c": "IV. jakýkoliv následek porušení povinností ze strany uživatele ohledně ochrany hesla a přístupových údajů k uživatelskému účtu,"
+},
+{
+"t": "p",
+"c": "V. jakýkoliv jiný následek používání služeb,"
+},
+{
+"t": "p",
+"c": "VI. správnost obsahu služeb, kdy obsah služeb by neměl být uživatelem bez dalšího nebo bez konzultace s patřičným odborníkem použit k osobním, lékařským, právním či finančním rozhodnutím,"
+},
+{
+"t": "p",
+"c": "VII. provozovatel i uživatel prohlašují, že úmyslem smluvních stran je v maximální míře dovolené kogentními ustanoveními právních předpisů omezit odpovědnost provozovatele v souvislosti se službami vůči uživateli."
+},
+{
+"t": "p",
+"c": "6.9 Provozovatel v souladu s ustanovením § 3, 4 a 5 zákona č. 480/2004 Sb., o některých službách informační společnosti, v platném znění, zásadně neodpovídá za obsah uživatele."
+},
+{
+"t": "p",
+"c": "6.10 Uživatel se zavazuje odškodnit provozovatele za veškerou újmu (majetkovou či nemajetkovou), která mu vznikne v důsledku zaviněného porušení ustanovení těchto podmínek uživatelem."
+},
+{
+"t": "p",
+"c": "6.11 Mimosoudní vyřizování stížností spotřebitelů zajišťuje provozovatel prostřednictvím elektronické adresy info@wemarry.io. Informaci o vyřízení stížnosti spotřebitele zašle provozovatel na elektronickou adresu spotřebitele."
+},
+{
+"t": "p",
+"c": "6.12 Provozovatel je oprávněn k poskytování služeb na základě živnostenského oprávnění. Živnostenskou kontrolu provádí v rámci své působnosti příslušný živnostenský úřad. Dozor nad oblastí ochrany osobních údajů vykonává Úřad pro ochranu osobních údajů. Česká obchodní inspekce vykonává ve vymezeném rozsahu mimo jiné dozor nad dodržováním zákona č. 634/1992 Sb., o ochraně spotřebitele, ve znění pozdějších předpisů."
+},
+{
+"t": "p",
+"c": "6.13 Uživatel tímto přebírá na sebe nebezpečí změny okolností ve smyslu § 1765 odst. 2 občanského zákoníku."
+},
+{
+"t": "p",
+"c": "6.14 V případě sporu vyplývajícího z uzavřené smlouvy, který se nepodaří vyřešit dohodou smluvních stran, je spotřebitel oprávněn zahájit mimosoudní řešení spotřebitelského sporu u příslušného orgánu, kterým je Česká obchodní inspekce (www.coi.cz). Mimosoudní řešení spotřebitelského sporu se zahajuje na návrh spotřebitele. K návrhu se přiloží doklad o skutečnosti, že se spotřebiteli nepodařilo spor vyřešit s provozovatelem přímo, a další písemnosti dokládající tvrzené skutečnosti, jsou-li k dispozici."
+},
+{
+"t": "p",
+"c": "6.15 V případě sporu vyplývajícího z uzavřené smlouvy, který se nepodaří vyřešit dohodou smluvních stran, si provozovatel a uživatel, který je podnikatelem, sjednávají v souladu s ust. § 89a zákona č. 99/1963 Sb., občanského soudního řádu, v platném znění, místní příslušnost soudu prvního stupně pro řešení sporů tak, že je místně příslušný Obvodní soud pro Prahu [•], bude-li dána věcná příslušnost okresního soudu, a Městský soud v Praze, bude-li dána věcná příslušnost krajského soudu."
+},
+{
+"t": "p",
+"c": "7. Ochrana osobních údajů"
+},
+{
+"t": "p",
+"c": "7.1 Provozovatel je správcem osobních údajů a je oprávněn zpracovávat osobní údaje uživatele v souladu s platnými právní předpisy České republiky a v souladu s Nařízením Evropského parlamentu a Rady EU 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů."
+},
+{
+"t": "p",
+"c": "7.2 Podrobná pravidla zpracování osobních údajů a práva uživatelů jako subjektů údajů jsou uvedena v Zásadách zpracování a ochrany osobních údajů, které jsou k dispozici zde nebo jsou přístupné z internetových stránek provozovatele."
+},
+{
+"t": "p",
+"c": "8. Závěrečná ustanovení"
+},
+{
+"t": "p",
+"c": "8.1 Je-li některé ustanovení obchodních podmínek neplatné nebo neúčinné nebo nepoužitelné (a to i z důvodů jejich rozporu s právem na ochranu spotřebitele), nebo se takovým stane, namísto neplatných ustanovení nastoupí ustanovení, jehož smysl se neplatnému ustanovení co nejvíce přibližuje. Neplatností nebo neúčinností nebo nepoužitelností jednoho ustanovení není dotknutá platnost ostatních ustanovení. Změny a doplňky smlouvy či obchodních podmínek vyžadují písemnou formu."
+},
+{
+"t": "p",
+"c": "8.2 Znění obchodních podmínek může provozovatel měnit či doplňovat. Práva a povinnosti stran se řídí vždy tím zněním obchodních podmínek, za jehož účinnosti vznikly."
+},
+{
+"t": "p",
+"c": "8.3 Pokud vztah založený smlouvou obsahuje mezinárodní (zahraniční) prvek, pak strany sjednávají, že se jejich vztah řídí českým právem. Tímto nejsou dotčena práva spotřebitele vyplývající z obecně závazných právních předpisů."
+},
+{
+"t": "p",
+"c": "* * *"
+},
+{
+"t": "p",
+"c": "TYTO VŠEOBECNÉ OBCHODNÍ PODMÍNKY PLATÍ OD 1. KVĚTNA 2022"
+}
+]

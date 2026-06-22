@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site";
+
+const title = "Časté dotazy (FAQ) | WeMarry";
+const description =
+  "Odpovědi na časté dotazy o svatebním webu WeMarry — k čemu slouží, kolik stojí, jak ho vytvořit a spravovat.";
+
+const groups = [
+  {
+    heading: "Proč mít vlastní svatební web?",
+    items: [
+      {
+        q: "Opravdu potřebuji svatební web?",
+        a: "Plánování svatby je vzrušující a stresující zároveň. Jednoduché odeslání pozvánky, přehled o počtu hostů a komunikace všeho důležitého na jednom místě se hodí. Žijeme v digitální době a komunikovat online je zkrátka efektivnější. S webem nemusíte nikoho nahánět ani nic vysvětlovat — jednoduše pošlete link a je to.",
+      },
+      {
+        q: "Nestačí obyčejné svatební oznámení?",
+        a: "Ani jedno nevylučuje to druhé. Svatební oznámení je tradice a radost zejména pro rodiče a prarodiče. Svatební web funguje spíš jako asistent do kapsy, který jednoduše odpoví na veškeré dotazy vašich hostů. Více ve srovnání na stránce Svatební oznámení online.",
+      },
+    ],
+  },
+  {
+    heading: "Cena svatebního webu",
+    items: [
+      {
+        q: "Můžu si to nejdříve vyzkoušet zdarma?",
+        a: "Ano, rozhodně! Web si můžete nejdříve vytvořit a upravovat sami pro sebe. Veřejný bude až po zaplacení tarifu.",
+      },
+      {
+        q: "Proč bych měl za web platit, když si ho můžu udělat jinde zdarma?",
+        a: "K ničemu vás nenutíme. Pokud umíte vytvářet weby a nevadí vám u toho trávit hodiny času, proč ne. WeMarry jsme vytvářeli s tím, že vám ušetříme čas — web vytvoříte sami a jednoduše do 5 minut a navíc zaručíme, že bude vypadat hezky v každé situaci a na každém zařízení.",
+      },
+      {
+        q: "Jak mohu tarif zaplatit?",
+        a: "Platbu provedete jednoduše kartou přes zabezpečenou platební bránu Stripe.",
+      },
+      {
+        q: "Co když si to s webem rozmyslím?",
+        a: "V případě, že si web zaplatíte a rozhodnete se, že ho nepotřebujete, stačí nás kontaktovat a my vám bez problému vrátíme peníze — platí 30denní garance vrácení peněz.",
+      },
+    ],
+  },
+  {
+    heading: "Vytvoření a správa webu",
+    items: [
+      {
+        q: "Jak dlouho bude můj web fungovat?",
+        a: "Vaše stránky budou veřejné 18 měsíců od zaplacení — takže se do galerie i informací vracíte dlouho po svatbě.",
+      },
+      {
+        q: "Zvládneme to i bez zkušeností s webovými stránkami?",
+        a: "Samozřejmě! Správa svatebního webu je jednoduchá a intuitivní. Pokud si chcete být jisti, projděte si stránku Jak to funguje.",
+      },
+      {
+        q: "Můžeme web editovat také na mobilu?",
+        a: "Ano. Web i jeho správa fungují bez problémů i na mobilním rozhraní — upravovat ho zvládnete odkudkoliv.",
+      },
+      {
+        q: "Mohu mít svatební web na vlastní URL adrese?",
+        a: "Ano, pokud máte vlastní doménu, po zaplacení vás navedeme, jak ji propojit.",
+      },
+      {
+        q: "Mohu web upravovat i po zveřejnění?",
+        a: "Samozřejmě! Obsah svatebního webu i jeho šablonu můžete měnit kdykoliv chcete.",
+      },
+      {
+        q: "Co by na stránce nemělo chybět?",
+        a: "Na to jsme mysleli za vás — web si vytvoříte podle sebe, ale je předvyplněný, takže víte, co kam patří a jak to bude vypadat.",
+      },
+      {
+        q: "Kam se můžu obrátit, když se něco pokazí nebo tomu nerozumím?",
+        a: "Stačí nám napsat na info@wemarry.cz a my vám během jednoho pracovního dne odpovíme.",
+      },
+    ],
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: groups.flatMap((g) =>
+    g.items.map((it) => ({
+      "@type": "Question",
+      name: it.q,
+      acceptedAnswer: { "@type": "Answer", text: it.a },
+    }))
+  ),
+};
+---
+
+<BaseLayout title={title} description={description} jsonld={faqSchema}>
+  <main class="relative min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-br from-[#6b5b52] via-[#8a7a6e] to-[#c9a796]"></div>
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-black/45 via-black/30 to-black/50"></div>
+      <div class="container-site flex min-h-[360px] flex-col items-center justify-center pb-14 pt-40 text-center md:min-h-[420px] md:pt-48">
+        <p class="mb-4 text-tiny uppercase tracking-cta text-white/85">Časté dotazy</p>
+        <h1 class="max-w-3xl font-serif text-hero-sm italic text-white md:text-hero">
+          Vše, co potřebujete vědět
+        </h1>
+        <p class="mt-5 max-w-xl text-body text-white/85">
+          Nenašli jste odpověď? Napište nám na
+          <a href="mailto:info@wemarry.cz" class="underline underline-offset-2">info@wemarry.cz</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="container-site py-20 md:py-28">
+      <div class="mx-auto flex max-w-3xl flex-col gap-12">
+        {
+          groups.map((g) => (
+            <div>
+              <h2 class="font-serif text-h2 text-ink">{g.heading}</h2>
+              <div class="mt-6 flex flex-col gap-3">
+                {g.items.map((it) => (
+                  <details class="group rounded-card border border-beige-border bg-white p-6 shadow-card transition-shadow open:shadow-prominent">
+                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-h4 text-ink">
+                      {it.q}
+                      <span class="shrink-0 text-h3 text-primary transition-transform group-open:rotate-45">+</span>
+                    </summary>
+                    <p class="mt-4 text-body text-ink-muted">{it.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-14 text-center">
+        <a href={SITE.app.signup} class="btn-primary">Vyzkoušet zdarma</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

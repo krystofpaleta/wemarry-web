@@ -1,0 +1,77 @@
+---
+// Renderuje pole bloků { t: "h1|h2|h3|p|li", c: text } jako čitelný právní dokument.
+// Po sobě jdoucí "li" se seskupí do <ul>.
+type B = { t: string; c: string };
+const { blocks } = Astro.props as { blocks: B[] };
+
+type Grouped = { kind: "ul"; items: string[] } | { kind: "el"; t: string; c: string };
+const grouped: Grouped[] = [];
+for (const b of blocks) {
+  if (b.t === "li") {
+    const last = grouped[grouped.length - 1];
+    if (last && last.kind === "ul") last.items.push(b.c);
+    else grouped.push({ kind: "ul", items: [b.c] });
+  } else {
+    grouped.push({ kind: "el", t: b.t, c: b.c });
+  }
+}
+---
+
+<div class="legal-prose">
+  {
+    grouped.map((g) =>
+      g.kind === "ul" ? (
+        <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
+      ) : g.t === "h1" ? (
+        <h1>{g.c}</h1>
+      ) : g.t === "h2" ? (
+        <h2>{g.c}</h2>
+      ) : g.t === "h3" ? (
+        <h3>{g.c}</h3>
+      ) : (
+        <p>{g.c}</p>
+      )
+    )
+  }
+</div>
+
+<style>
+  .legal-prose {
+    max-width: 52rem;
+    margin: 0 auto;
+    color: var(--tw-prose-body, #4a4540);
+  }
+  .legal-prose :global(h1) {
+    font-family: "Lora", Georgia, serif;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: #2e2a27;
+    margin: 0 0 1.5rem;
+  }
+  .legal-prose :global(h2) {
+    font-family: "Lora", Georgia, serif;
+    font-size: 1.35rem;
+    color: #2e2a27;
+    margin: 2.25rem 0 0.75rem;
+  }
+  .legal-prose :global(h3) {
+    font-weight: 600;
+    color: #2e2a27;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .legal-prose :global(p) {
+    margin: 0 0 1rem;
+    line-height: 1.7;
+    font-size: 0.975rem;
+  }
+  .legal-prose :global(ul) {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .legal-prose :global(li) {
+    margin: 0 0 0.4rem;
+    line-height: 1.65;
+    font-size: 0.975rem;
+  }
+</style>
